@@ -36,4 +36,100 @@ class AVLTreeTest {
         }
         assertEquals(result, tree.preOrder(root), "Ошибка при создании дерева с большим количеством листов")
     }
+
+    @Test
+    fun testDeletingNode(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 10)
+        root = tree.insert(root, 20)
+        root = tree.insert(root, 30)
+        root = tree.insert(root, 40)
+        root = tree.insert(root, 50)
+        root = tree.insert(root, 25)
+        root = tree.deleteNode(root, 25)
+
+        assertEquals("10 20 30 40 50 ", tree.preOrder(root), "Ошибка при удалении листа")
+    }
+
+    @Test
+    fun testDelitingAllNode(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 10)
+        root = tree.insert(root, 20)
+        root = tree.insert(root, 30)
+        root = tree.insert(root, 40)
+        root = tree.insert(root, 50)
+        root = tree.insert(root, 25)
+        root = tree.deleteNode(root, 25)
+        root = tree.deleteNode(root, 50)
+        root = tree.deleteNode(root, 40)
+        root = tree.deleteNode(root, 30)
+        root = tree.deleteNode(root, 20)
+        root = tree.deleteNode(root, 10)
+
+        assertEquals("", tree.preOrder(root), "Ошибка при удалении всех листьев")
+    }
+
+    @Test
+    fun testDeletingTheHigherNode(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 10)
+        root = tree.insert(root, 20)
+        root = tree.insert(root, 30)
+        root = tree.insert(root, 40)
+        root = tree.insert(root, 50)
+        root = tree.insert(root, 25)
+        root = tree.deleteNode(root, 50)
+
+        assertEquals("10 20 25 30 40 ", tree.preOrder(root), "Ошибка при удалении наибольшего листа")
+    }
+
+    @Test
+    fun testDeletingTheSmallestNode(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 10)
+        root = tree.insert(root, 20)
+        root = tree.insert(root, 30)
+        root = tree.insert(root, 40)
+        root = tree.insert(root, 50)
+        root = tree.insert(root, 25)
+        root = tree.deleteNode(root, 10)
+
+        assertEquals("20 25 30 40 50 ", tree.preOrder(root), "Ошибка при удалении наименьшего листа")
+    }
+
+    @Test
+    fun testDeletingASingleNode(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 10)
+        root = tree.deleteNode(root, 10)
+
+        assertEquals("", tree.preOrder(root), "Ошибка при удалении единственного листа")
+    }
+
+    @Test
+    fun testDeletingANonexistentNode(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 10)
+        root = tree.insert(root, 20)
+        root = tree.insert(root, 30)
+        root = tree.insert(root, 40)
+        root = tree.insert(root, 50)
+        root = tree.insert(root, 25)
+        root = tree.deleteNode(root, 100)
+
+        assertEquals("10 20 25 30 40 50 ", tree.preOrder(root), "Ошибка при удалении единственного листа")
+    }
 }
