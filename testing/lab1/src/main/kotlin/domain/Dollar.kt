@@ -2,6 +2,8 @@ package domain
 
 class Dollar(var value: Double){
 
+    var isExist = true
+
     fun changeValue(newValue: Double){
         this.value = newValue
     }
@@ -15,5 +17,6 @@ class Dollar(var value: Double){
 
     fun destruction(){
         changeValue(0.0)
+        isExist = false
     }
 }

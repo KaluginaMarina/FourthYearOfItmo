@@ -16,6 +16,11 @@ class BrainControlSystem {
         else "Это не охватывается. Мне кажется, ${checkUnit(unit)}."
     }
 
-    fun checkDollar(dollar: Dollar){}
+    fun checkDollar(dollar: Dollar): String{
+        return if (dollar.value > 0) "Доллар упал. Совсем упал. " +
+                (if (realizeDestruction(dollar.getSize(), dollar.isExist)) "Что-то ощущается." else "Все хорошо.")
+        else "С долларом все ок."
+    }
+    
 
 }

@@ -4,7 +4,7 @@ import kotlin.collections.ArrayList
 
 class Word(val name: String, val units: ArrayList<GeographicUnit>, val actors: ArrayList<Actor>) {
     val mcducks = Mcdonalds()
-    val dollar = Dollar()
+    val dollar = Dollar(74.9)
 
     fun create() {
         God.createWorld()
@@ -31,15 +31,6 @@ class Word(val name: String, val units: ArrayList<GeographicUnit>, val actors: A
             actor.destruction()
         }
         mcducks.destruction()
+        dollar.destruction()
     }
-
-    companion object{
-        @JvmStatic
-        fun main(args: Array<String>){
-            val newWord = Word("Земля", ArrayList(), ArrayList())
-            newWord.create()
-            newWord.destructionWord()
-        }
-    }
-
 }
