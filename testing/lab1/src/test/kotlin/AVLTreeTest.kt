@@ -195,4 +195,33 @@ class AVLTreeTest {
 
         assertEquals(4, tree.height(root), "Ошибка при балансировке листьев с детьми - правый поворот")
     }
+
+    @Test
+    fun testHightASingleNode(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 90)
+
+        assertEquals(1, tree.height(root), "Ошибка расчета высоты дерева с единственной вершиной")
+    }
+
+    @Test
+    fun testHight(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 90)
+        root = tree.insert(root, 80)
+
+        assertEquals(2, tree.height(root), "Ошибка расчета высоты дерева с несколькими вершинами")
+    }
+
+    @Test
+    fun testHightWithoutNode(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        assertEquals(0, tree.height(root), "Ошибка расчета высоты дерева без вершин")
+    }
 }
