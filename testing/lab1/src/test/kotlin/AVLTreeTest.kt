@@ -132,4 +132,67 @@ class AVLTreeTest {
 
         assertEquals("10 20 25 30 40 50 ", tree.preOrder(root), "Ошибка при удалении единственного листа")
     }
+
+    @Test
+    fun testLeftRotate(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 20)
+        root = tree.insert(root, 30)
+        root = tree.insert(root, 40)
+
+        assertEquals(2, tree.height(root), "Ошибка при балансировке - левый поворот")
+    }
+
+    @Test
+    fun testRightRotate(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 50)
+        root = tree.insert(root, 40)
+        root = tree.insert(root, 30)
+
+        assertEquals(2, tree.height(root), "Ошибка при балансировке - правый поворот")
+    }
+
+    @Test
+    fun testLeftRotateWithChildren(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 0)
+        root = tree.insert(root, 10)
+        root = tree.insert(root, 20)
+        root = tree.insert(root, 30)
+        root = tree.insert(root, 40)
+        root = tree.insert(root, 40)
+        root = tree.insert(root, 50)
+        root = tree.insert(root, 60)
+        root = tree.insert(root, 70)
+        root = tree.insert(root, 80)
+        root = tree.insert(root, 90)
+
+        assertEquals(4, tree.height(root), "Ошибка при балансировке листьев с детьми - левый поворот")
+    }
+
+    @Test
+    fun testRightRotateWithChildren(){
+        val tree = AVLTree()
+        var root: AVLTree.Node? = null
+
+        root = tree.insert(root, 90)
+        root = tree.insert(root, 80)
+        root = tree.insert(root, 70)
+        root = tree.insert(root, 60)
+        root = tree.insert(root, 50)
+        root = tree.insert(root, 40)
+        root = tree.insert(root, 30)
+        root = tree.insert(root, 20)
+        root = tree.insert(root, 10)
+        root = tree.insert(root, 0)
+
+        assertEquals(4, tree.height(root), "Ошибка при балансировке листьев с детьми - правый поворот")
+    }
 }

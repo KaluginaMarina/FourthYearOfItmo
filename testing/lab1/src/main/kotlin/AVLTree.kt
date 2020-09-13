@@ -16,7 +16,7 @@ class AVLTree {
 
     }
 
-    private fun height(N: Node?): Int {
+    fun height(N: Node?): Int {
         return N?.height ?: 0
     }
 
