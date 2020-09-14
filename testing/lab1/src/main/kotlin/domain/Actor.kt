@@ -1,6 +1,6 @@
 package domain
 
-class Actor(val firstName: String, val lastName: String, var countFilms: Int) {
+class Actor(val firstName: String, val lastName: String, var countFilms: Int, var isExist: Boolean = true) {
     fun getFullName(): String{
         return firstName + lastName
     }
@@ -15,5 +15,6 @@ class Actor(val firstName: String, val lastName: String, var countFilms: Int) {
 
     fun destruction() {
         removeAllFilmsWithActor()
+        isExist = false
     }
 }

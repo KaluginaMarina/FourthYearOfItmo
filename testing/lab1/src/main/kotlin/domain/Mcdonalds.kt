@@ -1,6 +1,6 @@
 package domain
 
-class Mcdonalds() {
+class Mcdonalds(var isExist: Boolean = true) {
     var countMcdonalds = 0
     var hamburgerCount = 0
 
@@ -13,6 +13,7 @@ class Mcdonalds() {
     fun destruction() {
         hamburgerCount = 0
         countMcdonalds = 0
+        isExist = false
     }
 
     fun getSize(): Double {
