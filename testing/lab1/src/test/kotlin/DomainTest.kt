@@ -105,9 +105,9 @@ class DomainTest {
 
     @Test
     fun testGodGeoUnit() {
-        God.createGeoUnit(GeographicUnit("Бали", 10000.0, TypeOfGeographicUnit.COUNTRY), 6)
+        God.createGeoUnit(GeographicUnit("Бали", 5780.0, TypeOfGeographicUnit.COUNTRY), 6)
         assertEquals(
-            "На 6 день создал Бог место под названием Бали, размером 10000.0 км^2",
+            "На 6 день создал Бог место под названием Бали, размером 5780.0 км^2",
             outputStreamCaptor.toString().trim(),
             "При создании географического объекта Бог говорит что-то не то."
         )
@@ -115,7 +115,7 @@ class DomainTest {
 
     @Test
     fun testGodDistractionGeoUnit() {
-        God.destructionGeoUnit(GeographicUnit("Бали", 10000.0, TypeOfGeographicUnit.COUNTRY))
+        God.destructionGeoUnit(GeographicUnit("Бали", 5780.0, TypeOfGeographicUnit.COUNTRY))
         assertEquals(
             "Место с названием Бали было уничтожено.",
             outputStreamCaptor.toString().trim(),
@@ -168,32 +168,68 @@ class DomainTest {
         assertEquals(
             1.0 <= brain.MAX_SIZE_FOR_REALIZE,
             brain.realizeDestruction(1.0, false),
-            "[size == 1.0, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+            "[size == 1.0, MAX_SIZE_FOR_REALIZE == ${brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
         )
         assertEquals(
             -1.0 <= brain.MAX_SIZE_FOR_REALIZE,
             brain.realizeDestruction(-1.0, false),
-            "[size == -1.0, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+            "[size == -1.0, MAX_SIZE_FOR_REALIZE == ${brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
         )
         assertEquals(
             0.0 <= brain.MAX_SIZE_FOR_REALIZE,
             brain.realizeDestruction(0.0, false),
-            "[size == 0.0, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+            "[size == 0.0, MAX_SIZE_FOR_REALIZE == ${brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
         )
         assertEquals(
             Double.MAX_VALUE <= brain.MAX_SIZE_FOR_REALIZE,
             brain.realizeDestruction(Double.MAX_VALUE, false),
-            "[size == MAX_VALUE, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+            "[size == MAX_VALUE, MAX_SIZE_FOR_REALIZE == ${brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
         )
         assertEquals(
             Double.MIN_VALUE <= brain.MAX_SIZE_FOR_REALIZE,
             brain.realizeDestruction(Double.MIN_VALUE, false),
-            "[size == MIN_VALUE, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+            "[size == MIN_VALUE, MAX_SIZE_FOR_REALIZE == ${brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
         )
         assertEquals(
             true,
             brain.realizeDestruction(brain.MAX_SIZE_FOR_REALIZE, false),
-            "[size == MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+            "[size == MAX_SIZE_FOR_REALIZE == ${brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+        )
+    }
+
+    @Test
+    fun testBrainControlSystemCheckPositiveCorrectUnit() {
+        val brain = BrainControlSystem()
+        val unit = GeographicUnit("Москва", 2511.0, TypeOfGeographicUnit.CITY)
+
+        assertEquals(
+            "Москва все еще существует",
+            brain.checkUnit(unit),
+            "Существующий юнит должен существовать. Нельзя осознать, что он разрушен."
+        )
+    }
+
+    @Test
+    fun testBrainControlSystemCheckSmallDestroyedUnit() {
+        val brain = BrainControlSystem()
+        val unit = GeographicUnit("Очень маленький город", 0.1, TypeOfGeographicUnit.CITY, false)
+
+        assertEquals(
+            "Очень маленький город больше не существует",
+            brain.checkUnit(unit),
+            "Разрушенный маленький город должен быть осознан героем. MAX_SIZE_FOR_REALIZE = ${brain.MAX_SIZE_FOR_REALIZE}"
+        )
+    }
+
+    @Test
+    fun testBrainControlSystemCheckigDestroyedUnit() {
+        val brain = BrainControlSystem()
+        val unit = GeographicUnit("Очень большой город", Double.MAX_VALUE, TypeOfGeographicUnit.CITY, false)
+
+        assertEquals(
+            "Очень большой город все еще существует",
+            brain.checkUnit(unit),
+            "Разрушенный большой город не может быть осознан героем. MAX_SIZE_FOR_REALIZE = ${brain.MAX_SIZE_FOR_REALIZE}"
         )
     }
 }
