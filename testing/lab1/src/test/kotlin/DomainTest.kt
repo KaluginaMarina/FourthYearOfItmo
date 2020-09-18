@@ -1,7 +1,4 @@
-import domain.GeographicUnit
-import domain.God
-import domain.TypeOfGeographicUnit
-import domain.Word
+import domain.*
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -27,13 +24,15 @@ class DomainTest {
     }
 
     @Test
-    fun testCreatingWorldGeoUnit(){
+    fun testCreatingWorldGeoUnit() {
         val newWorld = Word("Земля", ArrayList(), ArrayList())
         newWorld.create()
         for (unit in newWorld.units) {
             assertNotNull(unit.name, "Не указано название географической единицы.")
-            assertEquals(true, unit.isExists,
-                "При создании мира все географические объекты должны существовать. Ошибка при создании ${unit.name}.")
+            assertEquals(
+                true, unit.isExists,
+                "При создании мира все географические объекты должны существовать. Ошибка при создании ${unit.name}."
+            )
             assert(unit.size > 0,
                 { "Размер существующего географического объекта должен быть больше 0. Ошибка при создании ${unit.name}." })
             assert(unit.type in TypeOfGeographicUnit.values(),
@@ -42,7 +41,7 @@ class DomainTest {
     }
 
     @Test
-    fun testCreatingWorldDollar(){
+    fun testCreatingWorldDollar() {
         val newWorld = Word("Земля", ArrayList(), ArrayList())
         newWorld.create()
         assert(newWorld.dollar.value > 0, { "После создания мира, доллар должен быть больше 0." })
@@ -50,27 +49,33 @@ class DomainTest {
     }
 
     @Test
-    fun testCreatingActors(){
+    fun testCreatingActors() {
         val newWorld = Word("Земля", ArrayList(), ArrayList())
         newWorld.create()
         for (actor in newWorld.actors) {
             assertNotNull(actor.lastName, "Фамилия актера должна существовать.")
             assertNotNull(actor.firstName, "Имя актера должно существовать. Ошибка с актером ${actor.lastName}.")
-            assert(actor.isExist, {"После создания мира актер должен существовать. Ошибка с актером ${actor.lastName}."})
-            assert(actor.countFilms >= 0, {"Количество фильмов должно быть больше или рабно 0. Ошибка с актером ${actor.lastName}."})
+            assert(
+                actor.isExist,
+                { "После создания мира актер должен существовать. Ошибка с актером ${actor.lastName}." })
+            assert(
+                actor.countFilms >= 0,
+                { "Количество фильмов должно быть больше или рабно 0. Ошибка с актером ${actor.lastName}." })
         }
     }
 
     @Test
-    fun testCreatingGeoUnit(){
+    fun testCreatingGeoUnit() {
         val newWorld = Word("Земля", ArrayList(), ArrayList())
         newWorld.create()
 
         for (geoUnit in newWorld.units) {
             assertNotNull(geoUnit.name, "Имя у созданного географического объекта должно существовать")
-            assert(geoUnit.size > 0, {"Размер созданного географического объекта должен быть больше 0"})
-            assert(geoUnit.type in TypeOfGeographicUnit.values(), {"Тип географического объекта должен быть из TypeOfGeographicUnit"})
-            assert(geoUnit.isExists, {"Только что созданый географический объект должен существовать"})
+            assert(geoUnit.size > 0, { "Размер созданного географического объекта должен быть больше 0" })
+            assert(
+                geoUnit.type in TypeOfGeographicUnit.values(),
+                { "Тип географического объекта должен быть из TypeOfGeographicUnit" })
+            assert(geoUnit.isExists, { "Только что созданый географический объект должен существовать" })
         }
     }
 
@@ -79,39 +84,116 @@ class DomainTest {
         val newWorld = Word("Земля", ArrayList(), ArrayList())
         newWorld.create()
 
-        assert(newWorld.mcducks.isExist, {"Только что созданный магазин макдональдс должен существовать"})
-        assert(newWorld.mcducks.hamburgerCount >= 0, {"Число гамбургеров в макдаке не может быть отрицательным"})
-        assert(newWorld.mcducks.countMcdonalds >= 0, {"Колтчество макдаков не может быть мельне 0"})
-        assert(newWorld.mcducks.getSize() > 0, {"Занимаемая площадь макдаков на планете должен быть больше 0"})
+        assert(newWorld.mcducks.isExist, { "Только что созданный магазин макдональдс должен существовать" })
+        assert(newWorld.mcducks.hamburgerCount >= 0, { "Число гамбургеров в макдаке не может быть отрицательным" })
+        assert(newWorld.mcducks.countMcdonalds >= 0, { "Колтчество макдаков не может быть мельне 0" })
+        assert(newWorld.mcducks.getSize() > 0, { "Занимаемая площадь макдаков на планете должен быть больше 0" })
     }
 
     @Test
-    fun testGodCreatingWorld(){
+    fun testGodCreatingWorld() {
         God.createWorld()
-        assertEquals("На первый день Бог создал небо, землю и свет, и отделил свет от тьмы;\n" +
-                "на второй день — создал твердь посреди воды, отделил воду над твердью от воды под твердью, и назвал " +
-                "твердь небом; \nна третий — сушу, моря и растения, \nна четвёртый — светила на тверди небесной, \nна пятый — " +
-                "рыб, пресмыкающихся и птиц. \nНаконец, на шестой — зверей земных, скот, гадов земных и человека.",
+        assertEquals(
+            "На первый день Бог создал небо, землю и свет, и отделил свет от тьмы;\n" +
+                    "на второй день — создал твердь посреди воды, отделил воду над твердью от воды под твердью, и назвал " +
+                    "твердь небом; \nна третий — сушу, моря и растения, \nна четвёртый — светила на тверди небесной, \nна пятый — " +
+                    "рыб, пресмыкающихся и птиц. \nНаконец, на шестой — зверей земных, скот, гадов земных и человека.",
             outputStreamCaptor.toString().trim(),
             "Сказанное Богом не соответствует тексту в Библии."
         )
     }
 
     @Test
-    fun testGodGeoUnit(){
+    fun testGodGeoUnit() {
         God.createGeoUnit(GeographicUnit("Бали", 10000.0, TypeOfGeographicUnit.COUNTRY), 6)
-        assertEquals("На 6 день создал Бог место под названием Бали, размером 10000.0 км^2",
+        assertEquals(
+            "На 6 день создал Бог место под названием Бали, размером 10000.0 км^2",
             outputStreamCaptor.toString().trim(),
             "При создании географического объекта Бог говорит что-то не то."
         )
     }
 
     @Test
-    fun testGodDistractionGeoUnit(){
+    fun testGodDistractionGeoUnit() {
         God.destructionGeoUnit(GeographicUnit("Бали", 10000.0, TypeOfGeographicUnit.COUNTRY))
-        assertEquals("Место с названием Бали было уничтожено.",
+        assertEquals(
+            "Место с названием Бали было уничтожено.",
             outputStreamCaptor.toString().trim(),
             "При уничтожении географического объекта Бог говорит что-то не то."
+        )
+    }
+
+    @Test
+    fun testBrainControlSystem() {
+        val brain = BrainControlSystem()
+        assert(brain.MAX_SIZE_FOR_REALIZE >= 0, { "Размер не может быть отрицательным" })
+    }
+
+    @Test
+    fun testRealizeDestructionBrainControlSystemPositiveTest() {
+        val brain = BrainControlSystem()
+
+        assertEquals(
+            false,
+            brain.realizeDestruction(1.0, true),
+            "[size == 1.0,isExist == true] нельзя осознать, что объект не существует, если он существует."
+        )
+        assertEquals(
+            false,
+            brain.realizeDestruction(-1.0, true),
+            "[size == -1.0,isExist == true] нельзя осознать, что объект не существует, если он существует."
+        )
+        assertEquals(
+            false,
+            brain.realizeDestruction(0.0, true),
+            "[size == 0.0,isExist == true] нельзя осознать, что объект не существует, если он существует."
+        )
+        assertEquals(
+            false,
+            brain.realizeDestruction(Double.MAX_VALUE, true),
+            "[size == MAX_VALUE,isExist == true] нельзя осознать, что объект не существует, если он существует."
+        )
+        assertEquals(
+            false,
+            brain.realizeDestruction(Double.MIN_VALUE, true),
+            "[size == MIN_VALUE,isExist == true] нельзя осознать, что объект не существует, если он существует."
+        )
+
+    }
+
+    @Test
+    fun testRealizeDestructionBrainControlSystemExistFalse() {
+        val brain = BrainControlSystem()
+
+        assertEquals(
+            1.0 <= brain.MAX_SIZE_FOR_REALIZE,
+            brain.realizeDestruction(1.0, false),
+            "[size == 1.0, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+        )
+        assertEquals(
+            -1.0 <= brain.MAX_SIZE_FOR_REALIZE,
+            brain.realizeDestruction(-1.0, false),
+            "[size == -1.0, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+        )
+        assertEquals(
+            0.0 <= brain.MAX_SIZE_FOR_REALIZE,
+            brain.realizeDestruction(0.0, false),
+            "[size == 0.0, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+        )
+        assertEquals(
+            Double.MAX_VALUE <= brain.MAX_SIZE_FOR_REALIZE,
+            brain.realizeDestruction(Double.MAX_VALUE, false),
+            "[size == MAX_VALUE, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+        )
+        assertEquals(
+            Double.MIN_VALUE <= brain.MAX_SIZE_FOR_REALIZE,
+            brain.realizeDestruction(Double.MIN_VALUE, false),
+            "[size == MIN_VALUE, MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+        )
+        assertEquals(
+            true,
+            brain.realizeDestruction(brain.MAX_SIZE_FOR_REALIZE, false),
+            "[size == MAX_SIZE_FOR_REALIZE == %{brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
         )
     }
 }

@@ -4,7 +4,7 @@ class BrainControlSystem {
     val MAX_SIZE_FOR_REALIZE = 150000.0
 
     fun realizeDestruction(size: Double, isExist: Boolean): Boolean {
-        return !isExist && size < MAX_SIZE_FOR_REALIZE
+        return !isExist && size <= MAX_SIZE_FOR_REALIZE
     }
 
     fun checkUnit(unit: GeographicUnit): String {
