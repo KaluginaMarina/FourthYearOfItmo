@@ -2,11 +2,15 @@ package domain
 
 import kotlin.collections.ArrayList
 
-class Word(val name: String, val units: ArrayList<GeographicUnit>, val actors: ArrayList<Actor>) {
+class World(val name: String, val units: ArrayList<GeographicUnit>, val actors: ArrayList<Actor>) {
     val mcducks = Mcdonalds()
     val dollar = Dollar(74.9)
+    var isExist = false
 
     fun create() {
+        if (isExist) {
+            throw WordAlreadyExistException()
+        }
         God.createWorld()
         val america = GeographicUnit("Америка", 9834000.0, TypeOfGeographicUnit.COUNTRY)
         units.add(america)
@@ -20,9 +24,14 @@ class Word(val name: String, val units: ArrayList<GeographicUnit>, val actors: A
         val bogart = Actor("Хамфри", "Богарт", 167)
         actors.add(bogart)
         mcducks.create()
+        isExist = true
     }
 
     fun destructionWord() {
+        if(!isExist) {
+            throw WordNotExistException()
+        }
+        isExist = false
         for (unit in units) {
             unit.destruction()
             God.destructionGeoUnit(unit)

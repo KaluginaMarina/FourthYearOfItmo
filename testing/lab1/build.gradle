@@ -5,6 +5,17 @@ plugins {
 group 'org.example'
 version '1.0-SNAPSHOT'
 
+java {
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+}
+
 repositories {
     mavenCentral()
 }

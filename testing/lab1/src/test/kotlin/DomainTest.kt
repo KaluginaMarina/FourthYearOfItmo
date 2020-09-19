@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
@@ -24,8 +25,18 @@ class DomainTest {
     }
 
     @Test
+    fun testCreatingWord() {
+        val newWorld = World("Земля", ArrayList(), ArrayList())
+        assert(!newWorld.isExist, { "Перед созданием isExist долен быть равен false" })
+        newWorld.create()
+        assert(newWorld.isExist, { "После создания isExist долен быть равен true" })
+        newWorld.destructionWord()
+        assert(!newWorld.isExist, { "После уничтодения isExist долен быть равен false" })
+    }
+
+    @Test
     fun testCreatingWorldGeoUnit() {
-        val newWorld = Word("Земля", ArrayList(), ArrayList())
+        val newWorld = World("Земля", ArrayList(), ArrayList())
         newWorld.create()
         for (unit in newWorld.units) {
             assertNotNull(unit.name, "Не указано название географической единицы.")
@@ -42,7 +53,7 @@ class DomainTest {
 
     @Test
     fun testCreatingWorldDollar() {
-        val newWorld = Word("Земля", ArrayList(), ArrayList())
+        val newWorld = World("Земля", ArrayList(), ArrayList())
         newWorld.create()
         assert(newWorld.dollar.value > 0, { "После создания мира, доллар должен быть больше 0." })
         assertEquals(true, newWorld.dollar.isExist, "При создании мира доллар должен существовать.")
@@ -50,7 +61,7 @@ class DomainTest {
 
     @Test
     fun testCreatingActors() {
-        val newWorld = Word("Земля", ArrayList(), ArrayList())
+        val newWorld = World("Земля", ArrayList(), ArrayList())
         newWorld.create()
         for (actor in newWorld.actors) {
             assertNotNull(actor.lastName, "Фамилия актера должна существовать.")
@@ -66,7 +77,7 @@ class DomainTest {
 
     @Test
     fun testCreatingGeoUnit() {
-        val newWorld = Word("Земля", ArrayList(), ArrayList())
+        val newWorld = World("Земля", ArrayList(), ArrayList())
         newWorld.create()
 
         for (geoUnit in newWorld.units) {
@@ -81,7 +92,7 @@ class DomainTest {
 
     @Test
     fun testCreateMcDonalds() {
-        val newWorld = Word("Земля", ArrayList(), ArrayList())
+        val newWorld = World("Земля", ArrayList(), ArrayList())
         newWorld.create()
 
         assert(newWorld.mcducks.isExist, { "Только что созданный магазин макдональдс должен существовать" })
@@ -215,14 +226,14 @@ class DomainTest {
         val unit = GeographicUnit("Очень маленький город", 0.1, TypeOfGeographicUnit.CITY, false)
 
         assertEquals(
-            "Очень маленький город больше не существует",
+            "Очень маленький город больше не существует.",
             brain.checkUnit(unit),
             "Разрушенный маленький город должен быть осознан героем. MAX_SIZE_FOR_REALIZE = ${brain.MAX_SIZE_FOR_REALIZE}"
         )
     }
 
     @Test
-    fun testBrainControlSystemCheckigDestroyedUnit() {
+    fun testBrainControlSystemCheckDestroyedUnit() {
         val brain = BrainControlSystem()
         val unit = GeographicUnit("Очень большой город", Double.MAX_VALUE, TypeOfGeographicUnit.CITY, false)
 
@@ -231,5 +242,34 @@ class DomainTest {
             brain.checkUnit(unit),
             "Разрушенный большой город не может быть осознан героем. MAX_SIZE_FOR_REALIZE = ${brain.MAX_SIZE_FOR_REALIZE}"
         )
+    }
+
+    @Test
+    fun testDestructionWorld() {
+        val newWorld = World("Земля", ArrayList(), ArrayList())
+        newWorld.create()
+        newWorld.destructionWord()
+        assert(!newWorld.isExist, { "После уничтожения мира isExist должен быть равен false" })
+        assert(!newWorld.mcducks.isExist, { "После уничтожения мира макдональдсы в нем не должны существовать" })
+        assert(!newWorld.dollar.isExist, { "После уничтожения мира доллары в нем не должны существовать" })
+        for (unit in newWorld.units) {
+            assert(!unit.isExists, { "После уничтожения мира географические единицы в нем не должны существовать" })
+        }
+        for (actor in newWorld.actors) {
+            assert(!actor.isExist, { "После уничтожения мира актеры в нем не должны существовать" })
+        }
+    }
+
+    @Test
+    fun testDestructionNotExistWorld(){
+        val newWorld = World("Земля", ArrayList(), ArrayList())
+        assertThrows<WordNotExistException> { newWorld.destructionWord() }
+    }
+
+    @Test
+    fun testcreatingAlreadyExistWorld(){
+        val newWorld = World("Земля", ArrayList(), ArrayList())
+        newWorld.create()
+        assertThrows<WordAlreadyExistException> { newWorld.create() }
     }
 }
