@@ -465,4 +465,25 @@ class DomainTest {
             "Не сильно знаменитого уничтоженного актера можно осознать"
         )
     }
+
+    @Test
+    fun testExistMcduck() {
+        val brain = BrainControlSystem()
+        val mcdonalds = Mcdonalds()
+
+        assertEquals("Макдональдс!", brain.checkMcduck(mcdonalds), "Если макдак существует, то все хорошо")
+    }
+
+    @Test
+    fun testNotExistMcduck() {
+        val brain = BrainControlSystem()
+        val mcdonalds = Mcdonalds()
+        mcdonalds.destruction()
+
+        assertEquals(
+            "Макдональдс... Больше никогда не будет маковских гамбургеров...",
+            brain.checkMcduck(mcdonalds),
+            "Если макдональдса больше не существует, то ты некогда не сможешь попробовать макдаковских булочек"
+        )
+    }
 }

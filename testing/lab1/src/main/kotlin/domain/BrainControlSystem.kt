@@ -38,7 +38,7 @@ class BrainControlSystem {
 
     fun checkMcduck(mcdonalds: Mcdonalds): String {
         return if (realizeDestruction(mcdonalds.getSize(), mcdonalds.isExist)) {
-            "Макдональдс..." + if (mcdonalds.hamburgerCount > 0) "Хорошо, что у меня осталась пара бургеров." else "Больше никогда не будет маковских гамбургеров..."
-        } else "Макдональлс!"
+            "Макдональдс... " + if (mcdonalds.hamburgerCount > 0) "Хорошо, что у меня осталась пара бургеров." else "Больше никогда не будет маковских гамбургеров..."
+        } else "Макдональдс!"
     }
 }
