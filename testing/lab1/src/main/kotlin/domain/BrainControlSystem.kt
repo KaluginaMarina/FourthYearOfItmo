@@ -8,7 +8,7 @@ class BrainControlSystem {
     }
 
     fun checkUnit(unit: GeographicUnit): String {
-        return if (realizeDestruction(unit.size, unit.isExists)) "${unit.name} больше не существует." else "${unit.name} все еще существует"
+        return if (realizeDestruction(unit.size, unit.isExists)) "${unit.name} больше не существует." else "${unit.name} все еще существует."
     }
 
     fun realizeDestructionGeoUnit(unit: GeographicUnit): String {

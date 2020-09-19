@@ -151,8 +151,8 @@ class DomainTest {
         )
         assertEquals(
             false,
-            brain.realizeDestruction(-1.0, true),
-            "[size == -1.0,isExist == true] нельзя осознать, что объект не существует, если он существует."
+            brain.realizeDestruction(brain.MAX_SIZE_FOR_REALIZE / 10, true),
+            "[size == brain.MAX_SIZE_FOR_REALIZE / 10,isExist == true] нельзя осознать, что объект не существует, если он существует."
         )
         assertEquals(
             false,
@@ -182,9 +182,9 @@ class DomainTest {
             "[size == 1.0, MAX_SIZE_FOR_REALIZE == ${brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
         )
         assertEquals(
-            -1.0 <= brain.MAX_SIZE_FOR_REALIZE,
-            brain.realizeDestruction(-1.0, false),
-            "[size == -1.0, MAX_SIZE_FOR_REALIZE == ${brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
+            true,
+            brain.realizeDestruction(brain.MAX_SIZE_FOR_REALIZE / 10, false),
+            "[size == brain.MAX_SIZE_FOR_REALIZE / 10, MAX_SIZE_FOR_REALIZE == ${brain.MAX_SIZE_FOR_REALIZE}, isExist == False], размер должен быть меньше или равен, чем максимальный размер, который можно осознать"
         )
         assertEquals(
             0.0 <= brain.MAX_SIZE_FOR_REALIZE,
@@ -214,7 +214,7 @@ class DomainTest {
         val unit = GeographicUnit("Москва", 2511.0, TypeOfGeographicUnit.CITY)
 
         assertEquals(
-            "Москва все еще существует",
+            "Москва все еще существует.",
             brain.checkUnit(unit),
             "Существующий юнит должен существовать. Нельзя осознать, что он разрушен."
         )
@@ -238,7 +238,7 @@ class DomainTest {
         val unit = GeographicUnit("Очень большой город", Double.MAX_VALUE, TypeOfGeographicUnit.CITY, false)
 
         assertEquals(
-            "Очень большой город все еще существует",
+            "Очень большой город все еще существует.",
             brain.checkUnit(unit),
             "Разрушенный большой город не может быть осознан героем. MAX_SIZE_FOR_REALIZE = ${brain.MAX_SIZE_FOR_REALIZE}"
         )
@@ -318,5 +318,46 @@ class DomainTest {
             assert(!actor.isExist,
                 { "При уничтожении мира должны уничтожиться все его составляющие, в том числе актер: ${actor.lastName} ${actor.firstName}" })
         }
+    }
+
+    @Test
+    fun testRealizeExistGeoUnitDestructing() {
+        val brain = BrainControlSystem()
+        val smallUnit = GeographicUnit("Очень маленький город", 0.1, TypeOfGeographicUnit.CITY, true)
+        val bigUnit = GeographicUnit("Очень большой город", Double.MAX_VALUE, TypeOfGeographicUnit.CITY, true)
+        assertEquals(
+            "Очень маленький город все еще существует.",
+            brain.checkUnit(smallUnit),
+            "Нельзя осознать, что не уничтоженный маленький город уничтожен"
+        )
+        assertEquals(
+            "Очень большой город все еще существует.",
+            brain.checkUnit(bigUnit),
+            "Нельзя осознать, что не уничтоженный большой город уничтожен."
+        )
+    }
+
+    @Test
+    fun testRealizeNotExistSmallGeoUnitDestructing() {
+        val brain = BrainControlSystem()
+        val smallUnit =
+            GeographicUnit("Очень маленький город", brain.MAX_SIZE_FOR_REALIZE / 10, TypeOfGeographicUnit.CITY, false)
+        assertEquals(
+            "Очень маленький город больше не существует.",
+            brain.checkUnit(smallUnit),
+            "Уничтожение не существующего маленького города герой может осознать"
+        )
+    }
+
+    @Test
+    fun testRealizeNotExistBigGeoUnitDestructing() {
+        val brain = BrainControlSystem()
+        val smallUnit =
+            GeographicUnit("Очень большой город", Double.MAX_VALUE, TypeOfGeographicUnit.CITY, false)
+        assertEquals(
+            "Очень большой город все еще существует.",
+            brain.checkUnit(smallUnit),
+            "Уничтожение не существующего большого города герой не может осознать "
+        )
     }
 }
