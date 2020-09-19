@@ -261,15 +261,62 @@ class DomainTest {
     }
 
     @Test
-    fun testDestructionNotExistWorld(){
+    fun testDestructionNotExistWorld() {
         val newWorld = World("Земля", ArrayList(), ArrayList())
         assertThrows<WordNotExistException> { newWorld.destructionWord() }
     }
 
     @Test
-    fun testcreatingAlreadyExistWorld(){
+    fun testCreatingAlreadyExistWorld() {
         val newWorld = World("Земля", ArrayList(), ArrayList())
         newWorld.create()
         assertThrows<WordAlreadyExistException> { newWorld.create() }
+    }
+
+    @Test
+    fun testDestroyedActor() {
+        val actor = Actor("Иван", "Пупкин", 100)
+        actor.destruction()
+        assert(!actor.isExist, { "После уничтожение актера он больше не может существовать" })
+    }
+
+    @Test
+    fun testDestructionDollar() {
+        val dollar = Dollar(Double.MAX_VALUE)
+        dollar.destruction()
+        assert(!dollar.isExist, { "После уничтожения доллара он не может существовать" })
+    }
+
+    @Test
+    fun testDestructionGeoUnit() {
+        val unit = GeographicUnit("Москва", 2511.0, TypeOfGeographicUnit.CITY)
+        unit.destruction()
+        assert(!unit.isExists, { "После уничтожения географический объект не может существовать" })
+    }
+
+    @Test
+    fun testDestructionMcdonalds() {
+        val mcdonalds = Mcdonalds()
+        mcdonalds.destruction()
+        assert(!mcdonalds.isExist, { "После уничтожения макдональдс не может существовать" })
+    }
+
+    @Test
+    fun testDestructionWorldAtribittes() {
+        val newWorld = World("Земля", ArrayList(), ArrayList())
+        newWorld.create()
+        newWorld.destructionWord()
+        assert(!newWorld.mcducks.isExist,
+            { "При уничтожении мира должны уничтожиться все его составляющие, в том числе макдак" })
+        assert(!newWorld.dollar.isExist,
+            { "При уничтожении мира должны уничтожиться все его составляющие, в том числе доллар" })
+        for (unit in newWorld.units) {
+            assert(!unit.isExists,
+                { "При уничтожении мира должны уничтожиться все его составляющие, в том числе географический объект ${unit.name}" })
+        }
+        for (actor in newWorld.actors) {
+            assert(!actor.isExist,
+                { "При уничтожении мира должны уничтожиться все его составляющие, в том числе актер: ${actor.lastName} ${actor.firstName}" })
+        }
     }
 }
