@@ -321,7 +321,7 @@ class DomainTest {
     }
 
     @Test
-    fun testRealizeExistGeoUnitDestructing() {
+    fun testheckExistGeoUnitDestructing() {
         val brain = BrainControlSystem()
         val smallUnit = GeographicUnit("Очень маленький город", 0.1, TypeOfGeographicUnit.CITY, true)
         val bigUnit = GeographicUnit("Очень большой город", Double.MAX_VALUE, TypeOfGeographicUnit.CITY, true)
@@ -338,7 +338,7 @@ class DomainTest {
     }
 
     @Test
-    fun testRealizeNotExistSmallGeoUnitDestructing() {
+    fun testCheckNotExistSmallGeoUnitDestructing() {
         val brain = BrainControlSystem()
         val smallUnit =
             GeographicUnit("Очень маленький город", brain.MAX_SIZE_FOR_REALIZE / 10, TypeOfGeographicUnit.CITY, false)
@@ -350,7 +350,7 @@ class DomainTest {
     }
 
     @Test
-    fun testRealizeNotExistBigGeoUnitDestructing() {
+    fun testCheckNotExistBigGeoUnitDestructing() {
         val brain = BrainControlSystem()
         val smallUnit =
             GeographicUnit("Очень большой город", Double.MAX_VALUE, TypeOfGeographicUnit.CITY, false)
@@ -358,6 +358,111 @@ class DomainTest {
             "Очень большой город все еще существует.",
             brain.checkUnit(smallUnit),
             "Уничтожение не существующего большого города герой не может осознать "
+        )
+    }
+
+    @Test
+    fun testRealizeDestructionExistsGeoUnit() {
+        val brain = BrainControlSystem()
+        val smallUnit = GeographicUnit("Очень маленький город", 0.1, TypeOfGeographicUnit.CITY, true)
+        val bigUnit = GeographicUnit("Очень большой город", Double.MAX_VALUE, TypeOfGeographicUnit.CITY, true)
+        assertEquals(
+            "Это не охватывается. Мне кажется, Очень маленький город все еще существует.",
+            brain.realizeDestructionGeoUnit(smallUnit),
+            "Нельзя осознать, что не уничтоженный маленький город уничтожен"
+        )
+        assertEquals(
+            "Это не охватывается. Мне кажется, Очень большой город все еще существует.",
+            brain.realizeDestructionGeoUnit(bigUnit),
+            "Нельзя осознать, что не уничтоженный большой город уничтожен."
+        )
+    }
+
+    @Test
+    fun testRealizeNotExistSmallGeoUnitDestructing() {
+        val brain = BrainControlSystem()
+        val smallUnit =
+            GeographicUnit("Очень маленький город", brain.MAX_SIZE_FOR_REALIZE / 10, TypeOfGeographicUnit.CITY)
+        smallUnit.destruction()
+        assertEquals(
+            "Очень маленький город больше не существует. Он смог это осознать.",
+            brain.realizeDestructionGeoUnit(smallUnit),
+            "Уничтожение не существующего маленького города герой может осознать"
+        )
+    }
+
+    @Test
+    fun testRealizeNotExistBigGeoUnitDestructing() {
+        val brain = BrainControlSystem()
+        val bigUnit =
+            GeographicUnit("Очень большой город", Double.MAX_VALUE, TypeOfGeographicUnit.CITY)
+        bigUnit.destruction()
+        assertEquals(
+            "Это не охватывается. Мне кажется, Очень большой город все еще существует.",
+            brain.realizeDestructionGeoUnit(bigUnit),
+            "Уничтожение не существующего большого города герой не может осознать "
+        )
+    }
+
+    @Test
+    fun testCheckExistsDollar() {
+        val brain = BrainControlSystem()
+        val dollar = Dollar(74.0)
+
+        assertEquals(
+            "Все хорошо.",
+            brain.checkDollar(dollar),
+            "Если доллар все еще существует, то с ним должно быть все хорошо"
+        )
+    }
+
+    @Test
+    fun testCheckNotExistsDollar() {
+        val brain = BrainControlSystem()
+        val dollar = Dollar(74.0)
+        dollar.destruction()
+        assertEquals(
+            "Что-то ощущается.",
+            brain.checkDollar(dollar),
+            "Если доллар уничтожен, то должно что-то ощущаться"
+        )
+    }
+
+    @Test
+    fun testCheckExistsActor() {
+        val brain = BrainControlSystem()
+        val actor = Actor("Вася", "Пупкин", 1)
+
+        assertEquals(
+            "Пойду посмотрю еще один фильм с Пупкин.",
+            brain.checkActor(actor),
+            "Так как актер существует нельзя осознать того, что его нет"
+        )
+    }
+
+    @Test
+    fun testCheckFamousActor() {
+        val brain = BrainControlSystem()
+        val actor = Actor("Джекки", "Чан", brain.MAX_SIZE_FOR_REALIZE.toInt())
+        actor.destruction()
+
+        assertEquals(
+            "Пойду посмотрю еще один фильм с Чан.",
+            brain.checkActor(actor),
+            "Так как объем вклада актера слишклм велик, то нельзя осознать того, что он уничтожен"
+        )
+    }
+
+    @Test
+    fun testCheckNotFamousActor() {
+        val brain = BrainControlSystem()
+        val actor = Actor("Вася", "Пупкин", (brain.MAX_SIZE_FOR_REALIZE / 10).toInt())
+        actor.destruction()
+
+        assertEquals(
+            "Все фильмы с Пупкин пропали.",
+            brain.checkActor(actor),
+            "Не сильно знаменитого уничтоженного актера можно осознать"
         )
     }
 }

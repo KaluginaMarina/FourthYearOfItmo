@@ -8,18 +8,24 @@ class BrainControlSystem {
     }
 
     fun checkUnit(unit: GeographicUnit): String {
-        return if (realizeDestruction(unit.size, unit.isExists)) "${unit.name} больше не существует." else "${unit.name} все еще существует."
+        return if (realizeDestruction(
+                unit.size,
+                unit.isExists
+            )
+        ) "${unit.name} больше не существует." else "${unit.name} все еще существует."
     }
 
     fun realizeDestructionGeoUnit(unit: GeographicUnit): String {
         return if (realizeDestruction(unit.size, unit.isExists)) "${checkUnit(unit)} Он смог это осознать."
-        else "Это не охватывается. Мне кажется, ${checkUnit(unit)}."
+        else "Это не охватывается. Мне кажется, ${checkUnit(unit)}"
     }
 
     fun checkDollar(dollar: Dollar): String {
-        return if (dollar.value > 0) "Доллар упал. Совсем упал. " +
-                (if (realizeDestruction(dollar.getSize(), dollar.isExist)) "Что-то ощущается." else "Все хорошо.")
-        else "С долларом все ок."
+        return if (realizeDestruction(
+                dollar.getSize(),
+                dollar.isExist
+            )
+        ) "Что-то ощущается." else "Все хорошо."
     }
 
     fun checkActor(actor: Actor): String {
