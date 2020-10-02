@@ -122,8 +122,98 @@ class FunctionsFirstLayerTest {
             Mockito.`when`(functions!!.f2(-5.9 - 100 * PERIOD)).thenReturn(-5.47627)
             // Граничная точка
             Mockito.`when`(functions!!.f2(-2.0 * PI + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
-        }
 
+
+            /**
+             * Положительная часть - функция, которая пересекает прямую ох 3 раза
+             * В точке x = 0 стремиться к бесконечности
+             */
+            // Левая граничная точка
+            Mockito.`when`(functions!!.f1(0 + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            // Отрезок между 0 и пересечением о осью ох
+            Mockito.`when`(functions!!.f1(0.01)).thenReturn(275.519)
+            // Первое пересечение с осью ох
+            Mockito.`when`(functions!!.f1(0.0159975)).thenReturn(0.0)
+            // Значение функции на убывающем отрезке между первым и вторым пересечением ох
+            Mockito.`when`(functions!!.f1(0.02)).thenReturn(-61.7048)
+            // Значение функции на возрастающем отрезке между первым и вторым пересечением ох
+            Mockito.`when`(functions!!.f1(0.05)).thenReturn(-91.4414)
+            // Второе пересечение с ox
+            Mockito.`when`(functions!!.f1(0.321061)).thenReturn(0.0)
+            // Третье пересечение с ох
+            Mockito.`when`(functions!!.f1(65.5183)).thenReturn(0.0)
+
+        }
+    }
+
+    @Test
+    fun testLeftEndpointF1() {
+        assertEquals(
+            Double.POSITIVE_INFINITY,
+            functions!!.systemOfFunctions(0.0 + EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [F1] (х = 0+). Левая граничная точка для положительного интервала."
+        )
+    }
+
+    @Test
+    fun testTheSegmentBetweenZeroAndTheIntersectionOfTheOX() {
+        assertEquals(
+            275.519,
+            functions!!.systemOfFunctions(0.01),
+            Functions.PRECISION,
+            "Layer 1: [F1] (х = 0.01). Отрезок между 0 и пересечением о осью ох."
+        )
+    }
+
+    @Test
+    fun testFirstIntersectionWithTheOX() {
+        assertEquals(
+            0.0,
+            functions!!.systemOfFunctions(0.0159975),
+            Functions.PRECISION,
+            "Layer 1: [F1] (х = 0.0159975).Первое пересечение с осью ох"
+        )
+    }
+
+    @Test
+    fun testTheValueOfTheFunctionOnTheDecreasingSegmentBetweenTheFirstAndSecondIntersectionOX() {
+        assertEquals(
+            -61.7048,
+            functions!!.systemOfFunctions(0.02),
+            Functions.PRECISION,
+            "Layer 1: [F1] (х = 0.02). Значение функции на убывающем отрезке между первым и вторым пересечением ох"
+        )
+    }
+
+    @Test
+    fun testTheValueOfTheFunctionOnTheIncreasingSegmentBetweenTheFirstAndSecondIntersectionOX(){
+        assertEquals(
+            -91.4414,
+            functions!!.systemOfFunctions(0.05),
+            Functions.PRECISION,
+            "Layer 1: [F1] (х = 0.02).Значение функции на возрастающем отрезке между первым и вторым пересечением ох"
+        )
+    }
+
+    @Test
+    fun testSecondIntersectionWithTheOX() {
+        assertEquals(
+            0.0,
+            functions!!.systemOfFunctions(0.321061),
+            Functions.PRECISION,
+            "Layer 1: [F1] (х = 0.321061). Второе пересечение с осью ох"
+        )
+    }
+
+    @Test
+    fun testThirdIntersectionWithTheOX() {
+        assertEquals(
+            0.0,
+            functions!!.systemOfFunctions(65.5183),
+            Functions.PRECISION,
+            "Layer 1: [F1] (х = 65.5183). Третье пересечение с осью ох"
+        )
     }
 
     @Test
@@ -753,7 +843,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testExtremumInTheThirdPart(){
+    fun testExtremumInTheThirdPart() {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-4.0),
@@ -763,7 +853,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testNeighborhoodToTheRightOfExtremumInTheThirdPart(){
+    fun testNeighborhoodToTheRightOfExtremumInTheThirdPart() {
         assertEquals(
             3.259463457,
             functions!!.systemOfFunctions(-4.0 + EPSILON),
@@ -773,7 +863,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testNeighborhoodToTheLeftOfExtremumInTheThirdPart(){
+    fun testNeighborhoodToTheLeftOfExtremumInTheThirdPart() {
         assertEquals(
             3.259463457,
             functions!!.systemOfFunctions(-4.0 - EPSILON),
@@ -813,7 +903,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testTheFourthPartToTheRightOfTheExtremum(){
+    fun testTheFourthPartToTheRightOfTheExtremum() {
         assertEquals(
             -2.1949,
             functions!!.systemOfFunctions(-5.1),
@@ -823,7 +913,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testTheFourthPartToTheRightOfTheExtremumWithPeriod(){
+    fun testTheFourthPartToTheRightOfTheExtremumWithPeriod() {
         assertEquals(
             -2.1949,
             functions!!.systemOfFunctions(-5.1 - 100 * PERIOD),
@@ -833,7 +923,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testTheFourthPartToTheLeftOfTheExtremum(){
+    fun testTheFourthPartToTheLeftOfTheExtremum() {
         assertEquals(
             -5.47627,
             functions!!.systemOfFunctions(-5.9),
@@ -843,7 +933,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testTheFourthPartToTheLeftOfTheExtremumWithPeriod(){
+    fun testTheFourthPartToTheLeftOfTheExtremumWithPeriod() {
         assertEquals(
             -5.47627,
             functions!!.systemOfFunctions(-5.9 - 100 * PERIOD),
@@ -853,7 +943,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testTheBorderPointOfTheFourthPartIsAboutTwoPi(){
+    fun testTheBorderPointOfTheFourthPartIsAboutTwoPi() {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(-2.0 * PI + EPSILON),
