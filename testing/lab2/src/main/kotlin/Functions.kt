@@ -24,7 +24,7 @@ open class Functions {
                 (log_3(x) * ((log_2(x) / log_5(x)) - log_3(x))))
     }
 
-   open fun f2(x: Double): Double {
+    open fun f2(x: Double): Double {
         return (((((csc(x) + sin(x)) - cot(x)) / tan(x)) * ((cot(x) - cos(x)) + tan(x))) - ((csc(x) * csc(x)) + sec(x)))
     }
 
