@@ -72,6 +72,16 @@ class FunctionsFirstLayerTest {
             Mockito.`when`(functions!!.f2(-2.0 - EPSILON)).thenReturn(-2.259600862)
             Mockito.`when`(functions!!.f2(-2.0 - EPSILON - PERIOD)).thenReturn(-2.259600862)
             Mockito.`when`(functions!!.f2(-2.0 - EPSILON - 100 * PERIOD)).thenReturn(-2.259600862)
+            // Граничное значение между второй и третьей частями и окрестности точки PI
+            Mockito.`when`(functions!!.f2(-PI)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-PI - PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-PI - 100 * PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-PI + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI + EPSILON - PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI + EPSILON - 100 * PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI - EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI - EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
         }
 
     }
@@ -568,4 +578,98 @@ class FunctionsFirstLayerTest {
             "Layer 1: [x = -2 - EPS - 100 * PERIOD]. Значения в окрестности слева к точке перегиба второй чати в сто периодов"
         )
     }
+
+    @Test
+    fun testTheBoundaryValueBetweenTheSecondAndThirdPartsAndTheVicinityOfThePIPoint() {
+        assertEquals(
+            Double.NaN,
+            functions!!.systemOfFunctions(-PI),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI].  Граничное значение между второй и третьей частями и окрестности точки PI."
+        )
+    }
+
+    @Test
+    fun testTheBoundaryValueBetweenTheSecondAndThirdPartsAndTheVicinityOfThePIPointFirstPeriod() {
+        assertEquals(
+            Double.NaN,
+            functions!!.systemOfFunctions(-PI - PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI- PERIOD].  Граничное значение между второй и третьей частями и окрестности точки PI. Сдвиг на один период"
+        )
+    }
+
+    @Test
+    fun testTheBoundaryValueBetweenTheSecondAndThirdPartsAndTheVicinityOfThePIPointPeriod() {
+        assertEquals(
+            Double.NaN,
+            functions!!.systemOfFunctions(-PI - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI - 100 * PERIOD].  Граничное значение между второй и третьей частями и окрестности точки PI. Сдвиг на сто периодов"
+        )
+    }
+
+    @Test
+    fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheRightOfThePI() {
+        assertEquals(
+            Double.NEGATIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI  + EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI + EPS].  Граничное значение между второй и третьей частями и справа от  точки PI . x->-pi+"
+        )
+    }
+
+    @Test
+    fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheRightOfThePIPointFirstPeriod() {
+        assertEquals(
+            Double.NEGATIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI  + EPSILON - PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI + EPS - PERIOD].  Граничное значение между второй и третьей частями и справа от  точки PI . Сдвиг на один период"
+        )
+    }
+
+
+    @Test
+    fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheRightOfThePIHundredthPeriod() {
+        assertEquals(
+            Double.NEGATIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI + EPSILON - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI + EPS - 100 * PERIOD].  Граничное значение между второй и третьей частями и справа от  точки PI. Сдвиг на сто периодов"
+        )
+    }
+
+
+    @Test
+    fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheLeftOfThePI() {
+        assertEquals(
+            Double.POSITIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI - EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI - EPS].  Граничное значение между второй и третьей частями и слева от  точки PI  x->-pi-"
+        )
+    }
+
+    @Test
+    fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheLeftOfThePIFirstPeriod() {
+        assertEquals(
+            Double.POSITIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI  - EPSILON - PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI  - EPS - PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на один период"
+        )
+    }
+
+
+    @Test
+    fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheLeftOfThePIHundredthPeriod() {
+        assertEquals(
+            Double.POSITIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI  - EPSILON - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI - EPS - 100 * PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на сто периодов"
+        )
+    }
+
 }
