@@ -95,6 +95,13 @@ class FunctionsFirstLayerTest {
             Mockito.`when`(functions!!.f2(-1.5 * PI)).thenReturn(Double.NaN)
             Mockito.`when`(functions!!.f2(-1.5 * PI + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
             Mockito.`when`(functions!!.f2(-1.5 * PI - EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            // Четвертая часть: справа и слева от экстремума + период
+            Mockito.`when`(functions!!.f2(-5.1)).thenReturn(-2.1949)
+            Mockito.`when`(functions!!.f2(-5.1 - 100 * PERIOD)).thenReturn(-2.1949)
+            Mockito.`when`(functions!!.f2(-5.9)).thenReturn(-5.47627)
+            Mockito.`when`(functions!!.f2(-5.9 - 100 * PERIOD)).thenReturn(-5.47627)
+            // Граничная точка
+            Mockito.`when`(functions!!.f2(-2.0 * PI + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
         }
 
     }
@@ -782,6 +789,56 @@ class FunctionsFirstLayerTest {
             functions!!.systemOfFunctions(-1.5 * PI - EPSILON),
             Functions.PRECISION,
             "Layer 1: [x = -1/5 * PI - EPS]. Окрестность слева Граничные точки между третим и четвертым отрезком"
+        )
+    }
+
+    @Test
+    fun testTheFourthPartToTheRightOfTheExtremum(){
+        assertEquals(
+            -2.1949,
+            functions!!.systemOfFunctions(-5.1),
+            Functions.PRECISION,
+            "Layer 1: [x = -5.1]. Четвертая часть справа от экстремума"
+        )
+    }
+
+    @Test
+    fun testTheFourthPartToTheRightOfTheExtremumWithPeriod(){
+        assertEquals(
+            -2.1949,
+            functions!!.systemOfFunctions(-5.1 - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -5.1 + PERIOD]. Четвертая часть справа от экстремума с периодом"
+        )
+    }
+
+    @Test
+    fun testTheFourthPartToTheLeftOfTheExtremum(){
+        assertEquals(
+            -5.47627,
+            functions!!.systemOfFunctions(-5.9),
+            Functions.PRECISION,
+            "Layer 1: [x = -5.9]. Четвертая часть слева от экстремума"
+        )
+    }
+
+    @Test
+    fun testTheFourthPartToTheLeftOfTheExtremumWithPeriod(){
+        assertEquals(
+            -5.47627,
+            functions!!.systemOfFunctions(-5.9 - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -5.9 + PERIOD]. Четвертая часть справа от экстремума с периодом"
+        )
+    }
+
+    @Test
+    fun testTheBorderPointOfTheFourthPartIsAboutTwoPi(){
+        assertEquals(
+            Double.NEGATIVE_INFINITY,
+            functions!!.systemOfFunctions(-2.0 * PI + EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [x = -2.0 * PI + EPSILON]. Граничная точка четвертой части около 2PI"
         )
     }
 }
