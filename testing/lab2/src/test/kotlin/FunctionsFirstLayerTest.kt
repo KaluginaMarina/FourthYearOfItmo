@@ -42,15 +42,15 @@ class FunctionsFirstLayerTest {
             Mockito.`when`(functions!!.f2(-1.0 + EPSILON - 100 * PERIOD)).thenReturn(-5.7044795233)
             Mockito.`when`(functions!!.f2(-1.0 - EPSILON - 100 * PERIOD)).thenReturn(-5.7044795233)
             // Значения около pi/2 и в эпсилон-окрестности + период (граница двух частей функии + неопределенное значение)
-            Mockito.`when`(functions!!.f2(-PI / 2)).thenReturn(Double.NaN)
-            Mockito.`when`(functions!!.f2(-PI / 2 - PERIOD)).thenReturn(Double.NaN)
-            Mockito.`when`(functions!!.f2(-PI / 2 - 100 * PERIOD)).thenReturn(Double.NaN)
-            Mockito.`when`(functions!!.f2(-PI / 2 + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(functions!!.f2(-PI / 2 + EPSILON - PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(functions!!.f2(-PI / 2 + EPSILON - 100 * PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(functions!!.f2(-PI / 2 - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(functions!!.f2(-PI / 2 - EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(functions!!.f2(-PI / 2 - EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2.0)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-PI / 2.0 - PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-PI / 2.0 - 100 * PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-PI / 2.0 + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2.0 + EPSILON - PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2.0 + EPSILON - 100 * PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2.0 - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2.0 - EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2.0 - EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
             // Значения для значений второй негативой части + период (слева и справа от точки перегиба)
             Mockito.`when`(functions!!.f2(-1.7)).thenReturn(4.5428)
             Mockito.`when`(functions!!.f2(-1.7 - PERIOD)).thenReturn(4.5428)
@@ -82,6 +82,19 @@ class FunctionsFirstLayerTest {
             Mockito.`when`(functions!!.f2(-PI - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
             Mockito.`when`(functions!!.f2(-PI - EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
             Mockito.`when`(functions!!.f2(-PI - EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
+            // Третья часть справа и слева от экстремума + париод
+            Mockito.`when`(functions!!.f2(-3.5)).thenReturn(25.9773)
+            Mockito.`when`(functions!!.f2(-3.5 - 100 * PERIOD)).thenReturn(25.9773)
+            Mockito.`when`(functions!!.f2(-4.3)).thenReturn(3.78801)
+            Mockito.`when`(functions!!.f2(-4.3 - 100 * PERIOD)).thenReturn(3.78801)
+            // Экстремум в третьей части и эпсилон-окрестности точки перегиба
+            Mockito.`when`(functions!!.f2(-4.0)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-4.0 + EPSILON)).thenReturn(3.259463457)
+            Mockito.`when`(functions!!.f2(-4.0 - EPSILON)).thenReturn(3.259463457)
+            // Граничные точки между третим и четвертым отрезком
+            Mockito.`when`(functions!!.f2(-1.5 * PI)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-1.5 * PI + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-1.5 * PI - EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
         }
 
     }
@@ -487,7 +500,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testValuesAtTheInflectionPointOfTheSecondPart(){
+    fun testValuesAtTheInflectionPointOfTheSecondPart() {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-2.0),
@@ -497,7 +510,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testValuesAtTheInflectionPointOfTheSecondPartFirstPeriod(){
+    fun testValuesAtTheInflectionPointOfTheSecondPartFirstPeriod() {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-2.0 - PERIOD),
@@ -508,7 +521,7 @@ class FunctionsFirstLayerTest {
 
 
     @Test
-    fun testValuesAtTheInflectionPointOfTheSecondPartHundredPeriod(){
+    fun testValuesAtTheInflectionPointOfTheSecondPartHundredPeriod() {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-2.0 - 100 * PERIOD),
@@ -518,7 +531,7 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testValuesInTheNeighborhoodToTheRightOfTheInflectionPointOfTheSecondPart(){
+    fun testValuesInTheNeighborhoodToTheRightOfTheInflectionPointOfTheSecondPart() {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 + EPSILON),
@@ -528,10 +541,10 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testValuesInTheNeighborhoodToTheRightOfTheInflectionPointOfTheSecondPartFirstPeriod(){
+    fun testValuesInTheNeighborhoodToTheRightOfTheInflectionPointOfTheSecondPartFirstPeriod() {
         assertEquals(
             -2.259600862,
-            functions!!.systemOfFunctions(-2.0 + EPSILON- PERIOD),
+            functions!!.systemOfFunctions(-2.0 + EPSILON - PERIOD),
             Functions.PRECISION,
             "Layer 1: [x = -2 + EPS - PERIOD]. Значения в окрестности справа к точке перегиба второй чати сдвиг в один период"
         )
@@ -539,7 +552,7 @@ class FunctionsFirstLayerTest {
 
 
     @Test
-    fun testValuesInTheNeighborhoodToTheRightOfTheInflectionPointOfTheSecondPartHundredPeriod(){
+    fun testValuesInTheNeighborhoodToTheRightOfTheInflectionPointOfTheSecondPartHundredPeriod() {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 + EPSILON - 100 * PERIOD),
@@ -550,7 +563,7 @@ class FunctionsFirstLayerTest {
 
 
     @Test
-    fun testValuesInTheNeighborhoodToTheLeftOfTheInflectionPointOfTheSecondPart(){
+    fun testValuesInTheNeighborhoodToTheLeftOfTheInflectionPointOfTheSecondPart() {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 - EPSILON),
@@ -560,17 +573,17 @@ class FunctionsFirstLayerTest {
     }
 
     @Test
-    fun testValuesInTheNeighborhoodToTheLeftOfTheInflectionPointOfTheSecondPartFirstPeriod(){
+    fun testValuesInTheNeighborhoodToTheLeftOfTheInflectionPointOfTheSecondPartFirstPeriod() {
         assertEquals(
             -2.259600862,
-            functions!!.systemOfFunctions(-2.0 - EPSILON- PERIOD),
+            functions!!.systemOfFunctions(-2.0 - EPSILON - PERIOD),
             Functions.PRECISION,
             "Layer 1: [x = -2 - EPS - PERIOD]. Значения в окрестности слева к точке перегиба второй чати сдвиг в один период"
         )
     }
 
     @Test
-    fun testValuesInTheNeighborhoodToTheLeftOfTheInflectionPointOfTheSecondPartHundredPeriod(){
+    fun testValuesInTheNeighborhoodToTheLeftOfTheInflectionPointOfTheSecondPartHundredPeriod() {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 - EPSILON - 100 * PERIOD),
@@ -613,7 +626,7 @@ class FunctionsFirstLayerTest {
     fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheRightOfThePI() {
         assertEquals(
             Double.NEGATIVE_INFINITY,
-            functions!!.systemOfFunctions(-PI  + EPSILON),
+            functions!!.systemOfFunctions(-PI + EPSILON),
             Functions.PRECISION,
             "Layer 1: [x = -PI + EPS].  Граничное значение между второй и третьей частями и справа от  точки PI . x->-pi+"
         )
@@ -623,7 +636,7 @@ class FunctionsFirstLayerTest {
     fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheRightOfThePIPointFirstPeriod() {
         assertEquals(
             Double.NEGATIVE_INFINITY,
-            functions!!.systemOfFunctions(-PI  + EPSILON - PERIOD),
+            functions!!.systemOfFunctions(-PI + EPSILON - PERIOD),
             Functions.PRECISION,
             "Layer 1: [x = -PI + EPS - PERIOD].  Граничное значение между второй и третьей частями и справа от  точки PI . Сдвиг на один период"
         )
@@ -655,7 +668,7 @@ class FunctionsFirstLayerTest {
     fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheLeftOfThePIFirstPeriod() {
         assertEquals(
             Double.POSITIVE_INFINITY,
-            functions!!.systemOfFunctions(-PI  - EPSILON - PERIOD),
+            functions!!.systemOfFunctions(-PI - EPSILON - PERIOD),
             Functions.PRECISION,
             "Layer 1: [x = -PI  - EPS - PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на один период"
         )
@@ -666,10 +679,109 @@ class FunctionsFirstLayerTest {
     fun testBoundaryValueBetweenTheSecondAndThirdPartsAndToTheLeftOfThePIHundredthPeriod() {
         assertEquals(
             Double.POSITIVE_INFINITY,
-            functions!!.systemOfFunctions(-PI  - EPSILON - 100 * PERIOD),
+            functions!!.systemOfFunctions(-PI - EPSILON - 100 * PERIOD),
             Functions.PRECISION,
             "Layer 1: [x = -PI - EPS - 100 * PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на сто периодов"
         )
     }
 
+    @Test
+    fun testTheThirdPartToTheRightOfTheExtremum() {
+        assertEquals(
+            25.9773,
+            functions!!.systemOfFunctions(-3.5),
+            Functions.PRECISION,
+            "Layer 1: [x = -3.5].  Третья часть справа от экстремума"
+        )
+    }
+
+    @Test
+    fun testTheThirdPartToTheRightOfTheExtremumWithPeriod() {
+        assertEquals(
+            25.9773,
+            functions!!.systemOfFunctions(-3.5 - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -3.5 - 100 * PERIOD].  Третья часть справа от экстремума. Сдвиг на сто периодов"
+        )
+    }
+
+    @Test
+    fun testTheThirdPartToTheLeftOfTheExtremum() {
+        assertEquals(
+            3.78801,
+            functions!!.systemOfFunctions(-4.3),
+            Functions.PRECISION,
+            "Layer 1: [x = -4.3].  Третья часть слева от экстремума"
+        )
+    }
+
+    @Test
+    fun testTheThirdPartToTheLeftOfTheExtremumWithPeriod() {
+        assertEquals(
+            3.78801,
+            functions!!.systemOfFunctions(-4.3 - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -4.3 - 100 * PERIOD].  Третья часть слева от экстремума. Сдвиг на сто периодов"
+        )
+    }
+
+    @Test
+    fun testExtremumInTheThirdPart(){
+        assertEquals(
+            Double.NaN,
+            functions!!.systemOfFunctions(-4.0),
+            Functions.PRECISION,
+            "Layer 1: [x = -4.0].  Экстремум в третьей части "
+        )
+    }
+
+    @Test
+    fun testNeighborhoodToTheRightOfExtremumInTheThirdPart(){
+        assertEquals(
+            3.259463457,
+            functions!!.systemOfFunctions(-4.0 + EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [x = -4.0 + EPS].  Окрестность справа от экстремума в третьей части"
+        )
+    }
+
+    @Test
+    fun testNeighborhoodToTheLeftOfExtremumInTheThirdPart(){
+        assertEquals(
+            3.259463457,
+            functions!!.systemOfFunctions(-4.0 - EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [x = -4.0 - EPS].  Окрестность слева от экстремума в третьей части"
+        )
+    }
+
+    @Test
+    fun testBoundaryPointsBetweenTheThirdAndFourthLineSegments() {
+        assertEquals(
+            Double.NaN,
+            functions!!.systemOfFunctions(-1.5 * PI),
+            Functions.PRECISION,
+            "Layer 1: [x = -1/5 * PI].  Граничные точки между третим и четвертым отрезком"
+        )
+    }
+
+    @Test
+    fun testRightNeighborhoodBoundaryPointsBetweenTheThirdAndFourthLineSegments() {
+        assertEquals(
+            Double.POSITIVE_INFINITY,
+            functions!!.systemOfFunctions(-1.5 * PI + EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [x = -1/5 * PI + EPS]. Окрестность справа Граничные точки между третим и четвертым отрезком"
+        )
+    }
+
+    @Test
+    fun testLeftNeighborhoodBoundaryPointsBetweenTheThirdAndFourthLineSegments() {
+        assertEquals(
+            Double.NEGATIVE_INFINITY,
+            functions!!.systemOfFunctions(-1.5 * PI - EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [x = -1/5 * PI - EPS]. Окрестность слева Граничные точки между третим и четвертым отрезком"
+        )
+    }
 }
