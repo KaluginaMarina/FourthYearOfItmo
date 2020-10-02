@@ -1,3 +1,14 @@
+import SimpleFunctions.Companion.cos
+import SimpleFunctions.Companion.cot
+import SimpleFunctions.Companion.csc
+import SimpleFunctions.Companion.log_10
+import SimpleFunctions.Companion.log_2
+import SimpleFunctions.Companion.log_3
+import SimpleFunctions.Companion.log_5
+import SimpleFunctions.Companion.sec
+import SimpleFunctions.Companion.sin
+import SimpleFunctions.Companion.tan
+
 open class Functions {
 
     companion object {
@@ -5,11 +16,7 @@ open class Functions {
     }
 
     open fun systemOfFunctions(x: Double): Double {
-        return if (x > 0) {
-            f1(x)
-        } else {
-            f2(x)
-        }
+        return if (x > 0) f1(x) else f2(x)
     }
 
     open fun f1(x: Double): Double {
@@ -19,46 +26,6 @@ open class Functions {
 
    open fun f2(x: Double): Double {
         return (((((csc(x) + sin(x)) - cot(x)) / tan(x)) * ((cot(x) - cos(x)) + tan(x))) - ((csc(x) * csc(x)) + sec(x)))
-    }
-
-    private fun sec(x: Double): Double {
-        return 1.0
-    }
-
-    private fun cos(x: Double): Double {
-        return 1.0
-    }
-
-    private fun tan(x: Double): Double {
-        return 1.0
-    }
-
-    private fun cot(x: Double): Double {
-        return 1.0
-    }
-
-    private fun sin(x: Double): Double {
-        return 1.0
-    }
-
-    private fun csc(x: Double): Double {
-        return 1.0
-    }
-
-    private fun log_5(x: Double): Double {
-        return 1.0
-    }
-
-    private fun log_10(x: Double): Double {
-        return 1.0
-    }
-
-    private fun log_3(x: Double): Double {
-        return 1.0
-    }
-
-    private fun log_2(x: Double): Double {
-        return 1.0
     }
 
 }
