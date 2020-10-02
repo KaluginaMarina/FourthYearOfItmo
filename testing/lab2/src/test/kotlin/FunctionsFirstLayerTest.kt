@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.CALLS_REAL_METHODS
+import kotlin.math.E
+import kotlin.math.PI
 
 class FunctionsFirstLayerTest {
     companion object {
@@ -26,7 +28,7 @@ class FunctionsFirstLayerTest {
             Mockito.`when`(functions!!.f2(-0.5)).thenReturn(-9.86725)
             Mockito.`when`(functions!!.f2(-0.5 - PERIOD)).thenReturn(-9.86725)
             Mockito.`when`(functions!!.f2(-0.5 - 100 * PERIOD)).thenReturn(-9.86725)
-            // Значения около единицы и в эпмилон-окрестности + период
+            // Значения около единицы и в эпсилон-окрестности + период
             Mockito.`when`(functions!!.f2(-1.0)).thenReturn(Double.NaN)
             Mockito.`when`(functions!!.f2(-1.0 + EPSILON)).thenReturn(-5.7044795233)
             Mockito.`when`(functions!!.f2(-1.0 - EPSILON)).thenReturn(-5.7044795233)
@@ -36,6 +38,16 @@ class FunctionsFirstLayerTest {
             Mockito.`when`(functions!!.f2(-1.0 - 100 * PERIOD)).thenReturn(Double.NaN)
             Mockito.`when`(functions!!.f2(-1.0 + EPSILON - 100 * PERIOD)).thenReturn(-5.7044795233)
             Mockito.`when`(functions!!.f2(-1.0 - EPSILON - 100 * PERIOD)).thenReturn(-5.7044795233)
+            // Значения около pi/2 и в эпсилон-окрестности + период (граница двух частей функии + неопределенное значение)
+            Mockito.`when`(functions!!.f2(-PI / 2)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-PI / 2 - PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-PI / 2 - 100 * PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(functions!!.f2(-PI / 2 + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2 + EPSILON - PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2 + EPSILON - 100 * PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2 - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2 - EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(functions!!.f2(-PI / 2 - EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
         }
 
     }
@@ -55,9 +67,9 @@ class FunctionsFirstLayerTest {
     fun testZeroValueFirstPeriod() {
         assertEquals(
             Double.NaN,
-            functions!!.systemOfFunctions(0.0 + PERIOD),
+            functions!!.systemOfFunctions(0.0 - PERIOD),
             Functions.PRECISION,
-            "Layer 1: [х = 0 + PERIOD]. Тестирование нулевого значения со сдвигом в период"
+            "Layer 1: [х = 0 - PERIOD]. Тестирование нулевого значения со сдвигом в период"
         )
     }
 
@@ -65,9 +77,9 @@ class FunctionsFirstLayerTest {
     fun testZeroValueHundredthPeriod() {
         assertEquals(
             Double.NaN,
-            functions!!.systemOfFunctions(0.0 + 100 * PERIOD),
+            functions!!.systemOfFunctions(0.0 - 100 * PERIOD),
             Functions.PRECISION,
-            "Layer 1: [х = 0 + 100 * PERIOD]. Тестирование нулевого значения со сдвигом в 100 периодов"
+            "Layer 1: [х = 0 - 100 * PERIOD]. Тестирование нулевого значения со сдвигом в 100 периодов"
         )
     }
 
@@ -146,9 +158,9 @@ class FunctionsFirstLayerTest {
     fun testValueOneFirstPeriod() {
         assertEquals(
             Double.NaN,
-            functions!!.systemOfFunctions(-1.0 + PERIOD),
+            functions!!.systemOfFunctions(-1.0 - PERIOD),
             Functions.PRECISION,
-            "Layer 1: [x = -1 + PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на один период."
+            "Layer 1: [x = -1 - PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на один период."
         )
     }
 
@@ -156,9 +168,9 @@ class FunctionsFirstLayerTest {
     fun testValueOneHundredthPeriod() {
         assertEquals(
             Double.NaN,
-            functions!!.systemOfFunctions(-1.0 + 100 * PERIOD),
+            functions!!.systemOfFunctions(-1.0 - 100 * PERIOD),
             Functions.PRECISION,
-            "Layer 1: [x = -1 + 100 * PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на сто периодов."
+            "Layer 1: [x = -1 - 100 * PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на сто периодов."
         )
     }
 
@@ -221,6 +233,99 @@ class FunctionsFirstLayerTest {
             functions!!.systemOfFunctions(-1.0 - EPSILON - 100 * PERIOD),
             Functions.PRECISION,
             "Layer 1: [x = -1 - EPS - 100 * PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1-. Сдвиг на сто периодов"
+        )
+    }
+
+    @Test
+    fun testIndefiniteValueInHalfPi() {
+        assertEquals(
+            Double.NaN,
+            functions!!.systemOfFunctions(-PI / 2),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI / 2]. При неопределенном значении."
+        )
+    }
+
+    @Test
+    fun testIndefiniteValueInHalfPiFirstPeriod() {
+        assertEquals(
+            Double.NaN,
+            functions!!.systemOfFunctions(-PI / 2 - PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI / 2 - PERIOD]. При неопределенном значении. Сдвиг на один период"
+        )
+    }
+
+    @Test
+    fun testIndefiniteValueInHalfPiHundredthPeriod() {
+        assertEquals(
+            Double.NaN,
+            functions!!.systemOfFunctions(-PI / 2 - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI / 2 - 100 * PERIOD]. При неопределенном значении. Сдвиг на сто периодов"
+        )
+    }
+
+    @Test
+    fun testBoundaryValueToTheRightOfHalfPi() {
+        assertEquals(
+            Double.NEGATIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI / 2 + EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI / 2 + EPS]. Граничное значение справа от -PI/2. x->-pi/2+"
+        )
+    }
+
+    @Test
+    fun testBoundaryValueToTheRightOfHalfPiFirstPeriod() {
+        assertEquals(
+            Double.NEGATIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI / 2 + EPSILON - PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI / 2 + EPS - PERIOD]. Граничное значение справа от PI/2. x->pi/2+. Сдвиг на один период"
+        )
+    }
+
+
+    @Test
+    fun testBoundaryValueToTheRightOfHalfPiHundredthPeriod() {
+        assertEquals(
+            Double.NEGATIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI / 2 + EPSILON - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI / 2 + EPS - 100 * PERIOD]. Граничное значение справа от -PI/2. x->-pi/2+. Сдвиг на сто периодов"
+        )
+    }
+
+
+    @Test
+    fun testBoundaryValueToTheLeftOfHalfPi() {
+        assertEquals(
+            Double.POSITIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI / 2 - EPSILON),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI / 2 - EPS]. Граничное значение справа от -PI/2. x->-pi/2-"
+        )
+    }
+
+    @Test
+    fun testBoundaryValueToTheRightOfHalfPiLeftPeriod() {
+        assertEquals(
+            Double.POSITIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI / 2 - EPSILON - PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI / 2 - EPS - PERIOD]. Граничное значение справа от -PI/2. x->-pi/2-. Сдвиг на один период"
+        )
+    }
+
+
+    @Test
+    fun testBoundaryValueToTheLeftOfHalfPiHundredthPeriod() {
+        assertEquals(
+            Double.POSITIVE_INFINITY,
+            functions!!.systemOfFunctions(-PI / 2 - EPSILON - 100 * PERIOD),
+            Functions.PRECISION,
+            "Layer 1: [x = -PI / 2 - EPS - 100 * PERIOD]. Граничное значение справа от -PI/2. x->-pi/2-. Сдвиг на сто периодов"
         )
     }
 }
