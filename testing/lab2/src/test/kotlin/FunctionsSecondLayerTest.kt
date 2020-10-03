@@ -20,8 +20,28 @@ class FunctionsSecondLayerTest {
             val sf = Mockito.mock(SimpleFunctions::class.java)
             functions = Functions(sf)
 
-            // Значения около 0 и в эпсилон-окрестности от 0 + период
+            /**
+             * Негативная часть функции имеет вид переодической функции, которая
+             * состоит из 4-ех частей.
+             * В каждой части есть граничные точки, экстремумы или точки перегиба
+             *
+             * Граничные точки представляют собой точки разрыва второго рода. В таких
+             * точках невозможно посчитать значение функции и предел функции, в
+             * окрестностях этих точек стремиться к +- бесконечности
+             * (Примером может служить точка х = 0, х = pi/2)
+             *
+             * Помимо этих точек есть точки разрыва первого рода.
+             * Функция в данных точках не определена, но в эа односоронних предела
+             * в этой точке существуют и конечны
+             * (Примером такой точки модет послужить точка х = 1)
+             *
+             *
+             * Для тестирования были исследованы все точки разрыва первого и второго рода,
+             * была проконтролированна соблюдаемость периодичности, и выбраны и протестированы
+             * точки в каждом классе эквивалентности.
+             */
 
+            // Значения около 0 и в эпсилон-окрестности от 0 + период
             // Mockito.`when`(functions!!.f2(0.0)).thenReturn(Double.NaN)
             Mockito.`when`(sf.sin(0.0)).thenReturn(0.0)
             Mockito.`when`(sf.cos(0.0)).thenReturn(1.0)
@@ -195,76 +215,76 @@ class FunctionsSecondLayerTest {
 
             // Значения около pi/2 и в эпсилон-окрестности + период (граница двух частей функии + неопределенное значение)
             // Mockito.`when`(functions!!.f2(-PI / 2.0)).thenReturn(Double.NaN)
-            Mockito.`when`(sf.sin(-PI/2)).thenReturn(-1.0)
-            Mockito.`when`(sf.cos(-PI/2)).thenReturn(0.0)
-            Mockito.`when`(sf.tan(-PI/2)).thenReturn(Double.NaN)
-            Mockito.`when`(sf.cot(-PI/2)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-PI/2)).thenReturn(Double.NaN)
-            Mockito.`when`(sf.csc(-PI/2)).thenReturn(-1.0)
+            Mockito.`when`(sf.sin(-PI / 2)).thenReturn(-1.0)
+            Mockito.`when`(sf.cos(-PI / 2)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-PI / 2)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.cot(-PI / 2)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-PI / 2)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.csc(-PI / 2)).thenReturn(-1.0)
 
             // Mockito.`when`(functions!!.f2(-PI / 2.0 - PERIOD)).thenReturn(Double.NaN)
-            Mockito.`when`(sf.sin(-PI/2 - PERIOD)).thenReturn(-1.0)
-            Mockito.`when`(sf.cos(-PI/2 - PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.tan(-PI/2 - PERIOD)).thenReturn(Double.NaN)
-            Mockito.`when`(sf.cot(-PI/2 - PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-PI/2 - PERIOD)).thenReturn(Double.NaN)
-            Mockito.`when`(sf.csc(-PI/2 - PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.sin(-PI / 2 - PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.cos(-PI / 2 - PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-PI / 2 - PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.cot(-PI / 2 - PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-PI / 2 - PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.csc(-PI / 2 - PERIOD)).thenReturn(-1.0)
 
             // Mockito.`when`(functions!!.f2(-PI / 2.0 - 100 * PERIOD)).thenReturn(Double.NaN)
-            Mockito.`when`(sf.sin(-PI/2 - 100 * PERIOD)).thenReturn(-1.0)
-            Mockito.`when`(sf.cos(-PI/2 - 100 * PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.tan(-PI/2 - 100 * PERIOD)).thenReturn(Double.NaN)
-            Mockito.`when`(sf.cot(-PI/2 - 100 * PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-PI/2 - 100 * PERIOD)).thenReturn(Double.NaN)
-            Mockito.`when`(sf.csc(-PI/2 - 100 * PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.sin(-PI / 2 - 100 * PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.cos(-PI / 2 - 100 * PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-PI / 2 - 100 * PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.cot(-PI / 2 - 100 * PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-PI / 2 - 100 * PERIOD)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.csc(-PI / 2 - 100 * PERIOD)).thenReturn(-1.0)
 
             // Mockito.`when`(functions!!.f2(-PI / 2.0 + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(sf.sin(-PI/2 + EPSILON)).thenReturn(-1.0)
-            Mockito.`when`(sf.cos(-PI/2 + EPSILON)).thenReturn(0.0)
-            Mockito.`when`(sf.tan(-PI/2 + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(sf.cot(-PI/2 + EPSILON)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-PI/2 + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(sf.csc(-PI/2 + EPSILON)).thenReturn(-1.0)
+            Mockito.`when`(sf.sin(-PI / 2 + EPSILON)).thenReturn(-1.0)
+            Mockito.`when`(sf.cos(-PI / 2 + EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-PI / 2 + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.cot(-PI / 2 + EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-PI / 2 + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.csc(-PI / 2 + EPSILON)).thenReturn(-1.0)
 
             // Mockito.`when`(functions!!.f2(-PI / 2.0 + EPSILON - PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(sf.sin(-PI/2 + EPSILON - PERIOD)).thenReturn(-1.0)
-            Mockito.`when`(sf.cos(-PI/2 + EPSILON - PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.tan(-PI/2 + EPSILON - PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(sf.cot(-PI/2 + EPSILON - PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-PI/2 + EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(sf.csc(-PI/2 + EPSILON - PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.sin(-PI / 2 + EPSILON - PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.cos(-PI / 2 + EPSILON - PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-PI / 2 + EPSILON - PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.cot(-PI / 2 + EPSILON - PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-PI / 2 + EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.csc(-PI / 2 + EPSILON - PERIOD)).thenReturn(-1.0)
 
             // Mockito.`when`(functions!!.f2(-PI / 2.0 + EPSILON - 100 * PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(sf.sin(-PI/2 + EPSILON - 100 * PERIOD)).thenReturn(-1.0)
-            Mockito.`when`(sf.cos(-PI/2 + EPSILON - 100 * PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.tan(-PI/2 + EPSILON - 100 * PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(sf.cot(-PI/2 + EPSILON - 100 * PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-PI/2 + EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(sf.csc(-PI/2 + EPSILON - 100 * PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.sin(-PI / 2 + EPSILON - 100 * PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.cos(-PI / 2 + EPSILON - 100 * PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-PI / 2 + EPSILON - 100 * PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.cot(-PI / 2 + EPSILON - 100 * PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-PI / 2 + EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.csc(-PI / 2 + EPSILON - 100 * PERIOD)).thenReturn(-1.0)
 
             // Mockito.`when`(functions!!.f2(-PI / 2.0 - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(sf.sin(-PI/2 - EPSILON)).thenReturn(-1.0)
-            Mockito.`when`(sf.cos(-PI/2 - EPSILON)).thenReturn(0.0)
-            Mockito.`when`(sf.tan(-PI/2 - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(sf.cot(-PI/2 - EPSILON)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-PI/2 - EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(sf.csc(-PI/2 - EPSILON)).thenReturn(-1.0)
+            Mockito.`when`(sf.sin(-PI / 2 - EPSILON)).thenReturn(-1.0)
+            Mockito.`when`(sf.cos(-PI / 2 - EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-PI / 2 - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.cot(-PI / 2 - EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-PI / 2 - EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.csc(-PI / 2 - EPSILON)).thenReturn(-1.0)
 
             // Mockito.`when`(functions!!.f2(-PI / 2.0 - EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(sf.sin(-PI/2 - EPSILON - PERIOD)).thenReturn(-1.0)
-            Mockito.`when`(sf.cos(-PI/2 - EPSILON - PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.tan(-PI/2 - EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(sf.cot(-PI/2 - EPSILON - PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-PI/2 - EPSILON - PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(sf.csc(-PI/2 - EPSILON - PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.sin(-PI / 2 - EPSILON - PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.cos(-PI / 2 - EPSILON - PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-PI / 2 - EPSILON - PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.cot(-PI / 2 - EPSILON - PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-PI / 2 - EPSILON - PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.csc(-PI / 2 - EPSILON - PERIOD)).thenReturn(-1.0)
 
             // Mockito.`when`(functions!!.f2(-PI / 2.0 - EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(sf.sin(-PI/2 - EPSILON - 100 * PERIOD)).thenReturn(-1.0)
-            Mockito.`when`(sf.cos(-PI/2 - EPSILON - 100 * PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.tan(-PI/2 - EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
-            Mockito.`when`(sf.cot(-PI/2 - EPSILON - 100 * PERIOD)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-PI/2 - EPSILON - 100 * PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
-            Mockito.`when`(sf.csc(-PI/2 - EPSILON - 100 * PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.sin(-PI / 2 - EPSILON - 100 * PERIOD)).thenReturn(-1.0)
+            Mockito.`when`(sf.cos(-PI / 2 - EPSILON - 100 * PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-PI / 2 - EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.cot(-PI / 2 - EPSILON - 100 * PERIOD)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-PI / 2 - EPSILON - 100 * PERIOD)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.csc(-PI / 2 - EPSILON - 100 * PERIOD)).thenReturn(-1.0)
 
             // Значения для значений второй негативой части + период (слева и справа от точки перегиба)
             // Mockito.`when`(functions!!.f2(-1.7)).thenReturn(4.5428)
@@ -486,21 +506,91 @@ class FunctionsSecondLayerTest {
             Mockito.`when`(sf.sec(-PI - EPSILON - 100 * PERIOD)).thenReturn(-1.0)
             Mockito.`when`(sf.csc(-PI - EPSILON - 100 * PERIOD)).thenReturn(Double.POSITIVE_INFINITY)
 
+            // Третья часть справа и слева от экстремума + париод
+            // Mockito.`when`(functions!!.f2(-3.5)).thenReturn(25.9773)
+            Mockito.`when`(sf.sin(-3.5)).thenReturn(0.3507832276896)
+            Mockito.`when`(sf.cos(-3.5)).thenReturn(-0.93645668729)
+            Mockito.`when`(sf.tan(-3.5)).thenReturn(-0.37458564015859)
+            Mockito.`when`(sf.cot(-3.5)).thenReturn(-2.669616484968866)
+            Mockito.`when`(sf.sec(-3.5)).thenReturn(-1.0678550471918)
+            Mockito.`when`(sf.csc(-3.5)).thenReturn(2.850763437540464)
+
+            // Mockito.`when`(functions!!.f2(-3.5 - 100 * PERIOD)).thenReturn(25.9773)
+            Mockito.`when`(sf.sin(-3.5 - 100 * PERIOD)).thenReturn(0.3507832276896)
+            Mockito.`when`(sf.cos(-3.5 - 100 * PERIOD)).thenReturn(-0.93645668729)
+            Mockito.`when`(sf.tan(-3.5 - 100 * PERIOD)).thenReturn(-0.37458564015859)
+            Mockito.`when`(sf.cot(-3.5 - 100 * PERIOD)).thenReturn(-2.669616484968866)
+            Mockito.`when`(sf.sec(-3.5 - 100 * PERIOD)).thenReturn(-1.0678550471918)
+            Mockito.`when`(sf.csc(-3.5 - 100 * PERIOD)).thenReturn(2.850763437540464)
+
+            // Mockito.`when`(functions!!.f2(-4.3)).thenReturn(3.78801)
+            Mockito.`when`(sf.sin(-4.3)).thenReturn(0.91616593674945498)
+            Mockito.`when`(sf.cos(-4.3)).thenReturn(-0.400799172079975)
+            Mockito.`when`(sf.tan(-4.3)).thenReturn(-2.28584787736698)
+            Mockito.`when`(sf.cot(-4.3)).thenReturn(-0.4374744312171)
+            Mockito.`when`(sf.sec(-4.3)).thenReturn(-2.4950151339146)
+            Mockito.`when`(sf.csc(-4.3)).thenReturn(1.091505326587438)
+
+            // Mockito.`when`(functions!!.f2(-4.3 - 100 * PERIOD)).thenReturn(3.78801)
+            Mockito.`when`(sf.sin(-4.3 - 100 * PERIOD)).thenReturn(0.91616593674945498)
+            Mockito.`when`(sf.cos(-4.3 - 100 * PERIOD)).thenReturn(-0.400799172079975)
+            Mockito.`when`(sf.tan(-4.3 - 100 * PERIOD)).thenReturn(-2.28584787736698)
+            Mockito.`when`(sf.cot(-4.3 - 100 * PERIOD)).thenReturn(-0.4374744312171)
+            Mockito.`when`(sf.sec(-4.3 - 100 * PERIOD)).thenReturn(-2.4950151339146)
+            Mockito.`when`(sf.csc(-4.3 - 100 * PERIOD)).thenReturn(1.091505326587438)
+
+            // Экстремум в третьей части и эпсилон-окрестности точки перегиба
+            // Mockito.`when`(functions!!.f2(-4.0)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.sin(-4.0)).thenReturn(0.7568024953079)
+            Mockito.`when`(sf.cos(-4.0)).thenReturn(-0.65364362086361191)
+            Mockito.`when`(sf.tan(-4.0)).thenReturn(-1.15782128234957758)
+            Mockito.`when`(sf.cot(-4.0)).thenReturn(-0.8636911544506)
+            Mockito.`when`(sf.sec(-4.0)).thenReturn(-1.52988565646639757)
+            Mockito.`when`(sf.csc(-4.0)).thenReturn(1.321348708810902)
+
+            // Mockito.`when`(functions!!.f2(-4.0 + EPSILON)).thenReturn(3.259463457)
+            Mockito.`when`(sf.sin(-4.0 + EPSILON)).thenReturn(0.75680249465428463)
+            Mockito.`when`(sf.cos(-4.0 + EPSILON)).thenReturn(-0.65364362162041)
+            Mockito.`when`(sf.tan(-4.0 + EPSILON)).thenReturn(-1.157821280009027)
+            Mockito.`when`(sf.cot(-4.0 + EPSILON)).thenReturn(-0.863691156196579)
+            Mockito.`when`(sf.sec(-4.0 + EPSILON)).thenReturn(-1.52988565469506)
+            Mockito.`when`(sf.csc(-4.0 + EPSILON)).thenReturn(1.32134870995213957)
+
+            // Mockito.`when`(functions!!.f2(-4.0 - EPSILON)).thenReturn(3.259463457)
+            Mockito.`when`(sf.sin(-4.0 - EPSILON)).thenReturn(0.75680249596157187)
+            Mockito.`when`(sf.cos(-4.0 - EPSILON)).thenReturn(-0.6536436201068094)
+            Mockito.`when`(sf.tan(-4.0 - EPSILON)).thenReturn(-1.1578212846901277)
+            Mockito.`when`(sf.cot(-4.0 - EPSILON)).thenReturn(-0.863691152704654205)
+            Mockito.`when`(sf.sec(-4.0 - EPSILON)).thenReturn(-1.52988565823773)
+            Mockito.`when`(sf.csc(-4.0 - EPSILON)).thenReturn(1.321348707669665)
+
+            // Граничные точки между третим и четвертым отрезком
+            // Mockito.`when`(functions!!.f2(-1.5 * PI)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.sin(-1.5 * PI)).thenReturn(1.0)
+            Mockito.`when`(sf.cos(-1.5 * PI)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-1.5 * PI)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.cot(-1.5 * PI)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-1.5 * PI)).thenReturn(Double.NaN)
+            Mockito.`when`(sf.csc(-1.5 * PI)).thenReturn(1.0)
+
+            // Mockito.`when`(functions!!.f2(-1.5 * PI + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.sin(-1.5 * PI + EPSILON)).thenReturn(1.0)
+            Mockito.`when`(sf.cos(-1.5 * PI + EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-1.5 * PI + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.cot(-1.5 * PI + EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-1.5 * PI + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.csc(-1.5 * PI + EPSILON)).thenReturn(1.0)
+
+            // Mockito.`when`(functions!!.f2(-1.5 * PI - EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.sin(-1.5 * PI - EPSILON)).thenReturn(1.0)
+            Mockito.`when`(sf.cos(-1.5 * PI - EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.tan(-1.5 * PI - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.cot(-1.5 * PI - EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.sec(-1.5 * PI - EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.csc(-1.5 * PI - EPSILON)).thenReturn(1.0)
+            
 
             /*
-             // Третья часть справа и слева от экстремума + париод
-             Mockito.`when`(functions!!.f2(-3.5)).thenReturn(25.9773)
-             Mockito.`when`(functions!!.f2(-3.5 - 100 * PERIOD)).thenReturn(25.9773)
-             Mockito.`when`(functions!!.f2(-4.3)).thenReturn(3.78801)
-             Mockito.`when`(functions!!.f2(-4.3 - 100 * PERIOD)).thenReturn(3.78801)
-             // Экстремум в третьей части и эпсилон-окрестности точки перегиба
-             Mockito.`when`(functions!!.f2(-4.0)).thenReturn(Double.NaN)
-             Mockito.`when`(functions!!.f2(-4.0 + EPSILON)).thenReturn(3.259463457)
-             Mockito.`when`(functions!!.f2(-4.0 - EPSILON)).thenReturn(3.259463457)
-             // Граничные точки между третим и четвертым отрезком
-             Mockito.`when`(functions!!.f2(-1.5 * PI)).thenReturn(Double.NaN)
-             Mockito.`when`(functions!!.f2(-1.5 * PI + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
-             Mockito.`when`(functions!!.f2(-1.5 * PI - EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
              // Четвертая часть: справа и слева от экстремума + период
              Mockito.`when`(functions!!.f2(-5.1)).thenReturn(-2.1949)
              Mockito.`when`(functions!!.f2(-5.1 - 100 * PERIOD)).thenReturn(-2.1949)
