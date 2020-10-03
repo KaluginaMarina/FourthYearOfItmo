@@ -349,6 +349,13 @@ class FunctionsThirdLayerTest {
              * В точке x = 0 стремиться к бесконечности
              */
 
+            // Функции для перевода логарифмов
+            Mockito.`when`(sf.ln(2.0)).thenReturn(0.6931471805599)
+            Mockito.`when`(sf.ln(3.0)).thenReturn(1.098612288668)
+            Mockito.`when`(sf.ln(5.0)).thenReturn(1.6094379124341)
+            Mockito.`when`(sf.ln(10.0)).thenReturn(2.302585092994)
+
+
             // Отрезок между 0 и пересечением о осью ох
             // Mockito.`when`(functions!!.f1(0.01)).thenReturn(275.519)
             Mockito.`when`(sf.ln(0.01)).thenReturn(-4.605170185988)
@@ -374,16 +381,6 @@ class FunctionsThirdLayerTest {
             Mockito.`when`(sf.ln(65.5183)).thenReturn(4.182329492932)
 
         }
-    }
-
-    @Test
-    fun testLeftEndpointF1() {
-        assertEquals(
-            Double.NaN,
-            functions!!.systemOfFunctions(0.0 + EPSILON),
-            PRECISION,
-            "Layer 3: [F1] (х = 0+). Левая граничная точка для положительного интервала."
-        )
     }
 
     @Test

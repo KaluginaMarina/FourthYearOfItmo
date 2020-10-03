@@ -9,6 +9,12 @@ open class Functions (var sf: SimpleFunctions) {
     }
 
     open fun f1(x: Double): Double {
+        println("log_2($x) = ${sf.log_2(x)}")
+        println("log_3($x) = ${sf.log_3(x)}")
+        println("log_5($x) = ${sf.log_5(x)}")
+        println("log_10($x) = ${sf.log_10(x)}")
+        println("ln($x) = ${sf.ln(x)}")
+
         return (((((sf.log_2(x) * sf.log_2(x)) * sf.log_3(x)) - sf.log_10(x)) * ((sf.log_10(x) * sf.log_10(x) * sf.log_10(x)) -
                 sf.log_2(x))) - (sf.log_3(x) * ((sf.log_2(x) / sf.log_5(x)) - sf.log_3(x))))
     }

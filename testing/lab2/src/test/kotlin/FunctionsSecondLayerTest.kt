@@ -683,16 +683,6 @@ class FunctionsSecondLayerTest {
     }
 
     @Test
-    fun testLeftEndpointF1() {
-        assertEquals(
-            Double.NaN,
-            functions!!.systemOfFunctions(0.0 + EPSILON),
-            PRECISION,
-            "Layer 2: [F1] (х = 0+). Левая граничная точка для положительного интервала."
-        )
-    }
-
-    @Test
     fun testTheSegmentBetweenZeroAndTheIntersectionOfTheOX() {
         assertEquals(
             275.519,
