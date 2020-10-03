@@ -578,7 +578,7 @@ class FunctionsSecondLayerTest {
             Mockito.`when`(sf.cos(-1.5 * PI + EPSILON)).thenReturn(0.0)
             Mockito.`when`(sf.tan(-1.5 * PI + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
             Mockito.`when`(sf.cot(-1.5 * PI + EPSILON)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-1.5 * PI + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.sec(-1.5 * PI + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
             Mockito.`when`(sf.csc(-1.5 * PI + EPSILON)).thenReturn(1.0)
 
             // Mockito.`when`(functions!!.f2(-1.5 * PI - EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
@@ -586,39 +586,79 @@ class FunctionsSecondLayerTest {
             Mockito.`when`(sf.cos(-1.5 * PI - EPSILON)).thenReturn(0.0)
             Mockito.`when`(sf.tan(-1.5 * PI - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
             Mockito.`when`(sf.cot(-1.5 * PI - EPSILON)).thenReturn(0.0)
-            Mockito.`when`(sf.sec(-1.5 * PI - EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.sec(-1.5 * PI - EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
             Mockito.`when`(sf.csc(-1.5 * PI - EPSILON)).thenReturn(1.0)
-            
 
-            /*
-             // Четвертая часть: справа и слева от экстремума + период
-             Mockito.`when`(functions!!.f2(-5.1)).thenReturn(-2.1949)
-             Mockito.`when`(functions!!.f2(-5.1 - 100 * PERIOD)).thenReturn(-2.1949)
-             Mockito.`when`(functions!!.f2(-5.9)).thenReturn(-5.47627)
-             Mockito.`when`(functions!!.f2(-5.9 - 100 * PERIOD)).thenReturn(-5.47627)
-             // Граничная точка
-             Mockito.`when`(functions!!.f2(-2.0 * PI + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            // Четвертая часть: справа и слева от экстремума + период
+            // Mockito.`when`(functions!!.f2(-5.1)).thenReturn(-2.1949)
+            Mockito.`when`(sf.sin(-5.1)).thenReturn(0.925814682327732)
+            Mockito.`when`(sf.cos(-5.1)).thenReturn(0.37797774271298)
+            Mockito.`when`(sf.tan(-5.1)).thenReturn(2.44938941558459612)
+            Mockito.`when`(sf.cot(-5.1)).thenReturn(0.40826501234852844)
+            Mockito.`when`(sf.sec(-5.1)).thenReturn(2.645658426399343)
+            Mockito.`when`(sf.csc(-5.1)).thenReturn(1.080129770123916)
+
+            //  Mockito.`when`(functions!!.f2(-5.1 - 100 * PERIOD)).thenReturn(-2.1949)
+            Mockito.`when`(sf.sin(-5.1 - 100 * PERIOD)).thenReturn(0.925814682327732)
+            Mockito.`when`(sf.cos(-5.1 - 100 * PERIOD)).thenReturn(0.37797774271298)
+            Mockito.`when`(sf.tan(-5.1 - 100 * PERIOD)).thenReturn(2.44938941558459612)
+            Mockito.`when`(sf.cot(-5.1 - 100 * PERIOD)).thenReturn(0.40826501234852844)
+            Mockito.`when`(sf.sec(-5.1 - 100 * PERIOD)).thenReturn(2.645658426399343)
+            Mockito.`when`(sf.csc(-5.1 - 100 * PERIOD)).thenReturn(1.080129770123916)
+
+            // Mockito.`when`(functions!!.f2(-5.9)).thenReturn(-5.47627)
+            Mockito.`when`(sf.sin(-5.9)).thenReturn(0.373876664830236)
+            Mockito.`when`(sf.cos(-5.9)).thenReturn(0.92747843074403574)
+            Mockito.`when`(sf.tan(-5.9)).thenReturn(0.4031108998732266396323)
+            Mockito.`when`(sf.cot(-5.9)).thenReturn(2.48070692287032564165)
+            Mockito.`when`(sf.sec(-5.9)).thenReturn(1.07819218954535306596)
+            Mockito.`when`(sf.csc(-5.9)).thenReturn(2.67467882878987)
+
+            //  Mockito.`when`(functions!!.f2(-5.9 - 100 * PERIOD)).thenReturn(-5.47627)
+            Mockito.`when`(sf.sin(-5.9 - 100 * PERIOD)).thenReturn(0.373876664830236)
+            Mockito.`when`(sf.cos(-5.9 - 100 * PERIOD)).thenReturn(0.92747843074403574)
+            Mockito.`when`(sf.tan(-5.9 - 100 * PERIOD)).thenReturn(0.4031108998732266396323)
+            Mockito.`when`(sf.cot(-5.9 - 100 * PERIOD)).thenReturn(2.48070692287032564165)
+            Mockito.`when`(sf.sec(-5.9 - 100 * PERIOD)).thenReturn(1.07819218954535306596)
+            Mockito.`when`(sf.csc(-5.9 - 100 * PERIOD)).thenReturn(2.67467882878987)
+
+            // Граничная точка
+            // Mockito.`when`(functions!!.f2(-2.0 * PI + EPSILON)).thenReturn(Double.NEGATIVE_INFINITY)
+            Mockito.`when`(sf.sin(-2.0 * PI + EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.cos(-2.0 * PI + EPSILON)).thenReturn(1.0)
+            Mockito.`when`(sf.tan(-2.0 * PI + EPSILON)).thenReturn(0.0)
+            Mockito.`when`(sf.cot(-2.0 * PI + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
+            Mockito.`when`(sf.sec(-2.0 * PI + EPSILON)).thenReturn(1.0)
+            Mockito.`when`(sf.csc(-2.0 * PI + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
 
 
-             /**
-              * Положительная часть - функция, которая пересекает прямую ох 3 раза
-              * В точке x = 0 стремиться к бесконечности
-              */
-             // Левая граничная точка
-             Mockito.`when`(functions!!.f1(0 + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
-             // Отрезок между 0 и пересечением о осью ох
-             Mockito.`when`(functions!!.f1(0.01)).thenReturn(275.519)
-             // Первое пересечение с осью ох
-             Mockito.`when`(functions!!.f1(0.0159975)).thenReturn(0.0)
-             // Значение функции на убывающем отрезке между первым и вторым пересечением ох
-             Mockito.`when`(functions!!.f1(0.02)).thenReturn(-61.7048)
-             // Значение функции на возрастающем отрезке между первым и вторым пересечением ох
-             Mockito.`when`(functions!!.f1(0.05)).thenReturn(-91.4414)
-             // Второе пересечение с ox
-             Mockito.`when`(functions!!.f1(0.321061)).thenReturn(0.0)
-             // Третье пересечение с ох
-             Mockito.`when`(functions!!.f1(65.5183)).thenReturn(0.0)
-            */
+            /**
+             * Положительная часть - функция, которая пересекает прямую ох 3 раза
+             * В точке x = 0 стремиться к бесконечности
+             */
+
+            // Отрезок между 0 и пересечением о осью ох
+            // Mockito.`when`(functions!!.f1(0.01)).thenReturn(275.519)
+            Mockito.`when`(sf.log_2(0.01)).thenReturn(-6.64385618977472)
+//            Mockito.`when`(sf.log_3(0.01)).thenReturn()
+//            Mockito.`when`(sf.log_5(0.01)).thenReturn()
+//            Mockito.`when`(sf.log_10(0.01)).thenReturn()
+
+            // Первое пересечение с осью ох
+            // Mockito.`when`(functions!!.f1(0.0159975)).thenReturn(0.0)
+
+            // Значение функции на убывающем отрезке между первым и вторым пересечением ох
+            // Mockito.`when`(functions!!.f1(0.02)).thenReturn(-61.7048)
+
+            // Значение функции на возрастающем отрезке между первым и вторым пересечением ох
+            // Mockito.`when`(functions!!.f1(0.05)).thenReturn(-91.4414)
+
+            // Второе пересечение с ox
+            // Mockito.`when`(functions!!.f1(0.321061)).thenReturn(0.0)
+
+            // Третье пересечение с ох
+            // Mockito.`when`(functions!!.f1(65.5183)).thenReturn(0.0)
+
         }
     }
 
