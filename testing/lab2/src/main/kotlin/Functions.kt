@@ -14,6 +14,7 @@ open class Functions (var sf: SimpleFunctions) {
     }
 
     open fun f2(x: Double): Double {
+        if (sf.tan(x) == 0.0) { return Double.NEGATIVE_INFINITY }
         return (((((sf.csc(x) + sf.sin(x)) - sf.cot(x)) / sf.tan(x)) * ((sf.cot(x) - sf.cos(x)) + sf.tan(x))) -
                 ((sf.csc(x) * sf.csc(x)) + sf.sec(x)))
     }
