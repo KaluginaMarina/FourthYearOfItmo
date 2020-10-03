@@ -1,9 +1,5 @@
 open class Functions (var sf: SimpleFunctions) {
 
-    companion object {
-        const val PRECISION = 1E-8
-    }
-
     open fun systemOfFunctions(x: Double): Double {
         return if (x > 0) f1(x) else f2(x)
     }
