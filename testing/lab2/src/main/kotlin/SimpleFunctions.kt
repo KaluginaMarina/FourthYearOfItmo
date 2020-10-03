@@ -61,6 +61,15 @@ open class SimpleFunctions {
     }
 
     open fun ln(x: Double): Double {
-        return 1.0
+        val x1 = (x - 1) / (x + 1)
+        var cur = x1
+        var res = 0.0
+        var n = 3
+        while (abs(2 * cur) > PRECISION / 10) {
+            res += 2 * cur
+            cur *= x1 * x1 / n * (n - 2)
+            n += 2
+        }
+        return res
     }
 }
