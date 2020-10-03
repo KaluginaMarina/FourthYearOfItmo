@@ -11,6 +11,7 @@ class FunctionsFirstLayerTest {
     companion object {
         const val EPSILON = 1E-10
         const val PERIOD = 2 * Math.PI
+        const val PRECISION = 1E-5 // точность, с которой выдает ответ вольфрам для сложных функций
         var functions: Functions? = null
 
         @BeforeAll
@@ -151,7 +152,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.POSITIVE_INFINITY,
             functions!!.systemOfFunctions(0.0 + EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [F1] (х = 0+). Левая граничная точка для положительного интервала."
         )
     }
@@ -161,7 +162,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             275.519,
             functions!!.systemOfFunctions(0.01),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [F1] (х = 0.01). Отрезок между 0 и пересечением о осью ох."
         )
     }
@@ -171,7 +172,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             0.0,
             functions!!.systemOfFunctions(0.0159975),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [F1] (х = 0.0159975).Первое пересечение с осью ох"
         )
     }
@@ -181,7 +182,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -61.7048,
             functions!!.systemOfFunctions(0.02),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [F1] (х = 0.02). Значение функции на убывающем отрезке между первым и вторым пересечением ох"
         )
     }
@@ -191,7 +192,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -91.4414,
             functions!!.systemOfFunctions(0.05),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [F1] (х = 0.02).Значение функции на возрастающем отрезке между первым и вторым пересечением ох"
         )
     }
@@ -201,7 +202,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             0.0,
             functions!!.systemOfFunctions(0.321061),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [F1] (х = 0.321061). Второе пересечение с осью ох"
         )
     }
@@ -211,7 +212,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             0.0,
             functions!!.systemOfFunctions(65.5183),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [F1] (х = 65.5183). Третье пересечение с осью ох"
         )
     }
@@ -221,7 +222,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(0.0),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [х = 0]. Тестирование нулевого значения."
         )
     }
@@ -232,7 +233,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(0.0 - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [х = 0 - PERIOD]. Тестирование нулевого значения со сдвигом в период"
         )
     }
@@ -242,7 +243,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(0.0 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [х = 0 - 100 * PERIOD]. Тестирование нулевого значения со сдвигом в 100 периодов"
         )
     }
@@ -252,7 +253,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(0 - EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [х = 0-]. Тестирование граничного значения слева от нуля."
         )
     }
@@ -262,7 +263,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(0 - EPSILON - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [х = 0 - EPSILON - PERIOD]. Тестирование граничного значения слева от нуля со сдвигом в период влево"
         )
     }
@@ -272,7 +273,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(0 - EPSILON - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [х = 0 - EPSILON - 100 * PERIOD]. Тестирование граничного значения слева от нуля со сдвигом в сто периодов влево"
         )
     }
@@ -282,7 +283,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -9.86725,
             functions!!.systemOfFunctions(-0.5),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [х = -0.5]. Первый кусок функции справа от экстремума."
         )
     }
@@ -292,7 +293,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -9.86725,
             functions!!.systemOfFunctions(-0.5 - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -0.5 - PERIOD]. Первый кусок функции справа от экстремума. Проверка переодичности: сдвиг в один период"
         )
     }
@@ -303,7 +304,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -9.86725,
             functions!!.systemOfFunctions(-0.5 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -0.5 - 100 * PERIOD]. Первый кусок функции справа от экстремума. Проверка переодичности: сдвиг в сто периодов"
         )
     }
@@ -313,7 +314,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -6.80003,
             functions!!.systemOfFunctions(-1.3),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [х = -1.3]. Первый кусок функции слева от экстремума."
         )
     }
@@ -323,7 +324,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -6.80003,
             functions!!.systemOfFunctions(-1.3 - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1.3 - PERIOD]. Первый кусок функции слева от экстремума. Проверка переодичности: сдвиг в один период"
         )
     }
@@ -334,7 +335,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -6.80003,
             functions!!.systemOfFunctions(-1.3 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1.3 - 100 * PERIOD]. Первый кусок функции слева от экстремума. Проверка переодичности: сдвиг в сто периодов"
         )
     }
@@ -344,7 +345,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-1.0),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1]. Первый кусок функции. При неопределенном значении."
         )
     }
@@ -354,7 +355,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-1.0 - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1 - PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на один период."
         )
     }
@@ -364,7 +365,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-1.0 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1 - 100 * PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на сто периодов."
         )
     }
@@ -374,7 +375,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 + EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1 + EPS]. Первый кусок функции. При неопределенном значении. x -> 1+."
         )
     }
@@ -384,7 +385,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 + EPSILON - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1 + EPS - PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1+. Сдвиг на один период"
         )
     }
@@ -395,7 +396,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 + EPSILON - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1 + EPS - 100 * PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1+. Сдвиг на сто периодов"
         )
     }
@@ -405,7 +406,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 - EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1 - EPS]. Первый кусок функции. При неопределенном значении. x -> 1-."
         )
     }
@@ -415,7 +416,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 - EPSILON - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1 - EPS - PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1-. Сдвиг на один период"
         )
     }
@@ -426,7 +427,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 - EPSILON - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1 - EPS - 100 * PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1-. Сдвиг на сто периодов"
         )
     }
@@ -436,7 +437,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI / 2]. При неопределенном значении."
         )
     }
@@ -446,7 +447,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI / 2 - PERIOD]. При неопределенном значении. Сдвиг на один период"
         )
     }
@@ -456,7 +457,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI / 2 - 100 * PERIOD]. При неопределенном значении. Сдвиг на сто периодов"
         )
     }
@@ -466,7 +467,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(-PI / 2 + EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI / 2 + EPS]. Граничное значение справа от -PI/2. x->-pi/2+"
         )
     }
@@ -476,7 +477,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(-PI / 2 + EPSILON - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI / 2 + EPS - PERIOD]. Граничное значение справа от PI/2. x->pi/2+. Сдвиг на один период"
         )
     }
@@ -487,7 +488,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(-PI / 2 + EPSILON - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI / 2 + EPS - 100 * PERIOD]. Граничное значение справа от -PI/2. x->-pi/2+. Сдвиг на сто периодов"
         )
     }
@@ -498,7 +499,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.POSITIVE_INFINITY,
             functions!!.systemOfFunctions(-PI / 2 - EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI / 2 - EPS]. Граничное значение справа от -PI/2. x->-pi/2-"
         )
     }
@@ -508,7 +509,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.POSITIVE_INFINITY,
             functions!!.systemOfFunctions(-PI / 2 - EPSILON - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI / 2 - EPS - PERIOD]. Граничное значение справа от -PI/2. x->-pi/2-. Сдвиг на один период"
         )
     }
@@ -519,7 +520,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.POSITIVE_INFINITY,
             functions!!.systemOfFunctions(-PI / 2 - EPSILON - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI / 2 - EPS - 100 * PERIOD]. Граничное значение справа от -PI/2. x->-pi/2-. Сдвиг на сто периодов"
         )
     }
@@ -529,7 +530,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             4.5428,
             functions!!.systemOfFunctions(-1.7),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1.7]. Вторая негативная часть справа от точки перегиба"
         )
     }
@@ -539,7 +540,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             4.5428,
             functions!!.systemOfFunctions(-1.7 - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1.7 - PERIOD]. Вторая негативная часть справа от точки перегиба сдвиг на один период"
         )
     }
@@ -550,7 +551,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             4.5428,
             functions!!.systemOfFunctions(-1.7 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1.7 - 100 * PERIOD]. Вторая негативная часть справа от точки перегиба сдвиг на сто периодов"
         )
     }
@@ -560,7 +561,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -3.62892,
             functions!!.systemOfFunctions(-2.1),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2.1]. Вторая негативная часть слева от точки перегиба"
         )
     }
@@ -570,7 +571,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -3.62892,
             functions!!.systemOfFunctions(-2.1 - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2.1 - PERIOD]. Вторая негативная часть слева от точки перегиба сдвиг на один период"
         )
     }
@@ -581,7 +582,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -3.62892,
             functions!!.systemOfFunctions(-2.1 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2.1 - 100 * PERIOD]. Вторая негативная часть слева от точки перегиба сдвиг на сто периодов"
         )
     }
@@ -591,7 +592,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             0.0,
             functions!!.systemOfFunctions(-1.843684653),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1.843684653 (y = 0)]. Значения в точке пересечения с осью ординат второй негативой части"
         )
     }
@@ -601,7 +602,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             0.0,
             functions!!.systemOfFunctions(-1.843684653 - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1.843684653 - PERIOD (y = 0) ]. Значения в точке пересечения с осью ординат второй негативой части со сдвигом в один период"
         )
     }
@@ -611,7 +612,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             0.0,
             functions!!.systemOfFunctions(-1.843684653 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1.843684653 - 100 * PERIOD (y = 0)]. Значения в точке пересечения с осью ординат второй негативой части со сдвигом в один период"
         )
     }
@@ -621,7 +622,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-2.0),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2]. Значения в точке перегиба второй чати"
         )
     }
@@ -631,7 +632,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-2.0 - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2 - PERIOD]. Значения в точке перегиба второй чати сдвиг в один период"
         )
     }
@@ -642,7 +643,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-2.0 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2 - 100 * PERIOD]. Значения в точке перегиба второй чати сдвиг в сто периодов"
         )
     }
@@ -652,7 +653,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 + EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2 + EPS ]. Значения в окрестности справа к точке перегиба второй чати"
         )
     }
@@ -662,7 +663,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 + EPSILON - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2 + EPS - PERIOD]. Значения в окрестности справа к точке перегиба второй чати сдвиг в один период"
         )
     }
@@ -673,7 +674,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 + EPSILON - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2 + EPS - 100 * PERIOD]. Значения в окрестности справа к точке перегиба второй чати в сто периодов"
         )
     }
@@ -684,7 +685,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 - EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2 - EPS ]. Значения в окрестности слева к точке перегиба второй чати"
         )
     }
@@ -694,7 +695,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 - EPSILON - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2 - EPS - PERIOD]. Значения в окрестности слева к точке перегиба второй чати сдвиг в один период"
         )
     }
@@ -704,7 +705,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 - EPSILON - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2 - EPS - 100 * PERIOD]. Значения в окрестности слева к точке перегиба второй чати в сто периодов"
         )
     }
@@ -714,7 +715,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-PI),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI].  Граничное значение между второй и третьей частями и окрестности точки PI."
         )
     }
@@ -724,7 +725,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-PI - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI- PERIOD].  Граничное значение между второй и третьей частями и окрестности точки PI. Сдвиг на один период"
         )
     }
@@ -734,7 +735,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-PI - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI - 100 * PERIOD].  Граничное значение между второй и третьей частями и окрестности точки PI. Сдвиг на сто периодов"
         )
     }
@@ -744,7 +745,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(-PI + EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI + EPS].  Граничное значение между второй и третьей частями и справа от  точки PI . x->-pi+"
         )
     }
@@ -754,7 +755,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(-PI + EPSILON - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI + EPS - PERIOD].  Граничное значение между второй и третьей частями и справа от  точки PI . Сдвиг на один период"
         )
     }
@@ -765,7 +766,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(-PI + EPSILON - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI + EPS - 100 * PERIOD].  Граничное значение между второй и третьей частями и справа от  точки PI. Сдвиг на сто периодов"
         )
     }
@@ -776,7 +777,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.POSITIVE_INFINITY,
             functions!!.systemOfFunctions(-PI - EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI - EPS].  Граничное значение между второй и третьей частями и слева от  точки PI  x->-pi-"
         )
     }
@@ -786,7 +787,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.POSITIVE_INFINITY,
             functions!!.systemOfFunctions(-PI - EPSILON - PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI  - EPS - PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на один период"
         )
     }
@@ -797,7 +798,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.POSITIVE_INFINITY,
             functions!!.systemOfFunctions(-PI - EPSILON - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -PI - EPS - 100 * PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на сто периодов"
         )
     }
@@ -807,7 +808,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             25.9773,
             functions!!.systemOfFunctions(-3.5),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -3.5].  Третья часть справа от экстремума"
         )
     }
@@ -817,7 +818,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             25.9773,
             functions!!.systemOfFunctions(-3.5 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -3.5 - 100 * PERIOD].  Третья часть справа от экстремума. Сдвиг на сто периодов"
         )
     }
@@ -827,7 +828,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             3.78801,
             functions!!.systemOfFunctions(-4.3),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -4.3].  Третья часть слева от экстремума"
         )
     }
@@ -837,7 +838,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             3.78801,
             functions!!.systemOfFunctions(-4.3 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -4.3 - 100 * PERIOD].  Третья часть слева от экстремума. Сдвиг на сто периодов"
         )
     }
@@ -847,7 +848,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-4.0),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -4.0].  Экстремум в третьей части "
         )
     }
@@ -857,7 +858,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             3.259463457,
             functions!!.systemOfFunctions(-4.0 + EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -4.0 + EPS].  Окрестность справа от экстремума в третьей части"
         )
     }
@@ -867,7 +868,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             3.259463457,
             functions!!.systemOfFunctions(-4.0 - EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -4.0 - EPS].  Окрестность слева от экстремума в третьей части"
         )
     }
@@ -877,7 +878,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NaN,
             functions!!.systemOfFunctions(-1.5 * PI),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1/5 * PI].  Граничные точки между третим и четвертым отрезком"
         )
     }
@@ -887,7 +888,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.POSITIVE_INFINITY,
             functions!!.systemOfFunctions(-1.5 * PI + EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1/5 * PI + EPS]. Окрестность справа Граничные точки между третим и четвертым отрезком"
         )
     }
@@ -897,7 +898,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(-1.5 * PI - EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -1/5 * PI - EPS]. Окрестность слева Граничные точки между третим и четвертым отрезком"
         )
     }
@@ -907,7 +908,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -2.1949,
             functions!!.systemOfFunctions(-5.1),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -5.1]. Четвертая часть справа от экстремума"
         )
     }
@@ -917,7 +918,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -2.1949,
             functions!!.systemOfFunctions(-5.1 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -5.1 + PERIOD]. Четвертая часть справа от экстремума с периодом"
         )
     }
@@ -927,7 +928,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -5.47627,
             functions!!.systemOfFunctions(-5.9),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -5.9]. Четвертая часть слева от экстремума"
         )
     }
@@ -937,7 +938,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             -5.47627,
             functions!!.systemOfFunctions(-5.9 - 100 * PERIOD),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -5.9 + PERIOD]. Четвертая часть справа от экстремума с периодом"
         )
     }
@@ -947,7 +948,7 @@ class FunctionsFirstLayerTest {
         assertEquals(
             Double.NEGATIVE_INFINITY,
             functions!!.systemOfFunctions(-2.0 * PI + EPSILON),
-            Functions.PRECISION,
+            PRECISION,
             "Layer 1: [x = -2.0 * PI + EPSILON]. Граничная точка четвертой части около 2PI"
         )
     }
