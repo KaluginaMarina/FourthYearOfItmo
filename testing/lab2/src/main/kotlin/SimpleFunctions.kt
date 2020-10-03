@@ -18,7 +18,7 @@ open class SimpleFunctions {
     }
 
     open fun sec(x: Double): Double {
-        return 1.0 / sqrt(1 - sin(x) * sin(x))
+        return 1.0 / cos(x)
     }
 
     open fun csc(x: Double): Double {
