@@ -8,7 +8,9 @@ open class SimpleFunctions {
     }
 
     open fun cos(x: Double): Double {
-        val sign = if (((x % (2.0 * PI)) < PI/2) && ((x % (2.0 * PI)) > -PI/2)) 1 else -1
+        val sign = if (((x % (2.0 * PI)) < PI/2) && ((x % (2.0 * PI)) > -PI/2) ||
+            ((x % (2.0 * PI)) < -1.5 * PI) || ((x % (2.0 * PI)) > 1.5 * PI) ) 1 else -1
+        println("sign = $sign: ${x % (2.0 * PI)}")
         return sqrt(1.0 - sin(x) * sin(x)) * sign
     }
 
