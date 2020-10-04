@@ -8,3 +8,4 @@ lab2/gradle
 lab2/.gradle
 lab2/gradlew.bat
 lab2/build
+lab2/out/*
