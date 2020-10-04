@@ -5,7 +5,8 @@ import java.lang.Math.PI
 
 open class Functions(var sf: SimpleFunctions) {
 
-    private val CSV_HEADER = "x,f(x),sin(x),cos(x),tan(x),cot(x),sec(x),csc(x)\n"
+    private val CSV_HEADER =
+        "x,f(x),sin(x),cos(x),tan(x),cot(x),sec(x),csc(x),log_2(x),log_3(x),log_5(x),log_10(x),ln(x)\n"
     private val FILENAME = "out/out.csv"
 
     open fun systemOfFunctions(x: Double): Double {
@@ -13,10 +14,8 @@ open class Functions(var sf: SimpleFunctions) {
     }
 
     open fun f1(x: Double): Double {
-        return (((((sf.log_2(x) * sf.log_2(x)) * sf.log_3(x)) - sf.log_10(x)) * ((sf.log_10(x) * sf.log_10(x) * sf.log_10(
-            x
-        )) -
-                sf.log_2(x))) - (sf.log_3(x) * ((sf.log_2(x) / sf.log_5(x)) - sf.log_3(x))))
+        return (((((sf.log_2(x) * sf.log_2(x)) * sf.log_3(x)) - sf.log_10(x)) * ((sf.log_10(x) * sf.log_10(x) *
+                sf.log_10(x)) - sf.log_2(x))) - (sf.log_3(x) * ((sf.log_2(x) / sf.log_5(x)) - sf.log_3(x))))
     }
 
     open fun f2(x: Double): Double {
@@ -37,7 +36,8 @@ open class Functions(var sf: SimpleFunctions) {
         while (cur < to) {
             fileWriter.append(
                 "$cur,${systemOfFunctions(cur)},${sf.sin(cur)},${sf.cos(cur)}," +
-                        "${sf.tan(cur)},${sf.cot(cur)},${sf.sec(cur)},${sf.csc(cur)}\n"
+                        "${sf.tan(cur)},${sf.cot(cur)},${sf.sec(cur)},${sf.csc(cur)},${sf.log_2(cur)},${sf.log_3(cur)}," +
+                        "${sf.log_5(cur)},${sf.log_10(cur)},${sf.ln(cur)}\n"
             )
             cur += step
         }
@@ -49,7 +49,7 @@ open class Functions(var sf: SimpleFunctions) {
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = Functions(SimpleFunctions())
-            functions.createSCV(- 2 * PI, 1.0, 0.05)
+            functions.createSCV(- 2 * PI, 3.0, 0.01)
             println("The data was written")
         }
     }
