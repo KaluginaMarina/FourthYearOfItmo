@@ -301,8 +301,8 @@ class FunctionsFourthLayerTest {
             Mockito.`when`(sf.ln(0.0333409)).thenReturn(-3.40097040742275701)
 
             // Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(1.55602)
-            Mockito.`when`(sf.ln(0.0333409)).thenReturn(-0.738967060394736)
-            
+            Mockito.`when`(sf.ln(0.477607)).thenReturn(-0.738967060394736)
+
             // Значение функции на возрастающем отрезке между первым и вторым пересечением ох
             // Mockito.`when`(functions!!.f1(0.05)).thenReturn(-91.44142)
             Mockito.`when`(sf.ln(0.05)).thenReturn(-2.99573227355399)
@@ -324,7 +324,7 @@ class FunctionsFourthLayerTest {
             275.519,
             functions!!.systemOfFunctions(0.01),
             PRECISION,
-            "Layer 3: [F1] (х = 0.01). Отрезок между 0 и пересечением о осью ох."
+            "Layer 4: [F1] (х = 0.01). Отрезок между 0 и пересечением о осью ох."
         )
     }
 
@@ -334,7 +334,7 @@ class FunctionsFourthLayerTest {
             0.0007,
             functions!!.systemOfFunctions(0.0159975),
             PRECISION,
-            "Layer 3: [F1] (х = 0.0159975).Первое пересечение с осью ох"
+            "Layer 4: [F1] (х = 0.0159975).Первое пересечение с осью ох"
         )
     }
 
@@ -344,7 +344,7 @@ class FunctionsFourthLayerTest {
             -61.70484,
             functions!!.systemOfFunctions(0.02),
             PRECISION,
-            "Layer 3: [F1] (х = 0.02). Значение функции на убывающем отрезке между первым и вторым пересечением ох"
+            "Layer 4: [F1] (х = 0.02). Значение функции на убывающем отрезке между первым и вторым пересечением ох"
         )
     }
 
@@ -374,7 +374,7 @@ class FunctionsFourthLayerTest {
             -91.44142,
             functions!!.systemOfFunctions(0.05),
             PRECISION,
-            "Layer 3: [F1] (х = 0.02).Значение функции на возрастающем отрезке между первым и вторым пересечением ох"
+            "Layer 4: [F1] (х = 0.02).Значение функции на возрастающем отрезке между первым и вторым пересечением ох"
         )
     }
 
@@ -384,7 +384,7 @@ class FunctionsFourthLayerTest {
             0.0,
             functions!!.systemOfFunctions(0.321061),
             PRECISION,
-            "Layer 3: [F1] (х = 0.321061). Второе пересечение с осью ох"
+            "Layer 4: [F1] (х = 0.321061). Второе пересечение с осью ох"
         )
     }
 
@@ -394,7 +394,7 @@ class FunctionsFourthLayerTest {
             -0.00013,
             functions!!.systemOfFunctions(65.5183),
             PRECISION,
-            "Layer 3: [F1] (х = 65.5183). Третье пересечение с осью ох"
+            "Layer 4: [F1] (х = 65.5183). Третье пересечение с осью ох"
         )
     }
 
@@ -404,7 +404,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(0.0),
             PRECISION,
-            "Layer 3: F1 [x = 0]. Тестирование нулевого значения."
+            "Layer 4: F1 [x = 0]. Тестирование нулевого значения."
         )
     }
 
@@ -415,7 +415,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(0.0 - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = 0 - PERIOD]. Тестирование нулевого значения со сдвигом в период"
+            "Layer 4: F1 [x = 0 - PERIOD]. Тестирование нулевого значения со сдвигом в период"
         )
     }
 
@@ -425,7 +425,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(0.0 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = 0 - 100 * PERIOD]. Тестирование нулевого значения со сдвигом в 100 периодов"
+            "Layer 4: F1 [x = 0 - 100 * PERIOD]. Тестирование нулевого значения со сдвигом в 100 периодов"
         )
     }
 
@@ -435,7 +435,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(0 - EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = 0-]. Тестирование граничного значения слева от нуля."
+            "Layer 4: F1 [x = 0-]. Тестирование граничного значения слева от нуля."
         )
     }
 
@@ -445,7 +445,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(0 - EPSILON - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = 0 - EPSILON - PERIOD]. Тестирование граничного значения слева от нуля со сдвигом в период влево"
+            "Layer 4: F1 [x = 0 - EPSILON - PERIOD]. Тестирование граничного значения слева от нуля со сдвигом в период влево"
         )
     }
 
@@ -455,7 +455,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(0 - EPSILON - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = 0 - EPSILON - 100 * PERIOD]. Тестирование граничного значения слева от нуля со сдвигом в сто периодов влево"
+            "Layer 4: F1 [x = 0 - EPSILON - 100 * PERIOD]. Тестирование граничного значения слева от нуля со сдвигом в сто периодов влево"
         )
     }
 
@@ -465,7 +465,7 @@ class FunctionsFourthLayerTest {
             -9.86725,
             functions!!.systemOfFunctions(-0.5),
             PRECISION,
-            "Layer 3: F1 [x = -0.5]. Первый кусок функции справа от экстремума."
+            "Layer 4: F1 [x = -0.5]. Первый кусок функции справа от экстремума."
         )
     }
 
@@ -475,7 +475,7 @@ class FunctionsFourthLayerTest {
             -9.86725,
             functions!!.systemOfFunctions(-0.5 - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -0.5 - PERIOD]. Первый кусок функции справа от экстремума. Проверка переодичности: сдвиг в один период"
+            "Layer 4: F1 [x = -0.5 - PERIOD]. Первый кусок функции справа от экстремума. Проверка переодичности: сдвиг в один период"
         )
     }
 
@@ -486,7 +486,7 @@ class FunctionsFourthLayerTest {
             -9.86725,
             functions!!.systemOfFunctions(-0.5 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -0.5 - 100 * PERIOD]. Первый кусок функции справа от экстремума. Проверка переодичности: сдвиг в сто периодов"
+            "Layer 4: F1 [x = -0.5 - 100 * PERIOD]. Первый кусок функции справа от экстремума. Проверка переодичности: сдвиг в сто периодов"
         )
     }
 
@@ -496,7 +496,7 @@ class FunctionsFourthLayerTest {
             -6.80003,
             functions!!.systemOfFunctions(-1.3),
             PRECISION,
-            "Layer 3: F1 [x = -1.3]. Первый кусок функции слева от экстремума."
+            "Layer 4: F1 [x = -1.3]. Первый кусок функции слева от экстремума."
         )
     }
 
@@ -506,7 +506,7 @@ class FunctionsFourthLayerTest {
             -6.80003,
             functions!!.systemOfFunctions(-1.3 - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1.3 - PERIOD]. Первый кусок функции слева от экстремума. Проверка переодичности: сдвиг в один период"
+            "Layer 4: F1 [x = -1.3 - PERIOD]. Первый кусок функции слева от экстремума. Проверка переодичности: сдвиг в один период"
         )
     }
 
@@ -517,7 +517,7 @@ class FunctionsFourthLayerTest {
             -6.80003,
             functions!!.systemOfFunctions(-1.3 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1.3 - 100 * PERIOD]. Первый кусок функции слева от экстремума. Проверка переодичности: сдвиг в сто периодов"
+            "Layer 4: F1 [x = -1.3 - 100 * PERIOD]. Первый кусок функции слева от экстремума. Проверка переодичности: сдвиг в сто периодов"
         )
     }
 
@@ -527,7 +527,7 @@ class FunctionsFourthLayerTest {
             -5.704479,
             functions!!.systemOfFunctions(-1.0),
             PRECISION,
-            "Layer 3: F1 [x = -1]. Первый кусок функции. При неопределенном значении."
+            "Layer 4: F1 [x = -1]. Первый кусок функции. При неопределенном значении."
         )
     }
 
@@ -537,7 +537,7 @@ class FunctionsFourthLayerTest {
             -5.704479,
             functions!!.systemOfFunctions(-1.0 - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1 - PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на один период."
+            "Layer 4: F1 [x = -1 - PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на один период."
         )
     }
 
@@ -547,7 +547,7 @@ class FunctionsFourthLayerTest {
             -5.70448,
             functions!!.systemOfFunctions(-1.0 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1 - 100 * PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на сто периодов."
+            "Layer 4: F1 [x = -1 - 100 * PERIOD]. Первый кусок функции. При неопределенном значении сдвиг на сто периодов."
         )
     }
 
@@ -557,7 +557,7 @@ class FunctionsFourthLayerTest {
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 + EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -1 + EPS]. Первый кусок функции. При неопределенном значении. x -> 1+."
+            "Layer 4: F1 [x = -1 + EPS]. Первый кусок функции. При неопределенном значении. x -> 1+."
         )
     }
 
@@ -567,7 +567,7 @@ class FunctionsFourthLayerTest {
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 + EPSILON - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1 + EPS - PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1+. Сдвиг на один период"
+            "Layer 4: F1 [x = -1 + EPS - PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1+. Сдвиг на один период"
         )
     }
 
@@ -578,7 +578,7 @@ class FunctionsFourthLayerTest {
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 + EPSILON - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1 + EPS - 100 * PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1+. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -1 + EPS - 100 * PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1+. Сдвиг на сто периодов"
         )
     }
 
@@ -588,7 +588,7 @@ class FunctionsFourthLayerTest {
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 - EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -1 - EPS]. Первый кусок функции. При неопределенном значении. x -> 1-."
+            "Layer 4: F1 [x = -1 - EPS]. Первый кусок функции. При неопределенном значении. x -> 1-."
         )
     }
 
@@ -598,7 +598,7 @@ class FunctionsFourthLayerTest {
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 - EPSILON - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1 - EPS - PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1-. Сдвиг на один период"
+            "Layer 4: F1 [x = -1 - EPS - PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1-. Сдвиг на один период"
         )
     }
 
@@ -609,7 +609,7 @@ class FunctionsFourthLayerTest {
             -5.7044795233,
             functions!!.systemOfFunctions(-1.0 - EPSILON - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1 - EPS - 100 * PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1-. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -1 - EPS - 100 * PERIOD]. Первый кусок функции. При неопределенном значении. x -> 1-. Сдвиг на сто периодов"
         )
     }
 
@@ -619,7 +619,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2),
             PRECISION,
-            "Layer 3: F1 [x = -PI / 2]. При неопределенном значении."
+            "Layer 4: F1 [x = -PI / 2]. При неопределенном значении."
         )
     }
 
@@ -629,7 +629,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI / 2 - PERIOD]. При неопределенном значении. Сдвиг на один период"
+            "Layer 4: F1 [x = -PI / 2 - PERIOD]. При неопределенном значении. Сдвиг на один период"
         )
     }
 
@@ -639,7 +639,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI / 2 - 100 * PERIOD]. При неопределенном значении. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -PI / 2 - 100 * PERIOD]. При неопределенном значении. Сдвиг на сто периодов"
         )
     }
 
@@ -649,7 +649,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 + EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -PI / 2 + EPS]. Граничное значение справа от -PI/2. x->-pi/2+"
+            "Layer 4: F1 [x = -PI / 2 + EPS]. Граничное значение справа от -PI/2. x->-pi/2+"
         )
     }
 
@@ -659,7 +659,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 + EPSILON - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI / 2 + EPS - PERIOD]. Граничное значение справа от PI/2. x->pi/2+. Сдвиг на один период"
+            "Layer 4: F1 [x = -PI / 2 + EPS - PERIOD]. Граничное значение справа от PI/2. x->pi/2+. Сдвиг на один период"
         )
     }
 
@@ -670,7 +670,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 + EPSILON - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI / 2 + EPS - 100 * PERIOD]. Граничное значение справа от -PI/2. x->-pi/2+. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -PI / 2 + EPS - 100 * PERIOD]. Граничное значение справа от -PI/2. x->-pi/2+. Сдвиг на сто периодов"
         )
     }
 
@@ -681,7 +681,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 - EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -PI / 2 - EPS]. Граничное значение справа от -PI/2. x->-pi/2-"
+            "Layer 4: F1 [x = -PI / 2 - EPS]. Граничное значение справа от -PI/2. x->-pi/2-"
         )
     }
 
@@ -691,7 +691,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 - EPSILON - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI / 2 - EPS - PERIOD]. Граничное значение справа от -PI/2. x->-pi/2-. Сдвиг на один период"
+            "Layer 4: F1 [x = -PI / 2 - EPS - PERIOD]. Граничное значение справа от -PI/2. x->-pi/2-. Сдвиг на один период"
         )
     }
 
@@ -702,7 +702,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI / 2 - EPSILON - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI / 2 - EPS - 100 * PERIOD]. Граничное значение справа от -PI/2. x->-pi/2-. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -PI / 2 - EPS - 100 * PERIOD]. Граничное значение справа от -PI/2. x->-pi/2-. Сдвиг на сто периодов"
         )
     }
 
@@ -712,7 +712,7 @@ class FunctionsFourthLayerTest {
             4.5428,
             functions!!.systemOfFunctions(-1.7),
             PRECISION,
-            "Layer 3: F1 [x = -1.7]. Вторая негативная часть справа от точки перегиба"
+            "Layer 4: F1 [x = -1.7]. Вторая негативная часть справа от точки перегиба"
         )
     }
 
@@ -722,7 +722,7 @@ class FunctionsFourthLayerTest {
             4.5428,
             functions!!.systemOfFunctions(-1.7 - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1.7 - PERIOD]. Вторая негативная часть справа от точки перегиба сдвиг на один период"
+            "Layer 4: F1 [x = -1.7 - PERIOD]. Вторая негативная часть справа от точки перегиба сдвиг на один период"
         )
     }
 
@@ -733,7 +733,7 @@ class FunctionsFourthLayerTest {
             4.5428,
             functions!!.systemOfFunctions(-1.7 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1.7 - 100 * PERIOD]. Вторая негативная часть справа от точки перегиба сдвиг на сто периодов"
+            "Layer 4: F1 [x = -1.7 - 100 * PERIOD]. Вторая негативная часть справа от точки перегиба сдвиг на сто периодов"
         )
     }
 
@@ -743,7 +743,7 @@ class FunctionsFourthLayerTest {
             -3.62892,
             functions!!.systemOfFunctions(-2.1),
             PRECISION,
-            "Layer 3: F1 [x = -2.1]. Вторая негативная часть слева от точки перегиба"
+            "Layer 4: F1 [x = -2.1]. Вторая негативная часть слева от точки перегиба"
         )
     }
 
@@ -753,7 +753,7 @@ class FunctionsFourthLayerTest {
             -3.62892,
             functions!!.systemOfFunctions(-2.1 - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -2.1 - PERIOD]. Вторая негативная часть слева от точки перегиба сдвиг на один период"
+            "Layer 4: F1 [x = -2.1 - PERIOD]. Вторая негативная часть слева от точки перегиба сдвиг на один период"
         )
     }
 
@@ -764,7 +764,7 @@ class FunctionsFourthLayerTest {
             -3.62892,
             functions!!.systemOfFunctions(-2.1 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -2.1 - 100 * PERIOD]. Вторая негативная часть слева от точки перегиба сдвиг на сто периодов"
+            "Layer 4: F1 [x = -2.1 - 100 * PERIOD]. Вторая негативная часть слева от точки перегиба сдвиг на сто периодов"
         )
     }
 
@@ -774,7 +774,7 @@ class FunctionsFourthLayerTest {
             0.0,
             functions!!.systemOfFunctions(-1.843684653),
             PRECISION,
-            "Layer 3: F1 [x = -1.843684653 (y = 0)]. Значения в точке пересечения с осью ординат второй негативой части"
+            "Layer 4: F1 [x = -1.843684653 (y = 0)]. Значения в точке пересечения с осью ординат второй негативой части"
         )
     }
 
@@ -784,7 +784,7 @@ class FunctionsFourthLayerTest {
             0.0,
             functions!!.systemOfFunctions(-1.843684653 - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1.843684653 - PERIOD (y = 0) ]. Значения в точке пересечения с осью ординат второй негативой части со сдвигом в один период"
+            "Layer 4: F1 [x = -1.843684653 - PERIOD (y = 0) ]. Значения в точке пересечения с осью ординат второй негативой части со сдвигом в один период"
         )
     }
 
@@ -794,7 +794,7 @@ class FunctionsFourthLayerTest {
             0.0,
             functions!!.systemOfFunctions(-1.843684653 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -1.843684653 - 100 * PERIOD (y = 0)]. Значения в точке пересечения с осью ординат второй негативой части со сдвигом в один период"
+            "Layer 4: F1 [x = -1.843684653 - 100 * PERIOD (y = 0)]. Значения в точке пересечения с осью ординат второй негативой части со сдвигом в один период"
         )
     }
 
@@ -804,7 +804,7 @@ class FunctionsFourthLayerTest {
             -2.2596,
             functions!!.systemOfFunctions(-2.0),
             PRECISION,
-            "Layer 3: F1 [x = -2]. Значения в точке перегиба второй чати"
+            "Layer 4: F1 [x = -2]. Значения в точке перегиба второй чати"
         )
     }
 
@@ -814,7 +814,7 @@ class FunctionsFourthLayerTest {
             -2.2596,
             functions!!.systemOfFunctions(-2.0 - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -2 - PERIOD]. Значения в точке перегиба второй чати сдвиг в один период"
+            "Layer 4: F1 [x = -2 - PERIOD]. Значения в точке перегиба второй чати сдвиг в один период"
         )
     }
 
@@ -825,7 +825,7 @@ class FunctionsFourthLayerTest {
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -2 - 100 * PERIOD]. Значения в точке перегиба второй чати сдвиг в сто периодов"
+            "Layer 4: F1 [x = -2 - 100 * PERIOD]. Значения в точке перегиба второй чати сдвиг в сто периодов"
         )
     }
 
@@ -835,7 +835,7 @@ class FunctionsFourthLayerTest {
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 + EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -2 + EPS ]. Значения в окрестности справа к точке перегиба второй чати"
+            "Layer 4: F1 [x = -2 + EPS ]. Значения в окрестности справа к точке перегиба второй чати"
         )
     }
 
@@ -845,7 +845,7 @@ class FunctionsFourthLayerTest {
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 + EPSILON - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -2 + EPS - PERIOD]. Значения в окрестности справа к точке перегиба второй чати сдвиг в один период"
+            "Layer 4: F1 [x = -2 + EPS - PERIOD]. Значения в окрестности справа к точке перегиба второй чати сдвиг в один период"
         )
     }
 
@@ -856,7 +856,7 @@ class FunctionsFourthLayerTest {
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 + EPSILON - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -2 + EPS - 100 * PERIOD]. Значения в окрестности справа к точке перегиба второй чати в сто периодов"
+            "Layer 4: F1 [x = -2 + EPS - 100 * PERIOD]. Значения в окрестности справа к точке перегиба второй чати в сто периодов"
         )
     }
 
@@ -867,7 +867,7 @@ class FunctionsFourthLayerTest {
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 - EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -2 - EPS ]. Значения в окрестности слева к точке перегиба второй чати"
+            "Layer 4: F1 [x = -2 - EPS ]. Значения в окрестности слева к точке перегиба второй чати"
         )
     }
 
@@ -877,7 +877,7 @@ class FunctionsFourthLayerTest {
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 - EPSILON - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -2 - EPS - PERIOD]. Значения в окрестности слева к точке перегиба второй чати сдвиг в один период"
+            "Layer 4: F1 [x = -2 - EPS - PERIOD]. Значения в окрестности слева к точке перегиба второй чати сдвиг в один период"
         )
     }
 
@@ -887,7 +887,7 @@ class FunctionsFourthLayerTest {
             -2.259600862,
             functions!!.systemOfFunctions(-2.0 - EPSILON - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -2 - EPS - 100 * PERIOD]. Значения в окрестности слева к точке перегиба второй чати в сто периодов"
+            "Layer 4: F1 [x = -2 - EPS - 100 * PERIOD]. Значения в окрестности слева к точке перегиба второй чати в сто периодов"
         )
     }
 
@@ -897,7 +897,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI),
             PRECISION,
-            "Layer 3: F1 [x = -PI].  Граничное значение между второй и третьей частями и окрестности точки PI."
+            "Layer 4: F1 [x = -PI].  Граничное значение между второй и третьей частями и окрестности точки PI."
         )
     }
 
@@ -907,7 +907,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI- PERIOD].  Граничное значение между второй и третьей частями и окрестности точки PI. Сдвиг на один период"
+            "Layer 4: F1 [x = -PI- PERIOD].  Граничное значение между второй и третьей частями и окрестности точки PI. Сдвиг на один период"
         )
     }
 
@@ -917,7 +917,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI - 100 * PERIOD].  Граничное значение между второй и третьей частями и окрестности точки PI. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -PI - 100 * PERIOD].  Граничное значение между второй и третьей частями и окрестности точки PI. Сдвиг на сто периодов"
         )
     }
 
@@ -927,7 +927,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI + EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -PI + EPS].  Граничное значение между второй и третьей частями и справа от  точки PI . x->-pi+"
+            "Layer 4: F1 [x = -PI + EPS].  Граничное значение между второй и третьей частями и справа от  точки PI . x->-pi+"
         )
     }
 
@@ -937,7 +937,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI + EPSILON - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI + EPS - PERIOD].  Граничное значение между второй и третьей частями и справа от  точки PI . Сдвиг на один период"
+            "Layer 4: F1 [x = -PI + EPS - PERIOD].  Граничное значение между второй и третьей частями и справа от  точки PI . Сдвиг на один период"
         )
     }
 
@@ -948,7 +948,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI + EPSILON - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI + EPS - 100 * PERIOD].  Граничное значение между второй и третьей частями и справа от  точки PI. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -PI + EPS - 100 * PERIOD].  Граничное значение между второй и третьей частями и справа от  точки PI. Сдвиг на сто периодов"
         )
     }
 
@@ -959,7 +959,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI - EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -PI - EPS].  Граничное значение между второй и третьей частями и слева от  точки PI  x->-pi-"
+            "Layer 4: F1 [x = -PI - EPS].  Граничное значение между второй и третьей частями и слева от  точки PI  x->-pi-"
         )
     }
 
@@ -969,7 +969,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI - EPSILON - PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI  - EPS - PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на один период"
+            "Layer 4: F1 [x = -PI  - EPS - PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на один период"
         )
     }
 
@@ -980,7 +980,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-PI - EPSILON - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -PI - EPS - 100 * PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -PI - EPS - 100 * PERIOD].  Граничное значение между второй и третьей частями и слева от  точки PI. x->-pi-. Сдвиг на сто периодов"
         )
     }
 
@@ -990,7 +990,7 @@ class FunctionsFourthLayerTest {
             25.9773,
             functions!!.systemOfFunctions(-3.5),
             PRECISION,
-            "Layer 3: F1 [x = -3.5].  Третья часть справа от экстремума"
+            "Layer 4: F1 [x = -3.5].  Третья часть справа от экстремума"
         )
     }
 
@@ -1000,7 +1000,7 @@ class FunctionsFourthLayerTest {
             25.97728,
             functions!!.systemOfFunctions(-3.5 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -3.5 - 100 * PERIOD].  Третья часть справа от экстремума. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -3.5 - 100 * PERIOD].  Третья часть справа от экстремума. Сдвиг на сто периодов"
         )
     }
 
@@ -1010,7 +1010,7 @@ class FunctionsFourthLayerTest {
             3.78801,
             functions!!.systemOfFunctions(-4.3),
             PRECISION,
-            "Layer 3: F1 [x = -4.3].  Третья часть слева от экстремума"
+            "Layer 4: F1 [x = -4.3].  Третья часть слева от экстремума"
         )
     }
 
@@ -1020,7 +1020,7 @@ class FunctionsFourthLayerTest {
             3.78801,
             functions!!.systemOfFunctions(-4.3 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -4.3 - 100 * PERIOD].  Третья часть слева от экстремума. Сдвиг на сто периодов"
+            "Layer 4: F1 [x = -4.3 - 100 * PERIOD].  Третья часть слева от экстремума. Сдвиг на сто периодов"
         )
     }
 
@@ -1030,7 +1030,7 @@ class FunctionsFourthLayerTest {
             3.259463,
             functions!!.systemOfFunctions(-4.0),
             PRECISION,
-            "Layer 3: F1 [x = -4.0].  Экстремум в третьей части "
+            "Layer 4: F1 [x = -4.0].  Экстремум в третьей части "
         )
     }
 
@@ -1040,7 +1040,7 @@ class FunctionsFourthLayerTest {
             3.259463457,
             functions!!.systemOfFunctions(-4.0 + EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -4.0 + EPS].  Окрестность справа от экстремума в третьей части"
+            "Layer 4: F1 [x = -4.0 + EPS].  Окрестность справа от экстремума в третьей части"
         )
     }
 
@@ -1050,7 +1050,7 @@ class FunctionsFourthLayerTest {
             3.259463457,
             functions!!.systemOfFunctions(-4.0 - EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -4.0 - EPS].  Окрестность слева от экстремума в третьей части"
+            "Layer 4: F1 [x = -4.0 - EPS].  Окрестность слева от экстремума в третьей части"
         )
     }
 
@@ -1060,7 +1060,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-1.5 * PI),
             PRECISION,
-            "Layer 3: F1 [x = -1/5 * PI].  Граничные точки между третим и четвертым отрезком"
+            "Layer 4: F1 [x = -1/5 * PI].  Граничные точки между третим и четвертым отрезком"
         )
     }
 
@@ -1070,7 +1070,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-1.5 * PI + EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -1/5 * PI + EPS]. Окрестность справа Граничные точки между третим и четвертым отрезком"
+            "Layer 4: F1 [x = -1/5 * PI + EPS]. Окрестность справа Граничные точки между третим и четвертым отрезком"
         )
     }
 
@@ -1080,7 +1080,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-1.5 * PI - EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -1/5 * PI - EPS]. Окрестность слева Граничные точки между третим и четвертым отрезком"
+            "Layer 4: F1 [x = -1/5 * PI - EPS]. Окрестность слева Граничные точки между третим и четвертым отрезком"
         )
     }
 
@@ -1090,7 +1090,7 @@ class FunctionsFourthLayerTest {
             -2.1949,
             functions!!.systemOfFunctions(-5.1),
             PRECISION,
-            "Layer 3: F1 [x = -5.1]. Четвертая часть справа от экстремума"
+            "Layer 4: F1 [x = -5.1]. Четвертая часть справа от экстремума"
         )
     }
 
@@ -1100,7 +1100,7 @@ class FunctionsFourthLayerTest {
             -2.1949,
             functions!!.systemOfFunctions(-5.1 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -5.1 + PERIOD]. Четвертая часть справа от экстремума с периодом"
+            "Layer 4: F1 [x = -5.1 + PERIOD]. Четвертая часть справа от экстремума с периодом"
         )
     }
 
@@ -1110,7 +1110,7 @@ class FunctionsFourthLayerTest {
             -5.47627,
             functions!!.systemOfFunctions(-5.9),
             PRECISION,
-            "Layer 3: F1 [x = -5.9]. Четвертая часть слева от экстремума"
+            "Layer 4: F1 [x = -5.9]. Четвертая часть слева от экстремума"
         )
     }
 
@@ -1120,7 +1120,7 @@ class FunctionsFourthLayerTest {
             -5.47627,
             functions!!.systemOfFunctions(-5.9 - 100 * PERIOD),
             PRECISION,
-            "Layer 3: F1 [x = -5.9 + PERIOD]. Четвертая часть справа от экстремума с периодом"
+            "Layer 4: F1 [x = -5.9 + PERIOD]. Четвертая часть справа от экстремума с периодом"
         )
     }
 
@@ -1130,7 +1130,7 @@ class FunctionsFourthLayerTest {
             Double.NaN,
             functions!!.systemOfFunctions(-2.0 * PI + EPSILON),
             PRECISION,
-            "Layer 3: F1 [x = -2.0 * PI + EPSILON]. Граничная точка четвертой части около 2PI"
+            "Layer 4: F1 [x = -2.0 * PI + EPSILON]. Граничная точка четвертой части около 2PI"
         )
     }
 }

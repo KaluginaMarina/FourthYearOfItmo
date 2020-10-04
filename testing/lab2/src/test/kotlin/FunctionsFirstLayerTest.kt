@@ -136,7 +136,8 @@ class FunctionsFirstLayerTest {
             Mockito.`when`(functions!!.f1(0.01)).thenReturn(275.519)
             // Экстремумы
             Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(-106.26636)
-            Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(1.55602)
+            Mockito.`when`(functions!!.f1(0.477607)).thenReturn(1.55602)
+
             // Первое пересечение с осью ох
             Mockito.`when`(functions!!.f1(0.0159975)).thenReturn(0.0)
             // Значение функции на убывающем отрезке между первым и вторым пересечением ох

@@ -372,8 +372,8 @@ class FunctionsThirdLayerTest {
             // Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(-106.26636)
             Mockito.`when`(sf.ln(0.0333409)).thenReturn(-3.40097040742275701)
 
-            // Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(1.55602)
-            Mockito.`when`(sf.ln(0.0333409)).thenReturn(-0.738967060394736)
+            // Mockito.`when`(functions!!.f1(0.477607)).thenReturn(1.55602)
+            Mockito.`when`(sf.ln(0.477607)).thenReturn(-0.738967060394736)
 
             // Значение функции на возрастающем отрезке между первым и вторым пересечением ох
             // Mockito.`when`(functions!!.f1(0.05)).thenReturn(-91.44142)
