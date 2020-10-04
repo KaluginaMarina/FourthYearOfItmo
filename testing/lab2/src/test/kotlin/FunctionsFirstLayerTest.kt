@@ -134,6 +134,9 @@ class FunctionsFirstLayerTest {
             Mockito.`when`(functions!!.f1(0 + EPSILON)).thenReturn(Double.POSITIVE_INFINITY)
             // Отрезок между 0 и пересечением о осью ох
             Mockito.`when`(functions!!.f1(0.01)).thenReturn(275.519)
+            // Экстремумы
+            Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(-106.26636)
+            Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(1.55602)
             // Первое пересечение с осью ох
             Mockito.`when`(functions!!.f1(0.0159975)).thenReturn(0.0)
             // Значение функции на убывающем отрезке между первым и вторым пересечением ох
@@ -175,6 +178,26 @@ class FunctionsFirstLayerTest {
             functions!!.systemOfFunctions(0.0159975),
             PRECISION,
             "Layer 1: [F1] (х = 0.0159975).Первое пересечение с осью ох"
+        )
+    }
+
+    @Test
+    fun testFirstExtreme() {
+        assertEquals(
+            -106.26636,
+            functions!!.systemOfFunctions(0.0333409),
+            PRECISION,
+            "Layer 1: [F1] (х = 0.0333409). Проверка функции в экстремуме"
+        )
+    }
+
+    @Test
+    fun testSecondExtreme() {
+        assertEquals(
+            1.55602,
+            functions!!.systemOfFunctions(0.477607),
+            PRECISION,
+            "Layer 1: [F1] (х = 0.0333409). Проверка функции во втором экстремуме"
         )
     }
 

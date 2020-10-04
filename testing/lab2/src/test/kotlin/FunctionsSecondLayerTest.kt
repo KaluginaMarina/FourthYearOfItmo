@@ -651,6 +651,19 @@ class FunctionsSecondLayerTest {
             Mockito.`when`(sf.log_5(0.0159975)).thenReturn(-2.56942053309557701)
             Mockito.`when`(sf.log_10(0.0159975)).thenReturn(-1.79594788115887)
 
+            // Экстремум
+            // Mockito.`when`(functions!!.f1(0.477607)).thenReturn(-106.26636)
+            Mockito.`when`(sf.log_2(0.477607)).thenReturn(-1.06610411341178)
+            Mockito.`when`(sf.log_3(0.477607)).thenReturn(-0.672636805556412359)
+            Mockito.`when`(sf.log_5(0.477607)).thenReturn(-0.459146050112072)
+            Mockito.`when`(sf.log_10(0.477607)).thenReturn(-0.320929316637701075)
+
+            // Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(1.55602)
+            Mockito.`when`(sf.log_2(0.0333409)).thenReturn(-4.9065631409989)
+            Mockito.`when`(sf.log_3(0.0333409)).thenReturn(-3.09569667343325042)
+            Mockito.`when`(sf.log_5(0.0333409)).thenReturn(-2.11314172553519505)
+            Mockito.`when`(sf.log_10(0.0333409)).thenReturn(-1.47702268105995754)
+
             // Значение функции на убывающем отрезке между первым и вторым пересечением ох
             // Mockito.`when`(functions!!.f1(0.02)).thenReturn(-61.70484)
             Mockito.`when`(sf.log_2(0.02)).thenReturn(-5.64385618977472)
@@ -709,6 +722,26 @@ class FunctionsSecondLayerTest {
             functions!!.systemOfFunctions(0.02),
             PRECISION,
             "Layer 2: [F1] (х = 0.02). Значение функции на убывающем отрезке между первым и вторым пересечением ох"
+        )
+    }
+
+    @Test
+    fun testFirstExtreme() {
+        assertEquals(
+            -106.26636,
+            functions!!.systemOfFunctions(0.0333409),
+            PRECISION,
+            "Layer 1: [F1] (х = 0.0333409). Проверка функции в экстремуме"
+        )
+    }
+
+    @Test
+    fun testSecondExtreme() {
+        assertEquals(
+            1.55602,
+            functions!!.systemOfFunctions(0.477607),
+            PRECISION,
+            "Layer 1: [F1] (х = 0.0333409). Проверка функции во втором экстремуме"
         )
     }
 

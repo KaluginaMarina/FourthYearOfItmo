@@ -296,6 +296,13 @@ class FunctionsFourthLayerTest {
             // Mockito.`when`(functions!!.f1(0.02)).thenReturn(-61.70484)
             Mockito.`when`(sf.ln(0.02)).thenReturn(-3.912023005428146)
 
+            // Экстремум
+            // Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(-106.26636)
+            Mockito.`when`(sf.ln(0.0333409)).thenReturn(-3.40097040742275701)
+
+            // Mockito.`when`(functions!!.f1(0.0333409)).thenReturn(1.55602)
+            Mockito.`when`(sf.ln(0.0333409)).thenReturn(-0.738967060394736)
+            
             // Значение функции на возрастающем отрезке между первым и вторым пересечением ох
             // Mockito.`when`(functions!!.f1(0.05)).thenReturn(-91.44142)
             Mockito.`when`(sf.ln(0.05)).thenReturn(-2.99573227355399)
@@ -338,6 +345,26 @@ class FunctionsFourthLayerTest {
             functions!!.systemOfFunctions(0.02),
             PRECISION,
             "Layer 3: [F1] (х = 0.02). Значение функции на убывающем отрезке между первым и вторым пересечением ох"
+        )
+    }
+
+    @Test
+    fun testFirstExtreme() {
+        assertEquals(
+            -106.26636,
+            functions!!.systemOfFunctions(0.0333409),
+            PRECISION,
+            "Layer 1: [F1] (х = 0.0333409). Проверка функции в экстремуме"
+        )
+    }
+
+    @Test
+    fun testSecondExtreme() {
+        assertEquals(
+            1.55602,
+            functions!!.systemOfFunctions(0.477607),
+            PRECISION,
+            "Layer 1: [F1] (х = 0.0333409). Проверка функции во втором экстремуме"
         )
     }
 

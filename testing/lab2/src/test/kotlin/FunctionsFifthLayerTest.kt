@@ -56,6 +56,26 @@ class FunctionsFifthLayerTest {
     }
 
     @Test
+    fun testFirstExtreme() {
+        assertEquals(
+            -106.26636,
+            functions!!.systemOfFunctions(0.0333409),
+            PRECISION,
+            "Layer 1: [F1] (х = 0.0333409). Проверка функции в экстремуме"
+        )
+    }
+
+    @Test
+    fun testSecondExtreme() {
+        assertEquals(
+            1.55602,
+            functions!!.systemOfFunctions(0.477607),
+            PRECISION,
+            "Layer 1: [F1] (х = 0.0333409). Проверка функции во втором экстремуме"
+        )
+    }
+
+    @Test
     fun testSecondIntersectionWithTheOX() {
         assertEquals(
             0.0,

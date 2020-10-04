@@ -1,6 +1,7 @@
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileWriter
+import java.lang.Math.PI
 
 open class Functions(var sf: SimpleFunctions) {
 
@@ -48,7 +49,7 @@ open class Functions(var sf: SimpleFunctions) {
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = Functions(SimpleFunctions())
-            functions.createSCV(-5.0, 5.0, 0.5)
+            functions.createSCV(- 2 * PI, 1.0, 0.05)
             println("The data was written")
         }
     }
