@@ -2,21 +2,23 @@
 
 
 GPIO_PinState state;
-GPIO_PinState state1;
+
 
 void checknBTN(){
-    state1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15);
+    //GPIO_PinState buff = state;
+    GPIO_PinState state1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15);
     if (state1 != state) {
-        state = state1;
         HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, GPIO_PIN_SET);
-        HAL_Delay(100);
-        state = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15);
-        while((state != state1)) {
-            state = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15);
-        }
         state = state1;
+	HAL_Delay(100);
+ 	state1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15);
+	HAL_Delay(100);
+        while((state == state1)) {
+            state1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15);
+	    HAL_Delay(100);
+        }
         HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, GPIO_PIN_RESET);
