@@ -11,7 +11,7 @@ lab2/gradlew.bat
 lab2/build
 lab2/out/*
 
-lab3/.igea
+lab3/.idea
 lab3/gradle
 lab3/.gradle
 lab3/gradlew.bat
