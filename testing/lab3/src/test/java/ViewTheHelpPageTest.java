@@ -40,19 +40,19 @@ public class ViewTheHelpPageTest {
     public void viewTheHelpPage() {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(960, 1053));
-        driver.findElement(By.cssSelector(".help_icon")).click();
+        driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[5]/a")).click();
         {
-            List<WebElement> elements = driver.findElements(By.cssSelector(".contact_item > .title"));
+            List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'main\']/div[4]/div[2]/div/div/div[2]/div"));
             assert(elements.size() > 0);
         }
-        driver.findElement(By.linkText("Список сайтов-мошенников")).click();
-        driver.findElement(By.cssSelector(".help_icon")).click();
-        driver.findElement(By.linkText("Пожаловаться")).click();
-        assertThat(driver.findElement(By.cssSelector("ins")).getText(), is("Политика Авторского Права"));
-        driver.findElement(By.cssSelector(".help_icon")).click();
-        driver.findElement(By.linkText("Ваши отзывы и пожелания")).click();
+        driver.findElement(By.xpath("//a[contains(text(),\'Список сайтов-мошенников\')]")).click();
+        driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[5]/a")).click();
+        driver.findElement(By.xpath("//a[contains(text(),\'Пожаловаться\')]")).click();
+        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[4]/div/div/ins")).getText(), is("Политика Авторского Права"));
+        driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[5]/a")).click();
+        driver.findElement(By.xpath("//a[contains(text(),\'Ваши отзывы и пожелания\')]")).click();
         js.executeScript("window.scrollTo(0,218)");
-        assertThat(driver.findElement(By.cssSelector(".title1 > ins")).getText(), is("Поддержка"));
-        driver.findElement(By.cssSelector(".help_icon")).click();
+        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[4]/div/div/div/ins")).getText(), is("Поддержка"));
+        driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[5]/a")).click();
     }
 }
