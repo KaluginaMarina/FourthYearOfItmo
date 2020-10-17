@@ -122,9 +122,16 @@ public class RemoteUploadTest {
             Actions builder = new Actions(driver);
             builder.moveToElement(element).release().perform();
         }
-        driver.findElement(By.xpath("//div[@id=\'context_menu_diag\']/ul/li[2]/span")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 100);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"filelist_tab_body\"]/tr[1]/td[4]/span[1]")));
+        }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).click();
         driver.findElement(By.xpath("//a[contains(text(),\'Logout\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id=\'main\']/div/div/a/strong")));
+        }
         driver.close();
     }
 }
