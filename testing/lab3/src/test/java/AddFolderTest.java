@@ -87,6 +87,10 @@ public class AddFolderTest {
 
 //        driver.findElement(By.xpath("(//input[@type=\'text\'])[9]")).click();
         driver.findElement(By.xpath("(//input[@type=\'text\'])[9]")).sendKeys("folder");
-        driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
     }
 }

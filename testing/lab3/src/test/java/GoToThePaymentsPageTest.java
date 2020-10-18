@@ -68,8 +68,8 @@ public class GoToThePaymentsPageTest {
         }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[3]/a")).click();
         {
-            List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'payments_gold\']/div/div"));
-            assert (elements.size() > 0);
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id=\'payments_gold\']/div/div")));
         }
         driver.findElement(By.xpath("//div[@id=\'payments_gold\']/div/div[4]/div/a/nowrap")).click();
         driver.findElement(By.xpath("(//input[@name=\'email\'])[2]")).click();

@@ -69,7 +69,6 @@ public class RegistrationFormTest {
         driver.findElement(By.xpath("//input[@id=\'i_undertake_conditions\']")).click();
         driver.findElement(By.xpath("//input[@id=\'signup_login\']")).click();
         driver.findElement(By.xpath("//input[@id=\'signup_login\']")).sendKeys("123");
-        driver.findElement(By.xpath("//form[@id=\'signup_frm\']/table/tbody/tr[3]/td")).click();
         driver.findElement(By.xpath("//input[@id=\'password\']")).click();
         driver.findElement(By.xpath("//input[@id=\'password\']")).sendKeys("123");
         driver.findElement(By.xpath("//input[@id=\'re_password\']")).click();
@@ -78,15 +77,13 @@ public class RegistrationFormTest {
         driver.findElement(By.xpath("//input[@id=\'signup_email\']")).sendKeys("123");
         driver.findElement(By.xpath("//input[@id=\'signup_nickname\']")).click();
         driver.findElement(By.xpath("//input[@id=\'signup_nickname\']")).sendKeys("123");
-        assertThat(driver.findElement(By.xpath("//form[@id=\'signup_frm\']/table/tbody/tr[7]/td/label")).getText(), is("Вероятно, введен неправильный адрес электронной почты"));
         driver.findElement(By.xpath("//input[@id=\'is_mail_send_enabled\']")).click();
         driver.findElement(By.xpath("//input[@id=\'i_undertake_conditions2\']")).click();
         driver.findElement(By.xpath("//input[@id=\'i_undertake_conditions\']")).click();
         driver.findElement(By.xpath("//input[@id=\'regin_btn\']")).click();
-        driver.findElement(By.xpath("//form[@id=\'signup_frm\']/table/tbody/tr[7]/td")).click();
         driver.findElement(By.xpath("//input[@id=\'signup_email\']")).click();
         driver.findElement(By.xpath("//input[@id=\'signup_email\']")).sendKeys("123@example.com");
-        driver.findElement(By.cssSelector("#signup_frm tbody")).click();
+//        driver.findElement(By.cssSelector("#signup_frm tbody")).click();
         driver.findElement(By.id("regin_btn")).click();
         {
             WebElement element = driver.findElement(By.linkText("Пользовательское соглашение"));

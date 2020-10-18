@@ -69,6 +69,12 @@ public class LoyaltyPageviewTest {
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[4]/a")).click();
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[4]/div[2]/div/div/h1/strong")).getText(), is("Loyalty Program!"));
         driver.findElement(By.xpath("//a[contains(text(),\'U-поинты\')]")).click();
+
+        if(driver.findElements(By.xpath("//div[@id=\'main\']/div[4]/div[2]/div/div/h1/strong")).size()>0
+                && driver.findElement(By.xpath("//div[@id=\'main\']/div[4]/div[2]/div/div/h1/strong")).getText().equals("Loyalty Program!")){
+            driver.findElement(By.xpath("//a[contains(text(),\'U-поинты\')]")).click();
+        }
+
         driver.switchTo().window(vars.get("window_handle").toString());
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);

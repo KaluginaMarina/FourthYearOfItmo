@@ -72,18 +72,59 @@ public class FolderRenameTest {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")));
         }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
-        driver.findElement(By.xpath("//div[@id=\'df_share\']/div/ul/li[2]/ul/li/a")).click();
-        driver.findElement(By.xpath("//div[@id=\'df_share\']/div/div/a[3]/span")).click();
-        driver.findElement(By.xpath("(//input[@type=\'text\'])[9]")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'df_share\']/div/ul/li[2]/ul/li/a"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'df_share\']/div/div/a[3]/span"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("(//input[@type=\'text\'])[9]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.findElement(By.xpath("(//input[@type=\'text\'])[9]")).sendKeys("rename");
-        driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div")).click();
-        driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div")).click();
-        driver.findElement(By.xpath("//div[@id=\'df_share\']/div/ul/li[2]/ul/li[8]/a")).click();
-        driver.findElement(By.xpath("//div[@id=\'df_share\']/div/div/a[3]/span")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'df_share\']/div/ul/li[2]/ul/li[8]/a"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'df_share\']/div/div/a[3]/span"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.findElement(By.xpath("(//input[@type=\'text\'])[9]")).sendKeys("1");
-        driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div")).click();
-        driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]")).click();
+
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id=\'main\']/div/div/a/strong")));

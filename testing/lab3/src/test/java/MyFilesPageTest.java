@@ -73,7 +73,11 @@ public class MyFilesPageTest {
             List<WebElement> elements = driver.findElements(By.xpath("//table[@id=\'tbl_filelist\']/thead/tr/th[2]"));
             assert (elements.size() > 0);
         }
-        driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]")).click();
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);

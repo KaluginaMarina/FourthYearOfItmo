@@ -69,10 +69,13 @@ public class RemoveFileTest {
             WebDriverWait wait = new WebDriverWait(driver, 300);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
         }
-        driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).click();
         driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).sendKeys("/home/marina/code/FourthYearOfItmo/testing/lab3.side");
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Несортированные\')]")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Несортированные\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.findElement(By.xpath("//input[@name=\'ids[]\']")).click();
         driver.findElement(By.xpath("//div[@id=\'df_share\']/div[2]/div/a[7]/span")).click();
         driver.findElement(By.xpath("//input[@value=\'Да\']")).click();

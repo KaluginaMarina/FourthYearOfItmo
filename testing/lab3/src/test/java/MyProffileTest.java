@@ -80,7 +80,6 @@ public class MyProffileTest {
         driver.findElement(By.xpath("//input[@name=\'password_old\']")).sendKeys("12345");
         driver.findElement(By.xpath("//form[@action=\'\']")).click();
         driver.findElement(By.xpath("//input[@value=\'Обновить\']")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[4]/div/form/table/tbody/tr/td[2]/div")).getText(), is("Неверный пароль"));
         driver.findElement(By.xpath("//input[@name=\'icq\']")).click();
         driver.findElement(By.xpath("//input[@name=\'icq\']")).sendKeys("qwe");
         driver.findElement(By.xpath("//input[@name=\'homepage\']")).click();

@@ -88,7 +88,11 @@ public class ShareOnTwitterAndFacebookTest {
             WebDriverWait wait = new WebDriverWait(driver, 300);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(@class, \'share_fb\')]")));
         }
-        driver.findElement(By.xpath("//span[contains(@class, \'share_fb\')]")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//span[contains(@class, \'share_fb\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         vars.put("win6430", waitForWindow(2000));
         vars.put("root", driver.getWindowHandle());
         driver.switchTo().window(vars.get("win6430").toString());
@@ -106,10 +110,6 @@ public class ShareOnTwitterAndFacebookTest {
         driver.findElement(By.xpath("//span[contains(@class, \'share_tw\')]")).click();
         vars.put("win1081", waitForWindow(2000));
         driver.switchTo().window(vars.get("win1081").toString());
-        {
-            List<WebElement> elements = driver.findElements(By.cssSelector(".r-13gxpu9 path"));
-            assert (elements.size() > 0);
-        }
         driver.close();
         driver.switchTo().window(vars.get("root").toString());
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).click();

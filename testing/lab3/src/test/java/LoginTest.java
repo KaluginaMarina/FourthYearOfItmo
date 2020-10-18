@@ -58,15 +58,8 @@ public class LoginTest {
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/span")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]")).click();
-        {
-            WebElement element = driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]"));
-            Actions builder = new Actions(driver);
-            builder.doubleClick(element).perform();
-        }
         driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
         // На случай ввода капчи
         {
@@ -75,6 +68,10 @@ public class LoginTest {
         }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).getText(), is("gardemarrina"));
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
     }
 }

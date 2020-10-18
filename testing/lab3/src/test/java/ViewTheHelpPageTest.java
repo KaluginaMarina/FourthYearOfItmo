@@ -76,7 +76,6 @@ public class ViewTheHelpPageTest {
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[5]/a")).click();
         driver.findElement(By.xpath("//a[contains(text(),\'Ваши отзывы и пожелания\')]")).click();
         js.executeScript("window.scrollTo(0,218)");
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[4]/div/div/div/ins")).getText(), is("Поддержка"));
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[5]/a")).click();
     }
 }

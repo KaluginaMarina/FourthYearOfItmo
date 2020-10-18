@@ -70,34 +70,43 @@ public class UploadFileInMyFilesTest {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
         }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
-        {
-            WebElement element = driver.findElement(By.xpath("(//input[@type=\'file\'])[2]"));
-            JavascriptExecutor jse = (JavascriptExecutor)driver;
-            jse.executeScript("arguments[0].scrollIntoView()", element);
-        }
-        driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).click();
         driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).sendKeys("/home/marina/code/FourthYearOfItmo/testing/lab3.side");
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),\'OK\')]")));
         }
-        driver.findElement(By.xpath("//a[contains(text(),\'Удаленная загрузка\')]")).click();
-        driver.findElement(By.xpath("//input[@name=\'remote_download_url\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'remote_download_url\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'remote_download_url\']")).click();
+        {
+            WebElement element = driver.findElement((By.xpath("//a[contains(text(),\'Удаленная загрузка\')]")));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+
         driver.findElement(By.xpath("//input[@name=\'remote_download_url\']")).sendKeys("https://sun9-3.userapi.com/yCWcnZAlhf743PbGTsxLVufFhe8l-1sd_btDyw/o0KHJJxyZCQ.jpg");
-        driver.findElement(By.xpath("//div[@id=\'container_upload\']/div[3]/div/div[2]")).click();
-        driver.findElement(By.xpath("//input[@name=\'remote_download_login\']")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'container_upload\']/div[3]/div/div[2]")));
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'container_upload\']/div[3]/div/div[2]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+//        driver.findElement(By.xpath("//div[@id=\'container_upload\']/div[3]/div/div[2]")).click();
         driver.findElement(By.xpath("//input[@name=\'remote_download_login\']")).sendKeys("gardemarrina");
-        driver.findElement(By.xpath("//div[@id=\'container_upload\']/div[3]/div/div[2]")).click();
-        driver.findElement(By.xpath("//input[@name=\'remote_download_password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'remote_download_password\']")).sendKeys("123456");
-        driver.findElement(By.xpath("//div[@id=\'container_upload\']/div[3]/div/div[2]")).click();
-        driver.findElement(By.xpath("//input[@name=\'upload\']")).click();
+        {
+            WebElement element = driver.findElement((By.xpath("//input[@name=\'upload\']")));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@value=\'OK\']")));
         }
-        driver.findElement(By.xpath("//input[@value=\'OK\']")).click();
+        {
+            WebElement element = driver.findElement((By.xpath("//input[@value=\'OK\']")));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
     }
 }

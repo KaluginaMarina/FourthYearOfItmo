@@ -67,7 +67,11 @@ public class GettingLinkToFileTest {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")));
         }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
-        driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr/td[2]/div/span")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr/td[2]/div/span"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.findElement(By.xpath("//div[@id=\'df_share\']/div[2]/div/a/span")).click();
         {
             List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/textarea"));

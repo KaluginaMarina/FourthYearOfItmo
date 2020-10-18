@@ -83,32 +83,80 @@ public class CreateDownloadLinkTest {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
         }
         driver.findElement(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")).click();
-        driver.findElement(By.xpath("//div[@id=\'df_share\']/div/ul/li[2]/ul/li/a")).click();
-        driver.findElement(By.xpath("//div[@id=\'df_share\']/div/ul/li[2]/ul/li/a")).click();
-        driver.findElement(By.xpath("//div[@id=\'df_share\']/div/div/a[2]/span")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id=\'df_share\']/div/ul/li[2]/ul/li/a")));
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'df_share\']/div/ul/li[2]/ul/li/a"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'df_share\']/div/ul/li[2]/ul/li/a"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'df_share\']/div/div/a[2]/span"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/textarea"));
             assert (elements.size() > 0);
         }
-        driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Расширенный список\')]")).click();
+
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Расширенный список\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/textarea"));
             assert (elements.size() > 0);
         }
-        driver.findElement(By.xpath("//a[contains(text(),\'Файлы в папке\')]")).click();
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Файлы в папке\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/textarea"));
             assert (elements.size() > 0);
         }
-        driver.findElement(By.xpath("//a[contains(text(),\'Файлы в папке (расширенный список)\')]")).click();
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Файлы в папке (расширенный список)\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/textarea"));
             assert (elements.size() > 0);
         }
-        driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div/a")).click();
-        driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]")).click();
+
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div/a"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id=\'main\']/div/div/a/strong")));

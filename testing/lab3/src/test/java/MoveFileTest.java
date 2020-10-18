@@ -71,7 +71,11 @@ public class MoveFileTest {
         }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).click();
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
-        driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr/td[2]/div/span")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr/td[2]/div/span"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.findElement(By.xpath("//div[@id=\'df_share\']/div[2]/div/a[5]/span")).click();
         {
             WebElement element = driver.findElement(By.xpath("//div[@id=\'df_share\']/div[2]/div/a[5]/span"));

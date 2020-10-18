@@ -61,14 +61,12 @@ public class UploadFileTest {
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
         driver.findElement(By.xpath("//input[@name=\'password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[7]/td")).click();
         driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
         driver.switchTo().window(vars.get("window_handle").toString());
         {
             WebDriverWait wait = new WebDriverWait(driver, 300);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
         }
-//        driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).click();
         driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).sendKeys("/home/marina/code/FourthYearOfItmo/testing/lab3.side");
         driver.findElement(By.xpath("//div[@id=\'uploadifive-file_upload-file-0\']/span")).click();
         {

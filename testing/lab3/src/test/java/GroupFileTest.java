@@ -56,8 +56,7 @@ public class GroupFileTest {
         driver.get("https://dfiles.eu/");
         vars.put("window_handle", driver.getWindowHandle());
         driver.manage().window().setSize(new Dimension(1920, 1053));
-            driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/strong")).click();
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[2]/td")).click();
+        driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/strong")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[2]/td")).click();
@@ -77,7 +76,11 @@ public class GroupFileTest {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
         }
         driver.findElement(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Несортированные\')]")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Несортированные\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.findElement(By.xpath("//input[@name=\'ids[]\']")).click();
         driver.findElement(By.xpath("(//input[@name=\'ids[]\'])[2]")).click();
         driver.findElement(By.xpath("//div[@id=\'df_share\']/div[2]/div/a[6]/span")).click();

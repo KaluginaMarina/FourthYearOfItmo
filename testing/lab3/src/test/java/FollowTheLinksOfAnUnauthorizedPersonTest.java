@@ -84,13 +84,21 @@ public class FollowTheLinksOfAnUnauthorizedPersonTest {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),\'FTP загрузка\')]")));
         }
-        driver.findElement(By.xpath("//a[contains(text(),\'FTP загрузка\')]")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'FTP загрузка\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         assertThat(driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/th")).getText(), is("Логин:"));
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id=\'logo\']")));
         }
-        driver.findElement(By.xpath("//a[@id=\'logo\']")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//a[@id=\'logo\']"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.switchTo().window(vars.get("window_handle").toString());
         if(driver.findElements(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/th")).size()>0
                 && driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/th")).getText().equals("Логин:")){
@@ -100,10 +108,23 @@ public class FollowTheLinksOfAnUnauthorizedPersonTest {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),\'Удаленная загрузка\')]")));
         }
-        driver.findElement(By.xpath("//a[contains(text(),\'Удаленная загрузка\')]")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Удаленная загрузка\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         assertThat(driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/th")).getText(), is("Логин:"));
-        driver.findElement(By.xpath("//a[@id=\'logo\']")).click();
-        driver.findElement(By.xpath("//div[@id=\'member_menu\']/div/div/a[4]")).click();
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[@id=\'logo\']"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'member_menu\']/div/div/a[4]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'main\']/div[4]/div[2]/div/p"));
             assert (elements.size() > 0);

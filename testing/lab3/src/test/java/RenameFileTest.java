@@ -68,14 +68,46 @@ public class RenameFileTest {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
         }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
-        driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr[4]/td[2]/div/span")).click();
-        driver.findElement(By.xpath("//div[@id=\'df_share\']/div[2]/div/a[8]/span")).click();
-        driver.findElement(By.xpath("(//input[@type=\'text\'])[9]")).click();
-        driver.findElement(By.xpath("(//input[@type=\'text\'])[9]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr[4]/td[2]/div/span")));
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr[4]/td[2]/div/span"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'df_share\']/div[2]/div/a[8]/span"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("(//input[@type=\'text\'])[9]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("(//input[@type=\'text\'])[9]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.findElement(By.xpath("(//input[@type=\'text\'])[9]")).sendKeys("lab3.side_rename_");
-        driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div")).click();
-        driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div")).click();
-        driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr[4]/td[2]/div/span")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'depositbox\']/div/div[2]/div/div"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr[4]/td[2]/div/span"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".file_rename_icon")));

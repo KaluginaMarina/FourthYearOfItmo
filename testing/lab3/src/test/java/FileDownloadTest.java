@@ -56,31 +56,70 @@ public class FileDownloadTest {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(1920, 1053));
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).click();
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name=\'login\']")));
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//input[@name=\'login\']"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/td"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//input[@name=\'login\']"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).click();
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[7]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[7]/td")).click();
-        driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//input[@id=\'login_btn\']"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         // На случай ввода капчи
         {
             WebDriverWait wait = new WebDriverWait(driver, 300);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")));
         }
-        driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
-        driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr/td[2]/div/span")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'lab3.side\')]")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr/td[2]/div/span")));
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr/td[2]/div/span"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'lab3.side\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@value=\'Continue\'])[2]")));
         }
-        driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click()", element);
+        }
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id=\'main\']/div/div/a/strong")));
