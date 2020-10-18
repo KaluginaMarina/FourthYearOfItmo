@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 
+import static org.hamcrest.CoreMatchers.anyOf;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNot.not;
@@ -34,10 +35,16 @@ public class RegistrationViaSocialNetvorksTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -63,6 +70,16 @@ public class RegistrationViaSocialNetvorksTest {
     public void registrationViaSocialNetvorks() {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(960, 1053));
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_ru\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_ru\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_ru\')]")));
+        }
         driver.findElement(By.xpath("//a[contains(text(),\'Зарегистрируйтесь сейчас!\')]")).click();
         driver.findElement(By.xpath("//input[@id=\'i_undertake_conditions\']")).click();
         vars.put("window_handles", driver.getWindowHandles());
@@ -70,7 +87,7 @@ public class RegistrationViaSocialNetvorksTest {
         vars.put("win2634", waitForWindow(2000));
         vars.put("root", driver.getWindowHandle());
         driver.switchTo().window(vars.get("win2634").toString());
-        assertThat(driver.findElement(By.xpath("//div[@id=\'header_block\']/span/div")).getText(), is("Вход на Facebook"));
+        assertThat(driver.findElement(By.xpath("//div[@id=\'header_block\']/span/div")).getText(), anyOf(is("Вход на Facebook"), is("Log in to Facebook")) );
         driver.close();
         driver.switchTo().window(vars.get("root").toString());
         driver.findElement(By.cssSelector("#signup_frm .oauth_login")).click();
@@ -80,7 +97,7 @@ public class RegistrationViaSocialNetvorksTest {
         driver.switchTo().window(vars.get("win7299").toString());
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
-            wait.until(ExpectedConditions.textToBe(By.xpath("//div[@id=\'bd\']/div/h2"), "Разрешить приложению Depositfiles доступ к вашей учетной записи?"));
+            wait.until(ExpectedConditions.textToBe(By.xpath("//div[@id=\'bd\']/div/h2"), "Authorize Depositfiles to access your account?"));
         }
         driver.close();
         driver.switchTo().window(vars.get("root").toString());
@@ -88,14 +105,14 @@ public class RegistrationViaSocialNetvorksTest {
         driver.findElement(By.xpath("(//a[@id=\'google\'])[2]")).click();
         vars.put("win6174", waitForWindow(2000));
         driver.switchTo().window(vars.get("win6174").toString());
-        assertThat(driver.getTitle(), is("Вход – Google Аккаунты"));
+        assertThat(driver.getTitle(), is("Вход – Google Аккаунты"));
         driver.close();
         driver.switchTo().window(vars.get("root").toString());
         vars.put("window_handles", driver.getWindowHandles());
         driver.findElement(By.xpath("(//a[@id=\'vkontakte\'])[2]")).click();
         vars.put("win5067", waitForWindow(2000));
         driver.switchTo().window(vars.get("win5067").toString());
-        assertThat(driver.findElement(By.xpath("//div[@id=\'oauth_wrap_content\']/div[2]/div/div")).getText(), is("Приложение Depositfiles запрашивает доступ к Вашему аккаунту.\\\\nДоступ к общей информации\\\\nПриложению будут доступны Ваши личные данные\\\\nДоступ к электронному адресу\\\\nma***@gmail.com (Запретить)"));
+        assertEquals(1, driver.findElements(By.xpath("//*[@id=\"oauth_wrap_content\"]/div[1]/a")).size());
         driver.switchTo().window(vars.get("root").toString());
     }
 }

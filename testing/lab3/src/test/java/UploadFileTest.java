@@ -27,17 +27,23 @@ import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class UploadAndDeleteFileTest {
+public class UploadFileTest {
     private WebDriver driver;
     private Map<String, Object> vars;
     JavascriptExecutor js;
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -46,34 +52,34 @@ public class UploadAndDeleteFileTest {
     }
 
     @Test
-    public void uploadAndDeleteFile() {
+    public void uploadFile() {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(960, 1053));
+        vars.put("window_handle", driver.getWindowHandle());
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/span")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("123");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]/td")).click();
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[3]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/td")).click();
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/td")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[7]/td")).click();
         driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
-        driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).click();
+        driver.switchTo().window(vars.get("window_handle").toString());
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
+        }
+//        driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).click();
         driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).sendKeys("/home/marina/code/FourthYearOfItmo/testing/lab3.side");
         driver.findElement(By.xpath("//div[@id=\'uploadifive-file_upload-file-0\']/span")).click();
         {
             List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'uploadifive-file_upload-file-0\']/span"));
             assert (elements.size() > 0);
         }
-        assertThat(driver.findElement(By.xpath("//a[contains(text(),\'OK\')]")).getText(), is("OK"));
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),\'OK\')]")));
+        }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).click();
-        driver.findElement(By.linkText("Logout")).click();
+        driver.findElement(By.linkText("Выход")).click();
     }
 }

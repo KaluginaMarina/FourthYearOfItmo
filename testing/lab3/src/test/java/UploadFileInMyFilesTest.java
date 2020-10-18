@@ -34,10 +34,16 @@ public class UploadFileInMyFilesTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -50,26 +56,30 @@ public class UploadFileInMyFilesTest {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(1920, 1053));
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/strong")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("1");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[2]/td")).click();
+        vars.put("window_handle", driver.getWindowHandle());
+        driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/span")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("1");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr/td")).click();
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]/td")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[7]/td")).click();
         driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
+        driver.switchTo().window(vars.get("window_handle").toString());
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
+        }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
+        {
+            WebElement element = driver.findElement(By.xpath("(//input[@type=\'file\'])[2]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
         driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).click();
         driver.findElement(By.xpath("(//input[@type=\'file\'])[2]")).sendKeys("/home/marina/code/FourthYearOfItmo/testing/lab3.side");
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
-            wait.until(ExpectedConditions.textToBe(By.xpath("//a[contains(text(),\'OK\')]"), "OK"));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),\'OK\')]")));
         }
         driver.findElement(By.xpath("//a[contains(text(),\'Удаленная загрузка\')]")).click();
         driver.findElement(By.xpath("//input[@name=\'remote_download_url\']")).click();
@@ -84,8 +94,10 @@ public class UploadFileInMyFilesTest {
         driver.findElement(By.xpath("//input[@name=\'remote_download_password\']")).sendKeys("123456");
         driver.findElement(By.xpath("//div[@id=\'container_upload\']/div[3]/div/div[2]")).click();
         driver.findElement(By.xpath("//input[@name=\'upload\']")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@value=\'OK\']")));
+        }
         driver.findElement(By.xpath("//input[@value=\'OK\']")).click();
-        driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]")).click();
     }
 }

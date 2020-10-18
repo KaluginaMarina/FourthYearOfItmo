@@ -34,10 +34,16 @@ public class RemoteUploadTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -48,37 +54,32 @@ public class RemoteUploadTest {
     @Test
     public void remoteUpload() {
         driver.get("https://dfiles.eu/");
+        vars.put("window_handle", driver.getWindowHandle());
         driver.manage().window().setSize(new Dimension(1920, 1053));
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/strong")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("q");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[7]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("1");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/td")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]/td")).click();
         driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Remote upload\')]")).click();
+        driver.switchTo().window(vars.get("window_handle").toString());
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
+        }
+        driver.findElement(By.xpath("//a[contains(text(),\'Удаленная загрузка\')]")).click();
         driver.findElement(By.xpath("//input[@name=\'remote_download_url\']")).click();
         driver.findElement(By.xpath("//input[@name=\'remote_download_url\']")).sendKeys("https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png");
         driver.findElement(By.xpath("//input[@name=\'remote_download_login\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'remote_download_login\']")).sendKeys("1");
-        driver.findElement(By.xpath("//form[@id=\'remote_upload_form\']/table/tbody/tr[3]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'remote_download_login\']")).click();
         driver.findElement(By.xpath("//input[@name=\'remote_download_login\']")).sendKeys("gardemarrina");
-        driver.findElement(By.xpath("//form[@id=\'remote_upload_form\']/table/tbody/tr[3]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'remote_download_password\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'remote_download_password\']")).sendKeys("1");
-        driver.findElement(By.xpath("//form[@id=\'remote_upload_form\']/table/tbody/tr[4]/td")).click();
         driver.findElement(By.xpath("//input[@name=\'remote_download_password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'remote_download_password\']")).sendKeys("123456");
         driver.findElement(By.xpath("//button[@name=\'remote_upload_btn\']")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@name=\'cancel\']")));
+        }
         driver.findElement(By.xpath("//button[@name=\'cancel\']")).click();
         driver.findElement(By.xpath("//div[@id=\'remoteuploadbox\']/div/ul/li[2]/span[2]")).click();
         driver.findElement(By.xpath("//div[@id=\'remoteuploadbox\']/div[2]/div[2]/div/h3")).click();
@@ -88,55 +89,23 @@ public class RemoteUploadTest {
         }
         driver.findElement(By.xpath("//div[@id=\'remoteuploadbox\']/div/ul/li[3]")).click();
         {
-            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png\')]"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).clickAndHold().perform();
-        }
-        {
-            WebElement element = driver.findElement(By.xpath("//div[@id=\'context_menu_diag\']/ul"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).release().perform();
-        }
-        {
-            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png\')]"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).clickAndHold().perform();
-        }
-        {
-            WebElement element = driver.findElement(By.xpath("//div[@id=\'context_menu_diag\']/ul"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).release().perform();
-        }
-        {
-            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png\')]"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).clickAndHold().perform();
-        }
-        {
-            WebElement element = driver.findElement(By.xpath("//div[@id=\'context_menu_diag\']/ul"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).release().perform();
-        }
-        {
             List<WebElement> elements = driver.findElements(By.xpath("//table[@id=\'filelist_tab\']/thead/tr/th/span"));
             assert (elements.size() > 0);
-        }
-        {
-            WebElement element = driver.findElement(By.xpath("//a[contains(text(),\'https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png\')]"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).clickAndHold().perform();
-        }
-        {
-            WebElement element = driver.findElement(By.xpath("//div[@id=\'context_menu_diag\']/ul"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).release().perform();
         }
         {
             WebDriverWait wait = new WebDriverWait(driver, 100);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"filelist_tab_body\"]/tr[1]/td[4]/span[1]")));
         }
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")));
+        }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Logout\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),\'Выход\')]")));
+        }
+        driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]")).click();
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id=\'main\']/div/div/a/strong")));

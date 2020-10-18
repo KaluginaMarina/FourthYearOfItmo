@@ -34,10 +34,16 @@ public class ShareOnTwitterAndFacebookTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -64,22 +70,25 @@ public class ShareOnTwitterAndFacebookTest {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(1920, 1053));
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/span")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("1");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[2]/td")).click();
+        vars.put("window_handle", driver.getWindowHandle());
+        driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/strong")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[2]/td")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("1");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[8]/td")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
-        driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[7]/td")).click();
         driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
+        driver.switchTo().window(vars.get("window_handle").toString());
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
+        }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
         vars.put("window_handles", driver.getWindowHandles());
-        driver.findElement(By.xpath("//span[@onclick=\"DF.Popup.init({ url: \'http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffb.depositfiles.com%2Ffiles%2Fa7aelkek7\', width: 600, height: 400 });  DF.Popup.open(); return false\"]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(@class, \'share_fb\')]")));
+        }
+        driver.findElement(By.xpath("//span[contains(@class, \'share_fb\')]")).click();
         vars.put("win6430", waitForWindow(2000));
         vars.put("root", driver.getWindowHandle());
         driver.switchTo().window(vars.get("win6430").toString());
@@ -90,7 +99,11 @@ public class ShareOnTwitterAndFacebookTest {
         driver.close();
         driver.switchTo().window(vars.get("root").toString());
         vars.put("window_handles", driver.getWindowHandles());
-        driver.findElement(By.xpath("//span[@onclick=\"DF.Popup.init({ url: \'http://twitter.com/timeline/home?status=lab3.side%20http%3A%2F%2Ffb.depositfiles.com%2Ffiles%2Fa7aelkek7\', width: 600, height: 400 });  DF.Popup.open(); return false\"]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(@class, \'share_tw\')]")));
+        }
+        driver.findElement(By.xpath("//span[contains(@class, \'share_tw\')]")).click();
         vars.put("win1081", waitForWindow(2000));
         driver.switchTo().window(vars.get("win1081").toString());
         {

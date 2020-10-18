@@ -34,10 +34,16 @@ public class FollowTheLinksOfAnUnauthorizedPersonTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -45,14 +51,55 @@ public class FollowTheLinksOfAnUnauthorizedPersonTest {
         driver.quit();
     }
 
+    public String waitForWindow(int timeout) {
+        try {
+            Thread.sleep(timeout);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Set<String> whNow = driver.getWindowHandles();
+        Set<String> whThen = (Set<String>) vars.get("window_handles");
+        if (whNow.size() > whThen.size()) {
+            whNow.removeAll(whThen);
+        }
+        return whNow.iterator().next();
+    }
+
     @Test
     public void followTheLinksOfAnUnauthorizedPerson() {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(960, 1053));
-        driver.findElement(By.xpath("//div[@id=\'member_menu\']/div/div")).click();
+        vars.put("window_handle", driver.getWindowHandle());
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_ru\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_ru\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_ru\')]")));
+        }
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),\'FTP загрузка\')]")));
+        }
         driver.findElement(By.xpath("//a[contains(text(),\'FTP загрузка\')]")).click();
         assertThat(driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/th")).getText(), is("Логин:"));
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id=\'logo\']")));
+        }
         driver.findElement(By.xpath("//a[@id=\'logo\']")).click();
+        driver.switchTo().window(vars.get("window_handle").toString());
+        if(driver.findElements(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/th")).size()>0
+                && driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/th")).getText().equals("Логин:")){
+            driver.findElement(By.xpath("//a[@id=\'logo\']")).click();
+        }
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),\'Удаленная загрузка\')]")));
+        }
         driver.findElement(By.xpath("//a[contains(text(),\'Удаленная загрузка\')]")).click();
         assertThat(driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]/th")).getText(), is("Логин:"));
         driver.findElement(By.xpath("//a[@id=\'logo\']")).click();

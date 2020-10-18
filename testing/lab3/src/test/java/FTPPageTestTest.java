@@ -34,10 +34,16 @@ public class FTPPageTestTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -49,21 +55,26 @@ public class FTPPageTestTest {
     public void fTPPageTest() {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(1920, 1053));
+        vars.put("window_handle", driver.getWindowHandle());
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/strong")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("1");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[3]/td")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]/td")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).click();
-        driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("1");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[7]/td")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]/td")).click();
         driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'FTP upload\')]")).click();
+        driver.switchTo().window(vars.get("window_handle").toString());
+        // На случай ввода капчи
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),\'FTP загрузка\')]")));
+        }
+        driver.findElement(By.xpath("//a[contains(text(),\'FTP загрузка\')]")).click();
         {
             List<WebElement> elements = driver.findElements(By.xpath("//div/div[2]/div/div/div"));
             assert (elements.size() > 0);
@@ -79,7 +90,7 @@ public class FTPPageTestTest {
             assert (elements.size() > 0);
         }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Logout\')]")).click();
+        driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]")).click();
         {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".link:nth-child(1) > strong")));

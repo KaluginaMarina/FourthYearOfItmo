@@ -34,10 +34,16 @@ public class LoginTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -51,8 +57,10 @@ public class LoginTest {
         driver.manage().window().setSize(new Dimension(960, 1053));
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a/span")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).click();
+        driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[4]")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).click();
+        driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]")).click();
         {
             WebElement element = driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]"));
@@ -60,8 +68,13 @@ public class LoginTest {
             builder.doubleClick(element).perform();
         }
         driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
+        // На случай ввода капчи
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 300);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, \'/gold/files_list.php\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]/strong")).getText(), is("gardemarrina"));
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div[2]/a[2]")).click();
-        driver.findElement(By.xpath("//a[contains(text(),\'Logout\')]")).click();
+        driver.findElement(By.xpath("//a[contains(text(),\'Выход\')]")).click();
     }
 }

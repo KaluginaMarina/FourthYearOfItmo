@@ -34,10 +34,16 @@ public class SwitchLanguageTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -49,48 +55,158 @@ public class SwitchLanguageTest {
     public void switchLanguage() {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(960, 1053));
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Почему стоит использовать DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[2]")).click();
-        driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).click();
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_en\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_en\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_en\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Why to use DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[3]")).click();
-        driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).click();
+
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_de\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_de\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_de\')]")));
+        }
+
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Warum benutzt man DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[4]")).click();
+
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_es\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_es\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_es\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("¿Por qué utilizar DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[5]")).click();
+
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_pt\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_pt\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_pt\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Por que usar DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[6]")).click();
+
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_fr\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_fr\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_fr\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Pourquoi utiliser DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[7]")).click();
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_ja\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_ja\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_ja\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("DepositFilesを使うの理由は？"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[8]")).click();
+
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_nl\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_nl\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_nl\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Waarom gebruikt men DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[9]")).click();
+
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_it\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_it\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_it\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Perché usare DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[10]")).click();
+
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_sv\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_sv\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_sv\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Varför använder man DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[11]")).click();
-        driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("DepositFiles\\\'ı neden kullanıyorsanız?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[12]")).click();
+
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_tr\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_tr\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_tr\')]")));
+        }
+        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("DepositFiles'ı neden kullanıyorsanız?"));
+
+
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_da\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_da\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_da\')]")));
+        }
         assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Why to use DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[13]")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Dlaczego warto skorzystać z DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[14]")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Γιατί να χρησιμοποιήσετε την υπηρεσία DepositFiles;"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[15]")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Proč používat DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[16]")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("為什麼要使用 DepositFiles？"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[17]")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("为什么要使用 DepositFiles？"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[18]")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("ما هي الفائدة من استخدام DepositFiles؟"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[19]")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Hvordan skal man bruke DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a[20]")).click();
-        assertThat(driver.findElement(By.xpath("//div[@id=\'main\']/div[3]/div[3]/div/h2")).getText(), is("Для чого використовувати DepositFiles?"));
-        driver.findElement(By.xpath("//div[@id=\'foobar\']/div/div/a")).click();
+
     }
 }

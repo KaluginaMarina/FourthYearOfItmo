@@ -34,10 +34,16 @@ public class RegistrationFormTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
 
     @After
@@ -48,6 +54,16 @@ public class RegistrationFormTest {
     @Test
     public void registrationForm() {
         driver.get("https://dfiles.eu/");
+        {
+            WebElement element = driver.findElement(By.xpath("//a[contains(@class, \'flag_ru\')]"));
+            JavascriptExecutor jse = (JavascriptExecutor)driver;
+            jse.executeScript("arguments[0].scrollIntoView()", element);
+        }
+        driver.findElement(By.xpath("//a[contains(@class, \'flag_ru\')]")).click();
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(@class, \'active\') and contains(@class, \'flag_ru\')]")));
+        }
         driver.manage().window().setSize(new Dimension(960, 1053));
         driver.findElement(By.xpath("//a[contains(text(),\'Зарегистрируйтесь сейчас!\')]")).click();
         driver.findElement(By.xpath("//input[@id=\'i_undertake_conditions\']")).click();

@@ -34,12 +34,17 @@ public class GettingLinkToFileTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        String driverType = System.getenv("DRIVER");
+        if(driverType.equals("CHROME")) {
+            driver = new ChromeDriver();
+        }else if(driverType.equals("FIREFOX")){
+            driver = new FirefoxDriver();
+        }
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
     }
-
     @After
     public void tearDown() {
         driver.quit();
@@ -49,12 +54,18 @@ public class GettingLinkToFileTest {
     public void gettingLinkToFile() {
         driver.get("https://dfiles.eu/");
         driver.manage().window().setSize(new Dimension(1920, 1053));
+        vars.put("window_handle", driver.getWindowHandle());
         driver.findElement(By.xpath("//div[@id=\'main\']/div/div/a")).click();
         driver.findElement(By.xpath("//input[@name=\'login\']")).sendKeys("gardemarrina");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]/td")).click();
         driver.findElement(By.xpath("//input[@name=\'password\']")).sendKeys("123456");
         driver.findElement(By.xpath("//form[@id=\'login_frm\']/table/tbody/tr[5]/td")).click();
         driver.findElement(By.xpath("//input[@id=\'login_btn\']")).click();
+        driver.switchTo().window(vars.get("window_handle").toString());
+        {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")));
+        }
         driver.findElement(By.xpath("//div[@id=\'main\']/div/ul/li[2]/a")).click();
         driver.findElement(By.xpath("//table[@id=\'tbl_filelist\']/tbody/tr/td[2]/div/span")).click();
         driver.findElement(By.xpath("//div[@id=\'df_share\']/div[2]/div/a/span")).click();
