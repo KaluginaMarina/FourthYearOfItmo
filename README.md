@@ -5,6 +5,9 @@
 
 [Лабораторная по webGL](https://github.com/KaluginaMarina/MassandraWinery)
 
+
+https://github.com/KaluginaMarina/FourthYearOfItmo/tree/master/comp-graph
+
 ## Тестирование программного обеспечения
 
 https://github.com/KaluginaMarina/FourthYearOfItmo/tree/master/testing
