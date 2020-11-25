@@ -43,4 +43,4 @@ __________________
 
 ## Теория надежности 
 
-[:(]()
+https://github.com/KaluginaMarina/FourthYearOfItmo/tree/master/reliability-theory/
