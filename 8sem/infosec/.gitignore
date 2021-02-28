@@ -1,5 +1,9 @@
 lab1/.ipynb_checkpoints/
 lab1/.ipynb_checkpoints/bigram_method-checkpoint.ipynb
 
-lab2/.ipynb_checkpoints/
-lab2/.ipynb_checkpoints/bigram_method-checkpoint.ipynb
+lab2/*
+!lab2/*.ipynb
+!lab2/*.svg
+!lab2/*.png
+
+
