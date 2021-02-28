@@ -5,5 +5,5 @@ lab2/*
 !lab2/*.ipynb
 !lab2/*.svg
 !lab2/*.png
-
+!lab2/*.pdf
 
