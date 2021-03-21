@@ -48,3 +48,21 @@ __________________
 https://github.com/KaluginaMarina/FourthYearOfItmo/tree/master/7sem/reliability-theory/
 
 # 8 семестр
+
+## Информационная безопасность
+
+https://github.com/KaluginaMarina/FourthYearOfItmo/tree/master/8sem/infosec
+
+__________________
+
+# Метрология
+
+https://github.com/KaluginaMarina/FourthYearOfItmo/tree/master/8sem/metrology
+
+__________________
+
+# Системы ввода-вывода
+
+https://github.com/band-of-four/io-mi
+
+__________________
