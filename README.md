@@ -63,6 +63,8 @@ __________________
 
 # Системы ввода-вывода
 
-https://github.com/band-of-four/io-mi
+[Лабораторные работы](https://github.com/band-of-four/io-mi)
+
+[Всякие рефераты](https://github.com/KaluginaMarina/FourthYearOfItmo/tree/master/8sem/io)
 
 __________________
